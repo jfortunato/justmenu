@@ -2,6 +2,7 @@
 
 abstract class Component {
 	public $components;
+	public $parent;
 	public $title;
 	public $description;
 	public $info;
@@ -12,6 +13,7 @@ abstract class Component {
 
 	public function add(Component $component){
 		$this->components->attach($component);
+		$component->parent = $this;
 	}
 
 	public function remove(Component $component){

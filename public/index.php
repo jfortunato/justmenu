@@ -46,6 +46,7 @@ $item2 = new Item();
 $item2->title = 'Vegetable Lo Mein';
 $item2->description = 'item2 descripton';
 $item2->info = 'addl info';
+$item2->addSize(5.30, 'pint', 'Pt.');
 
 $cat2->add($item1);
 $cat2->add($item2);

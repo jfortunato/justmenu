@@ -3,7 +3,7 @@
 class Item extends MenuComponent {
 
 	public function display(){
-		echo "$this->title [" . implode(', ', array_map(function($size) { return $size['price']; }, $this->category()->getSizes())) . "] <br>";
+		echo "$this->title [" . implode(', ', $this->getAllPrices()) . "] <br>";
 		echo "&nbsp;&nbsp;&nbsp;&nbsp; $this->description <br>";
 		echo "&nbsp;&nbsp;&nbsp;&nbsp; $this->info <br>";
 	}
@@ -27,4 +27,15 @@ class Item extends MenuComponent {
 				return $size['price'];
 		}
 	}
+
+	private function getAllPrices(){
+		$prices = array();
+		$sizes = $this->category()->getAllSizes();
+		foreach($sizes as $size){
+			$prices[$size] = $this->getPrice($size);
+		}
+
+		return $prices;
+	}
+
 }

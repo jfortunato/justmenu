@@ -4,7 +4,7 @@ class Category extends MenuComponent {
 
 	public function display(){
 		echo "===============================================<br>";
-		echo "$this->title [" . implode(', ', array_map(function($size) { return $size['size']; }, $this->sizes)) . "] <br>";
+		echo "$this->title [" . implode(', ', $this->getAllSizes()) . "] <br>";
 		echo "$this->description <br>";
 		echo "$this->info <br>";
 		echo "-----------------------------------------------<br>";
@@ -13,6 +13,10 @@ class Category extends MenuComponent {
 			$component->display();
 		}
 		echo "===============================================<br>";
+	}
+
+	public function getAllSizes(){
+		return array_map(function($size) { return $size['size']; }, $this->sizes);
 	}
 
 }

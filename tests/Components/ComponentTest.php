@@ -2,10 +2,10 @@
 
 use \Mockery as m;
 
-class ComponentTest extends PHPUnit_Framework_TestCase {
+class MenuComponentTest extends PHPUnit_Framework_TestCase {
 
 	public function setUp(){
-		$this->component = $this->getMockForAbstractClass('JustMenu\Components\Component');
+		$this->component = $this->getMockForAbstractClass('JustMenu\Components\MenuComponent');
 	}
 
 	public function tearDown(){
@@ -13,8 +13,8 @@ class ComponentTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanAddComponent(){
-		$component1 = m::mock('JustMenu\Components\Component');
-		$component2 = m::mock('JustMenu\Components\Component');
+		$component1 = m::mock('JustMenu\Components\MenuComponent');
+		$component2 = m::mock('JustMenu\Components\MenuComponent');
 
 		$this->component->add($component1);
 		$this->component->add($component2);
@@ -23,8 +23,8 @@ class ComponentTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanRemoveComponent(){
-		$component1 = m::mock('JustMenu\Components\Component');
-		$component2 = m::mock('JustMenu\Components\Component');
+		$component1 = m::mock('JustMenu\Components\MenuComponent');
+		$component2 = m::mock('JustMenu\Components\MenuComponent');
 		$this->component->add($component1);
 		$this->component->add($component2);
 
@@ -37,6 +37,14 @@ class ComponentTest extends PHPUnit_Framework_TestCase {
 		$this->assertContains($component2, $this->component->components);
 		$this->assertNotContains($component1, $this->component->components);
 		$this->assertCount(1, $this->component->components);
+	}
+
+	public function testCanAddSize(){
+		$this->component->addSize(1.99, 'small', 'Sm.');
+
+		$size[0] = array('size' => 'small', 'size_short' => 'Sm.', 'price' => 1.99);
+
+		$this->assertSame($size, $this->component->getSizes());
 	}
 
 }

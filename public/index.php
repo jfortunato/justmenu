@@ -13,7 +13,7 @@ $cat1 = new Category();
 $cat1->title = 'Chow Fun';
 $cat1->description = 'rice noodle';
 $cat1->info = 'comes with white rice';
-$cat1->sizes = array('Qt.' => 6.99);
+$cat1->addSize(6.99, 'quart', 'Qt.');
 
 $item1 = new Item();
 $item1->title = 'Vegetable Chow Fun';
@@ -34,7 +34,8 @@ $cat2 = new Category();
 $cat2->title = 'Lo Mein';
 $cat2->description = 'soft noodle';
 $cat2->info = 'comes with soda';
-$cat2->sizes = array('Pt.' => 4.45, 'Qt.' => 6.85);
+$cat2->addSize(4.45, 'pint', 'Pt.');
+$cat2->addSize(6.85, 'quart', 'Qt.');
 
 $item1 = new Item();
 $item1->title = 'Plain Lo Mein';

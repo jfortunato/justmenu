@@ -1,5 +1,7 @@
 <?php namespace JustMenu\Components;
 
+use JustMenu\Helpers\Abbreviator;
+
 abstract class MenuComponent {
 	/**
 	 * a composite of MenuComponents
@@ -57,6 +59,8 @@ abstract class MenuComponent {
 	}
 
 	public function addSize($price, $size, $size_short = ''){
+		// $size_short is not required so attempt to automatically abbreviate if not given
+		$size_short = empty($size_short) ? Abbreviator::abbreviate($size):$size_short;
 		$this->sizes[] = array('size' => $size, 'size_short' => $size_short, 'price' => $price);
 	}
 

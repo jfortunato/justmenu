@@ -21,7 +21,7 @@ class Item extends MenuComponent {
 				return $size['price'];
 		}
 
-		// if we made it here use default cateogry sizes
+		// if we made it here use default category sizes
 		foreach($this->category()->getSizes() as $size){
 			if($size['size'] === $s)
 				return $size['price'];

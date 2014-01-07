@@ -1,8 +1,9 @@
-<?php namespace JustMenu\Components;
+<?php namespace JustMenu\Menu;
 
-class Category extends MenuComponent {
+class SimpleCategoryPresenter implements Presenter {
 
-	public function display(){
+	public function show()
+	{
 		echo "===============================================<br>";
 		echo "$this->title [" . implode(', ', $this->getAllShortSizes()) . "] <br>";
 		echo "$this->description <br>";
@@ -14,13 +15,4 @@ class Category extends MenuComponent {
 		}
 		echo "===============================================<br>";
 	}
-
-	public function getAllSizes(){
-		return array_map(function($size) { return $size['size']; }, $this->sizes);
-	}
-
-	public function getAllShortSizes(){
-		return array_map(function($size) { return $size['size_short']; }, $this->sizes);
-	}
-
 }

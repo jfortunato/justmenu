@@ -1,13 +1,8 @@
 <?php
 
-use \Mockery as m;
 use JustMenu\Support\Abbreviator;
 
-class AbbreviatorTest extends PHPUnit_Framework_TestCase {
-
-	public function tearDown(){
-		m::close();
-	}
+class AbbreviatorTest extends TestCase {
 
 	public function testAbbreviatorReturnsCorrectAbbreviations(){
 		$this->assertSame('Sm.', Abbreviator::abbreviate('small'));

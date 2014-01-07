@@ -1,11 +1,11 @@
 <?php
 
-use JustMenu\Components\Menu;
-use JustMenu\Components\Category;
-use JustMenu\Components\Item;
+use JustMenu\Menu\Components\Menu;
+use JustMenu\Menu\Components\Category;
+use JustMenu\Menu\Components\Item;
 
 // bootstrap the application
-require_once '../lib/JustMenu/bootstrap.php';
+require_once '../src/JustMenu/bootstrap.php';
 
 $menu = new Menu();
 

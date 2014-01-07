@@ -11,8 +11,11 @@
 		"mockery/mockery": "dev-master"
     },
 	"autoload": {
+		"classmap": [
+			"tests/TestCase.php"
+		],
 		"psr-0": {
-			"JustMenu": "lib/"
+			"JustMenu": "src/"
 		}
 	}
 }

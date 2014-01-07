@@ -2,19 +2,15 @@
 
 use \Mockery as m;
 
-class MenuComponentTest extends PHPUnit_Framework_TestCase {
+class MenuComponentTest extends TestCase {
 
 	public function setUp(){
-		$this->component = $this->getMockForAbstractClass('JustMenu\Components\MenuComponent');
-	}
-
-	public function tearDown(){
-		m::close();
+		$this->component = $this->getMockForAbstractClass('JustMenu\Menu\Components\MenuComponent');
 	}
 
 	public function testCanAddComponent(){
-		$component1 = m::mock('JustMenu\Components\MenuComponent');
-		$component2 = m::mock('JustMenu\Components\MenuComponent');
+		$component1 = m::mock('JustMenu\Menu\Components\MenuComponent');
+		$component2 = m::mock('JustMenu\Menu\Components\MenuComponent');
 
 		$this->component->add($component1);
 		$this->component->add($component2);
@@ -23,8 +19,8 @@ class MenuComponentTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCanRemoveComponent(){
-		$component1 = m::mock('JustMenu\Components\MenuComponent');
-		$component2 = m::mock('JustMenu\Components\MenuComponent');
+		$component1 = m::mock('JustMenu\Menu\Components\MenuComponent');
+		$component2 = m::mock('JustMenu\Menu\Components\MenuComponent');
 		$this->component->add($component1);
 		$this->component->add($component2);
 

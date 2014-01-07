@@ -1,7 +1,7 @@
 <?php
 
 use \Mockery as m;
-use JustMenu\Helpers\Abbreviator;
+use JustMenu\Support\Abbreviator;
 
 class AbbreviatorTest extends PHPUnit_Framework_TestCase {
 

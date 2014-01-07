@@ -1,6 +1,6 @@
 <?php namespace JustMenu\Components;
 
-use JustMenu\Helpers\Abbreviator;
+use JustMenu\Support\Abbreviator;
 
 abstract class MenuComponent {
 	/**

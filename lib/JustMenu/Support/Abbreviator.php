@@ -1,4 +1,4 @@
-<?php namespace JustMenu\Helpers;
+<?php namespace JustMenu\Support;
 
 class Abbreviator {
 	private static $knownAbbreviations = array(

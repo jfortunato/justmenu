@@ -4,7 +4,7 @@ class SimpleMenuPresenter extends MenuPresenter {
 	
 	protected function renderMenu()
 	{
-		$this->showChildren();
+		$this->renderChildren();
 	}
 
 	protected function renderCategory()
@@ -15,7 +15,7 @@ class SimpleMenuPresenter extends MenuPresenter {
 		$this->output .= "{$this->component->info} <br>";
 		$this->output .= "-----------------------------------------------<br>";
 
-		$this->showChildren();
+		$this->renderChildren();
 
 		$this->output .= "===============================================<br>";
 	}

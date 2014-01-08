@@ -28,7 +28,7 @@ abstract class MenuPresenter {
 
 	}
 
-	protected function showChildren()
+	protected function renderChildren()
 	{
 		$components = $this->component->components;
 

@@ -1,6 +1,6 @@
 <?php
 
-use \Mockery as m;
+use Mockery as m;
 use JustMenu\Menu\Components\Category;
 
 

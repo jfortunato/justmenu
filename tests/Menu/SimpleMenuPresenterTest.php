@@ -2,13 +2,13 @@
 
 use Mockery as m;
 use JustMenu\Menu\SimpleMenuPresenter;
+use JustMenu\Menu\Components\Category;
 
 class SimpleMenuPresenterTest extends TestCase {
 
 	public function testCategory()
 	{
-		//$category = m::mock('JustMenu\Menu\Components\Category');
-		$category = new JustMenu\Menu\Components\Category;
+		$category = new Category;
 		$category->title = 'foo';
 		$category->description = 'bar';
 		$category->info = 'baz';
@@ -25,7 +25,6 @@ class SimpleMenuPresenterTest extends TestCase {
 	{
 		$item = m::mock('JustMenu\Menu\Components\Item');
 		$item->shouldReceive('getAllPrices')->once()->andReturn(array());
-		//$item = new JustMenu\Menu\Components\Item;
 		$item->title = 'foo';
 		$item->description = 'bar';
 		$item->info = 'baz';

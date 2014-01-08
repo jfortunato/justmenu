@@ -54,6 +54,7 @@ $menu->add($cat2);
 
 
 //$menu->display();
-$view = new JustMenu\Menu\SimpleMenuPresenter($menu);
+$view = new JustMenu\Menu\XMLMenuPresenter($menu);
 echo $view->show();
+
 //echo '<pre>'; var_dump($menu); echo '</pre>'; die();

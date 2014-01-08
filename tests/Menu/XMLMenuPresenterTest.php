@@ -9,6 +9,8 @@ class XMLMenuPresenterTest extends TestCase {
 
 	public function setUp()
 	{
+		$this->menu = new Menu;
+
 		$this->category = new Category;
 		$this->category->title = 'foo';
 		$this->category->description = 'bar';

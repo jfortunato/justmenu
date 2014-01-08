@@ -68,5 +68,5 @@ abstract class MenuComponent {
 		return $this->sizes;
 	}
 
-	abstract public function display();
+	//abstract public function display();
 }

@@ -5,38 +5,37 @@ use JustMenu\Menu\Components\MenuComponent;
 abstract class MenuPresenter {
 	protected $component;
 
-	protected $output = '';
-
 	public function __construct(MenuComponent $component)
 	{
 		$this->component = $component;
 	}
 
-	public function show()
+	public function render()
 	{
 		if ($this->component instanceof \JustMenu\Menu\Components\Category) {
-			$this->renderCategory();
+			return $this->renderCategory();
 		} else if($this->component instanceof \JustMenu\Menu\Components\Item) {
-			$this->renderItem();
+			return $this->renderItem();
 		} else if($this->component instanceof \JustMenu\Menu\Components\Menu) {
-			$this->renderMenu();
-		} else {
-			throw new \Exception;
+			return $this->renderMenu();
 		}
 
-		return $this->output;
-
+		throw new \Exception;
 	}
 
 	protected function renderChildren()
 	{
+		$rendered = '';
+
 		$components = $this->component->components;
 
 		for($components->rewind(); $components->valid(); $components->next()){
 			$component = $components->current();
 			$this->component = $component;
-			$this->show();
+			$rendered .= $this->render();
 		}
+
+		return $rendered;
 	}
 
 	abstract protected function renderMenu();

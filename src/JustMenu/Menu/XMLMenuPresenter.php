@@ -4,35 +4,41 @@ class XMLMenuPresenter extends MenuPresenter {
 	
 	protected function renderMenu()
 	{
-		$this->output .= "
+		$output = "
 		<JustMenu>";
-		$this->renderChildren();
-		$this->output .= "
+		$output .= $this->renderChildren();
+		$output .= "
 		</JustMenu>";
+
+		return $output;
 	}
 
 	protected function renderCategory()
 	{
-		$this->output .= "
+		$output = "
 		<Category>
 			<title>{$this->component->title}</title>
 			<description>{$this->component->description}</description>
 			<info>{$this->component->info}</info>";
 
-		$this->renderChildren();
+		$output .= $this->renderChildren();
 
-		$this->output .= "
+		$output .= "
 		</Category>";
+
+		return $output;
 	}
 
 	protected function renderItem()
 	{
-		$this->output .= "
+		$output = "
 		<Item>
 			<title>{$this->component->title}</title>
 			<description>{$this->component->description}</description>
 			<info>{$this->component->info}</info>
 		</Item>";
+
+		return $output;
 	}
 
 }

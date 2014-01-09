@@ -6,7 +6,7 @@ class HTMLMenuPresenter extends MenuPresenter {
 	{
 		$categories = $this->renderChildren();
 
-		return $this->fetchView('menu', compact('categories'));
+		return $this->fetchView('menu.html', compact('categories'));
 	}
 
 	protected function renderCategory()
@@ -19,8 +19,7 @@ class HTMLMenuPresenter extends MenuPresenter {
 			'items'       => $this->renderChildren(),
 		);
 
-		return $this->fetchView('category', $data);
-
+		return $this->fetchView('category.html', $data);
 	}
 
 	protected function renderItem()
@@ -32,18 +31,8 @@ class HTMLMenuPresenter extends MenuPresenter {
 			'prices'      => implode(', ', $this->component->getAllPrices()),
 		);
 
-		return $this->fetchView('item', $data);
+		return $this->fetchView('item.html', $data);
 	}
 
-	private function fetchView($view, $data)
-	{
-		ob_start();
-
-		extract($data);
-
-		include __DIR__ . "/views/{$view}.html";
-
-		return ltrim(ob_get_clean());
-	}
 
 }

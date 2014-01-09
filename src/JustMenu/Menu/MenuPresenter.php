@@ -27,7 +27,7 @@ abstract class MenuPresenter {
 	{
 		$rendered = '';
 
-		$components = $this->component->components;
+		$components = $this->component->components ?: new \SplObjectStorage;
 
 		for($components->rewind(); $components->valid(); $components->next()){
 			$component = $components->current();
@@ -36,6 +36,27 @@ abstract class MenuPresenter {
 		}
 
 		return $rendered;
+	}
+
+	protected function fetchView($view, $data)
+	{
+		ob_start();
+
+		extract($data);
+
+		include __DIR__ . "/views/{$view}";
+
+		return ltrim(ob_get_clean());
+	}
+
+	/**
+	 * Gets the value of $component
+	 *
+	 * @return Component
+	 */
+	public function getComponent()
+	{
+		return $this->component;
 	}
 
 	abstract protected function renderMenu();

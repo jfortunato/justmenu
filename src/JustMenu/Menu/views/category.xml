@@ -1,0 +1,6 @@
+<Category>
+	<title><?= $title; ?></title>
+	<description><?= $description; ?></description>
+	<info><?= $info; ?></info>
+	<?= $items; ?>
+</Category>

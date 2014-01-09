@@ -1,0 +1,5 @@
+<Item>
+	<title><?= $title; ?></title>
+	<description><?= $description; ?></description>
+	<info><?= $info; ?></info>
+</Item>

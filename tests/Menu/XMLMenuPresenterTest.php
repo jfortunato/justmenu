@@ -22,23 +22,28 @@ class XMLMenuPresenterTest extends TestCase {
 		$this->item->info = 'baz';
 	}
 
-	public function testMenu()
+	public function testItem()
 	{
-		$menu = new Menu;
-		$this->category->add($this->item);
-		$menu->add($this->category);
+		$presenter = new XMLMenuPresenter($this->item);
 
-		$presenter = new XMLMenuPresenter($menu);
+		$rendered = $presenter->render();
 
-		$this->assertXmlStringEqualsXmlString('<JustMenu><Category><title>foo</title><description>bar</description><info>baz</info><Item><title>foo</title><description>bar</description><info>baz</info></Item></Category></JustMenu>', $presenter->render());
+		$this->assertTag(['tag' => 'Item'], $rendered, '', false);
+		$this->assertTag(['tag' => 'title', 'parent' => ['tag' => 'Item'], 'content' => 'foo'], $rendered, '', false);
+		$this->assertTag(['tag' => 'description', 'parent' => ['tag' => 'Item'], 'content' => 'bar'], $rendered, '', false);
+		$this->assertTag(['tag' => 'info', 'parent' => ['tag' => 'Item'], 'content' => 'baz'], $rendered, '', false);
 	}
 
-	
 	public function testCategory()
 	{
 		$presenter = new XMLMenuPresenter($this->category);
+		
+		$rendered = $presenter->render();
 
-		$this->assertXmlStringEqualsXmlString('<Category><title>foo</title><description>bar</description><info>baz</info></Category>', $presenter->render());
+		$this->assertTag(['tag' => 'Category'], $rendered, '', false);
+		$this->assertTag(['tag' => 'title', 'parent' => ['tag' => 'Category'], 'content' => 'foo'], $rendered, '', false);
+		$this->assertTag(['tag' => 'description', 'parent' => ['tag' => 'Category'], 'content' => 'bar'], $rendered, '', false);
+		$this->assertTag(['tag' => 'info', 'parent' => ['tag' => 'Category'], 'content' => 'baz'], $rendered, '', false);
 	}
 
 	public function testCategoryWithItem()
@@ -47,15 +52,37 @@ class XMLMenuPresenterTest extends TestCase {
 
 		$presenter = new XMLMenuPresenter($this->category);
 
-		$this->assertXmlStringEqualsXmlString('<Category><title>foo</title><description>bar</description><info>baz</info><Item><title>foo</title><description>bar</description><info>baz</info></Item></Category>', $presenter->render());
+		$rendered = $presenter->render();
+
+		$this->assertTag(['tag' => 'Category'], $rendered, '', false);
+		$this->assertTag(['tag' => 'title', 'parent' => ['tag' => 'Category'], 'content' => 'foo'], $rendered, '', false);
+		$this->assertTag(['tag' => 'description', 'parent' => ['tag' => 'Category'], 'content' => 'bar'], $rendered, '', false);
+		$this->assertTag(['tag' => 'info', 'parent' => ['tag' => 'Category'], 'content' => 'baz'], $rendered, '', false);
+		$this->assertTag(['tag' => 'Item', 'parent' => ['tag' => 'Category']], $rendered, '', false);
+		$this->assertTag(['tag' => 'title', 'parent' => ['tag' => 'Item'], 'content' => 'foo'], $rendered, '', false);
+		$this->assertTag(['tag' => 'description', 'parent' => ['tag' => 'Item'], 'content' => 'bar'], $rendered, '', false);
+		$this->assertTag(['tag' => 'info', 'parent' => ['tag' => 'Item'], 'content' => 'baz'], $rendered, '', false);
 	}
 
-
-	public function testItem()
+	public function testMenu()
 	{
-		$presenter = new XMLMenuPresenter($this->item);
+		$menu = new Menu;
+		$this->category->add($this->item);
+		$menu->add($this->category);
 
-		$this->assertXmlStringEqualsXmlString('<Item><title>foo</title><description>bar</description><info>baz</info></Item>', $presenter->render());
+		$presenter = new XMLMenuPresenter($menu);
+
+		$rendered = $presenter->render();
+
+		$this->assertTag(['tag' => 'JustMenu'], $rendered, '', false);
+		$this->assertTag(['tag' => 'Category', 'parent' => ['tag' => 'JustMenu']], $rendered, '', false);
+		$this->assertTag(['tag' => 'title', 'parent' => ['tag' => 'Category'], 'content' => 'foo'], $rendered, '', false);
+		$this->assertTag(['tag' => 'description', 'parent' => ['tag' => 'Category'], 'content' => 'bar'], $rendered, '', false);
+		$this->assertTag(['tag' => 'info', 'parent' => ['tag' => 'Category'], 'content' => 'baz'], $rendered, '', false);
+		$this->assertTag(['tag' => 'Item', 'parent' => ['tag' => 'Category']], $rendered, '', false);
+		$this->assertTag(['tag' => 'title', 'parent' => ['tag' => 'Item'], 'content' => 'foo'], $rendered, '', false);
+		$this->assertTag(['tag' => 'description', 'parent' => ['tag' => 'Item'], 'content' => 'bar'], $rendered, '', false);
+		$this->assertTag(['tag' => 'info', 'parent' => ['tag' => 'Item'], 'content' => 'baz'], $rendered, '', false);
 	}
 
 }

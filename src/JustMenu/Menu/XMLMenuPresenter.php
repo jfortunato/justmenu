@@ -4,41 +4,32 @@ class XMLMenuPresenter extends MenuPresenter {
 	
 	protected function renderMenu()
 	{
-		$output = "
-		<JustMenu>";
-		$output .= $this->renderChildren();
-		$output .= "
-		</JustMenu>";
+		$categories = $this->renderChildren();
 
-		return $output;
+		return $this->fetchView('menu.xml', compact('categories'));
 	}
 
 	protected function renderCategory()
 	{
-		$output = "
-		<Category>
-			<title>{$this->component->title}</title>
-			<description>{$this->component->description}</description>
-			<info>{$this->component->info}</info>";
+		$data = array(
+			'title'       => $this->component->title,
+			'description' => $this->component->description,
+			'info'        => $this->component->info,
+			'items'        => $this->renderChildren(),
+		);
 
-		$output .= $this->renderChildren();
-
-		$output .= "
-		</Category>";
-
-		return $output;
+		return $this->fetchView('category.xml', $data);
 	}
 
 	protected function renderItem()
 	{
-		$output = "
-		<Item>
-			<title>{$this->component->title}</title>
-			<description>{$this->component->description}</description>
-			<info>{$this->component->info}</info>
-		</Item>";
+		$data = array(
+			'title'       => $this->component->title,
+			'description' => $this->component->description,
+			'info'        => $this->component->info,
+		);
 
-		return $output;
+		return $this->fetchView('item.xml', $data);
 	}
 
 }

@@ -1,0 +1,3 @@
+<JustMenu>
+	<?= $categories; ?>
+</JustMenu>

@@ -15,6 +15,7 @@ class XMLMenuPresenter extends MenuPresenter {
 			'title'       => $this->component->title,
 			'description' => $this->component->description,
 			'info'        => $this->component->info,
+			'sizes'        => $this->component->getSizes(),
 			'items'        => $this->renderChildren(),
 		);
 
@@ -27,6 +28,7 @@ class XMLMenuPresenter extends MenuPresenter {
 			'title'       => $this->component->title,
 			'description' => $this->component->description,
 			'info'        => $this->component->info,
+			'sizes'        => $this->component->getSizes(),
 		);
 
 		return $this->fetchView('item.xml', $data);

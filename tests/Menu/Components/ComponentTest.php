@@ -43,4 +43,17 @@ class MenuComponentTest extends TestCase {
 		$this->assertSame($size, $this->component->getSizes());
 	}
 
+	public function testCanGetSizesOfParentComponentIfCurrentDoesntHaveSize()
+	{
+		$component1 = $this->getMockForAbstractClass('JustMenu\Menu\Components\MenuComponent');
+		$component1->add($this->component);
+
+		$component1->addSize(3.00, 'small', 'Sm.');
+
+		$size[0] = array('size' => 'small', 'size_short' => 'Sm.', 'price' => 3.00);
+
+		$this->assertSame($size, $this->component->getSizes());
+	}
+
+
 }

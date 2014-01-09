@@ -65,7 +65,10 @@ abstract class MenuComponent {
 	}
 
 	public function getSizes(){
-		return $this->sizes;
+		if(!empty($this->sizes) || !$this->parent)
+			return $this->sizes;
+
+		return $this->parent->getSizes();
 	}
 
 	//abstract public function display();

@@ -1,22 +1,18 @@
 <?php
 
-use JustMenu\Menu\Components\Category;
 use JustMenu\Menu\XMLMenuPresenter;
-use JustMenu\Menu\Components\Item;
 use JustMenu\Menu\Components\Menu;
 
 class XMLMenuPresenterTest extends TestCase {
 
 	public function setUp()
 	{
-		$this->menu = new Menu;
-
-		$this->category = new Category;
+		$this->category = Mockery::mock('JustMenu\Menu\Components\Category[getSizes]');
 		$this->category->title = 'foo';
 		$this->category->description = 'bar';
 		$this->category->info = 'baz';
 
-		$this->item = new Item;
+		$this->item = Mockery::mock('JustMenu\Menu\Components\Item', array('getSizes' => []));
 		$this->item->title = 'foo';
 		$this->item->description = 'bar';
 		$this->item->info = 'baz';
@@ -34,8 +30,18 @@ class XMLMenuPresenterTest extends TestCase {
 		$this->assertTag(['tag' => 'info', 'parent' => ['tag' => 'Item'], 'content' => 'baz'], $rendered, '', false);
 	}
 
+	public function testItemWithSizes()
+	{
+		$this->item->shouldReceive('getSizes')->once()->andReturn(array(0 => ['size' => 'small', 'size_short' => 'sm', 'price' => '3.00']));
+		$presenter = new XMLMenuPresenter($this->item);
+
+		$this->assertTag(['tag' => 'size', 'parent' => ['tag' => 'Item'], 'content' => 'small', 'attributes' => ['price' => '3.00']], $presenter->render());
+	}
+
+
 	public function testCategory()
 	{
+		$this->category->shouldReceive('getSizes')->once()->andReturn([]);
 		$presenter = new XMLMenuPresenter($this->category);
 		
 		$rendered = $presenter->render();
@@ -46,8 +52,18 @@ class XMLMenuPresenterTest extends TestCase {
 		$this->assertTag(['tag' => 'info', 'parent' => ['tag' => 'Category'], 'content' => 'baz'], $rendered, '', false);
 	}
 
+	public function testCategoryWithDefaultSizes()
+	{
+		$this->category->shouldReceive('getSizes')->once()->andReturn(array(0 => ['size' => 'small', 'size_short' => 'sm', 'price' => '3.00']));
+		$presenter = new XMLMenuPresenter($this->category);
+
+		$this->assertTag(['tag' => 'default-size', 'parent' => ['tag' => 'Category'], 'content' => 'small', 'attributes' => ['price' => '3.00']], $presenter->render());
+	}
+
+
 	public function testCategoryWithItem()
 	{
+		$this->category->shouldReceive('getSizes')->once()->andReturn([]);
 		$this->category->add($this->item);
 
 		$presenter = new XMLMenuPresenter($this->category);
@@ -67,6 +83,7 @@ class XMLMenuPresenterTest extends TestCase {
 	public function testMenu()
 	{
 		$menu = new Menu;
+		$this->category->shouldReceive('getSizes')->once()->andReturn([]);
 		$this->category->add($this->item);
 		$menu->add($this->category);
 

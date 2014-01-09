@@ -44,9 +44,16 @@ abstract class MenuPresenter {
 
 		extract($data);
 
-		include __DIR__ . "/views/{$view}";
+		$type = $this->determineFileType($view);
+
+		include __DIR__ . "/views/{$type}/{$view}";
 
 		return ltrim(ob_get_clean());
+	}
+
+	protected function determineFileType($view)
+	{
+		return pathinfo($view, PATHINFO_EXTENSION);
 	}
 
 	/**

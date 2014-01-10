@@ -8,7 +8,8 @@
         }
     ],
     "require": {
-		"mockery/mockery": "dev-master"
+		"mockery/mockery": "dev-master",
+		"filp/whoops": "1.*"
     },
 	"autoload": {
 		"classmap": [

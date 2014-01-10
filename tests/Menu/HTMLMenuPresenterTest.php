@@ -19,7 +19,7 @@ class HTMLMenuPresenterTest extends TestCase {
 		$this->assertTag(['attributes' => ['data-title' => 'foo']], $rendered);
 		$this->assertTag(['attributes' => ['data-description' => 'bar']], $rendered);
 		$this->assertTag(['attributes' => ['data-info' => 'baz']], $rendered);
-		$this->assertTag(['attributes' => ['data-prices' => '3.00']], $rendered);
+		$this->assertTag(['attributes' => ['data-price' => '3.00']], $rendered);
 	}
 
 	public function testRenderProperlyRendersCategoryWithAttributes()
@@ -36,7 +36,7 @@ class HTMLMenuPresenterTest extends TestCase {
 		$this->assertTag(['attributes' => ['data-title' => 'foo']], $rendered);
 		$this->assertTag(['attributes' => ['data-description' => 'bar']], $rendered);
 		$this->assertTag(['attributes' => ['data-info' => 'baz']], $rendered);
-		$this->assertTag(['attributes' => ['data-sizes' => 'lg.']], $rendered);
+		$this->assertTag(['attributes' => ['data-size' => 'lg.']], $rendered);
 	}
 
 	public function testCanRenderCategoryWithNoItems()

@@ -15,7 +15,7 @@ class HTMLMenuPresenter extends MenuPresenter {
 			'title'       => $this->component->title,
 			'description' => $this->component->description,
 			'info'        => $this->component->info,
-			'sizes'       => implode(', ', $this->component->getAllShortSizes()),
+			'sizes'       => $this->component->getAllShortSizes(),
 			'items'       => $this->renderChildren(),
 		);
 
@@ -28,7 +28,7 @@ class HTMLMenuPresenter extends MenuPresenter {
 			'title'       => $this->component->title,
 			'description' => $this->component->description,
 			'info'        => $this->component->info,
-			'prices'      => implode(', ', $this->component->getAllPrices()),
+			'prices'      => $this->component->getAllPrices(),
 		);
 
 		return $this->fetchView('item.html', $data);

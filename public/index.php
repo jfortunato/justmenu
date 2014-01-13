@@ -1,10 +1,10 @@
 <?php
 
-use JustMenu\Menu\SimpleMenuBuilder;
-use JustMenu\Menu\HTMLMenuPresenter;
+use JustMenu\Menu\Builder\SimpleMenuBuilder;
+use JustMenu\Menu\Presenter\HTMLMenuPresenter;
 
 // bootstrap the application
-require_once '../src/JustMenu/bootstrap.php';
+require_once '../bootstrap.php';
 
 $builder = new SimpleMenuBuilder(new HTMLMenuPresenter);
 $view = $builder->build();

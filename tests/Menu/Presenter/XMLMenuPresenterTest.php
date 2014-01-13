@@ -1,26 +1,31 @@
 <?php
 
-use JustMenu\Menu\XMLMenuPresenter;
-use JustMenu\Menu\Components\Menu;
+use Mockery as m;
+use JustMenu\Menu\Presenter\XMLMenuPresenter;
+use JustMenu\Menu\Entity\Menu;
 
 class XMLMenuPresenterTest extends TestCase {
 
 	public function setUp()
 	{
-		$this->category = Mockery::mock('JustMenu\Menu\Components\Category[getSizes]');
-		$this->category->title = 'foo';
-		$this->category->description = 'bar';
-		$this->category->info = 'baz';
+		$this->mockCategory = m::mock('JustMenu\Menu\Entity\Category[getSizes]');
+		$this->mockCategory->title = 'foo';
+		$this->mockCategory->description = 'bar';
+		$this->mockCategory->info = 'baz';
+		$this->mockCategoryComponent = m::mock('JustMenu\Menu\MenuComponent[getEntity]', array($this->mockCategory));
+		$this->mockCategoryComponent->shouldReceive('getEntity')->andReturn($this->mockCategory);
 
-		$this->item = Mockery::mock('JustMenu\Menu\Components\Item', array('getSizes' => []));
-		$this->item->title = 'foo';
-		$this->item->description = 'bar';
-		$this->item->info = 'baz';
+		$this->mockItem = m::mock('JustMenu\Menu\Entity\Item', array('getSizes' => []));
+		$this->mockItem->title = 'foo';
+		$this->mockItem->description = 'bar';
+		$this->mockItem->info = 'baz';
+		$this->mockItemComponent = m::mock('JustMenu\Menu\MenuComponent', array($this->mockItem));
+		$this->mockItemComponent->shouldReceive('getEntity')->andReturn($this->mockItem);
 	}
 
 	public function testItem()
 	{
-		$presenter = new XMLMenuPresenter($this->item);
+		$presenter = new XMLMenuPresenter($this->mockItemComponent);
 
 		$rendered = $presenter->render();
 
@@ -32,8 +37,8 @@ class XMLMenuPresenterTest extends TestCase {
 
 	public function testItemWithSizes()
 	{
-		$this->item->shouldReceive('getSizes')->once()->andReturn(array(0 => ['size' => 'small', 'size_short' => 'sm', 'price' => '3.00']));
-		$presenter = new XMLMenuPresenter($this->item);
+		$this->mockItem->shouldReceive('getSizes')->once()->andReturn(array(0 => ['size' => 'small', 'size_short' => 'sm', 'price' => '3.00']));
+		$presenter = new XMLMenuPresenter($this->mockItemComponent);
 
 		$this->assertTag(['tag' => 'size', 'parent' => ['tag' => 'Item'], 'content' => 'small', 'attributes' => ['price' => '3.00']], $presenter->render());
 	}
@@ -41,8 +46,8 @@ class XMLMenuPresenterTest extends TestCase {
 
 	public function testCategory()
 	{
-		$this->category->shouldReceive('getSizes')->once()->andReturn([]);
-		$presenter = new XMLMenuPresenter($this->category);
+		$this->mockCategory->shouldReceive('getSizes')->once()->andReturn([]);
+		$presenter = new XMLMenuPresenter($this->mockCategoryComponent);
 		
 		$rendered = $presenter->render();
 
@@ -54,8 +59,8 @@ class XMLMenuPresenterTest extends TestCase {
 
 	public function testCategoryWithDefaultSizes()
 	{
-		$this->category->shouldReceive('getSizes')->once()->andReturn(array(0 => ['size' => 'small', 'size_short' => 'sm', 'price' => '3.00']));
-		$presenter = new XMLMenuPresenter($this->category);
+		$this->mockCategory->shouldReceive('getSizes')->once()->andReturn(array(0 => ['size' => 'small', 'size_short' => 'sm', 'price' => '3.00']));
+		$presenter = new XMLMenuPresenter($this->mockCategoryComponent);
 
 		$this->assertTag(['tag' => 'default-size', 'parent' => ['tag' => 'Category'], 'content' => 'small', 'attributes' => ['price' => '3.00']], $presenter->render());
 	}
@@ -63,10 +68,10 @@ class XMLMenuPresenterTest extends TestCase {
 
 	public function testCategoryWithItem()
 	{
-		$this->category->shouldReceive('getSizes')->once()->andReturn([]);
-		$this->category->add($this->item);
+		$this->mockCategory->shouldReceive('getSizes')->once()->andReturn([]);
+		$this->mockCategoryComponent->add($this->mockItemComponent);
 
-		$presenter = new XMLMenuPresenter($this->category);
+		$presenter = new XMLMenuPresenter($this->mockCategoryComponent);
 
 		$rendered = $presenter->render();
 
@@ -82,12 +87,14 @@ class XMLMenuPresenterTest extends TestCase {
 
 	public function testMenu()
 	{
-		$menu = new Menu;
-		$this->category->shouldReceive('getSizes')->once()->andReturn([]);
-		$this->category->add($this->item);
-		$menu->add($this->category);
+		$mockMenu = m::mock('JustMenu\Menu\Menu');
+		$mockMenuComponent = m::mock('JustMenu\Menu\MenuComponent[getEntity]', array($mockMenu));
+		$mockMenuComponent->shouldReceive('getEntity')->andReturn($mockMenu);
+		$this->mockCategory->shouldReceive('getSizes')->once()->andReturn([]);
+		$this->mockCategoryComponent->add($this->mockItemComponent);
+		$mockMenuComponent->add($this->mockCategoryComponent);
 
-		$presenter = new XMLMenuPresenter($menu);
+		$presenter = new XMLMenuPresenter($mockMenuComponent);
 
 		$rendered = $presenter->render();
 

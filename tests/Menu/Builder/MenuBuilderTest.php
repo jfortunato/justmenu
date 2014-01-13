@@ -1,13 +1,13 @@
 <?php
 
 use Mockery as m;
-use JustMenu\Menu\SimpleMenuBuilder;
+use JustMenu\Menu\Builder\SimpleMenuBuilder;
 
 class MenuBuilderTest extends TestCase {
 
 	public function setUp()
 	{
-		$this->builder = m::mock('JustMenu\Menu\MenuBuilder[assembleMenu]', array(m::mock('JustMenu\Menu\MenuPresenter')));
+		$this->builder = m::mock('JustMenu\Menu\Builder\MenuBuilder[assembleMenu]', array(m::mock('JustMenu\Menu\Presenter\MenuPresenter')));
 	}
 
 	public function testBuildReturnsMenuWrappedWithPresenter()
@@ -15,12 +15,12 @@ class MenuBuilderTest extends TestCase {
 		$this->builder
 			->shouldReceive('assembleMenu')
 			->once()
-			->andReturn(m::mock('JustMenu\Menu\Components\Menu'));
+			->andReturn(m::mock('JustMenu\Menu\MenuComponent'));
 
 		$this->builder->getMenuPresenter()
 			->shouldReceive('setComponent')
 			->once()
-			->with('JustMenu\Menu\Components\Menu')
+			->with('JustMenu\Menu\MenuComponent')
 			->andReturn('wrapped_menu');
 
 		$this->assertSame('wrapped_menu', $this->builder->build());

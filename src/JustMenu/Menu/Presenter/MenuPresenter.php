@@ -1,6 +1,6 @@
-<?php namespace	JustMenu\Menu;
+<?php namespace	JustMenu\Menu\Presenter;
 
-use JustMenu\Menu\Components\MenuComponent;
+use JustMenu\Menu\MenuComponent;
 
 abstract class MenuPresenter {
 	protected $component;
@@ -12,11 +12,13 @@ abstract class MenuPresenter {
 
 	public function render()
 	{
-		if ($this->component instanceof \JustMenu\Menu\Components\Category) {
+		$entity = $this->component->getEntity();
+
+		if ($entity instanceof \JustMenu\Menu\Entity\Category) {
 			return $this->renderCategory();
-		} else if($this->component instanceof \JustMenu\Menu\Components\Item) {
+		} else if($entity instanceof \JustMenu\Menu\Entity\Item) {
 			return $this->renderItem();
-		} else if($this->component instanceof \JustMenu\Menu\Components\Menu) {
+		} else if($entity instanceof \JustMenu\Menu\Menu) {
 			return $this->renderMenu();
 		}
 
@@ -46,7 +48,7 @@ abstract class MenuPresenter {
 
 		$type = $this->determineFileType($view);
 
-		include __DIR__ . "/views/{$type}/{$view}";
+		include __DIR__ . "/../views/{$type}/{$view}";
 
 		return ltrim(ob_get_clean());
 	}

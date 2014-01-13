@@ -1,4 +1,6 @@
-<?php namespace JustMenu\Menu;
+<?php namespace JustMenu\Menu\Builder;
+
+use JustMenu\Menu\Presenter\MenuPresenter;
 
 abstract class MenuBuilder {
 	

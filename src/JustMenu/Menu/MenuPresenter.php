@@ -5,7 +5,7 @@ use JustMenu\Menu\Components\MenuComponent;
 abstract class MenuPresenter {
 	protected $component;
 
-	public function __construct(MenuComponent $component)
+	public function __construct(MenuComponent $component = null)
 	{
 		$this->component = $component;
 	}
@@ -64,6 +64,19 @@ abstract class MenuPresenter {
 	public function getComponent()
 	{
 		return $this->component;
+	}
+
+	/**
+	 * Sets the value of component
+	 *
+	 * @param MenuComponent $component description
+	 *
+	 * @return MenuPresenter
+	 */
+	public function setComponent(MenuComponent $component)
+	{
+		$this->component = $component;
+		return $this;
 	}
 
 	abstract protected function renderMenu();

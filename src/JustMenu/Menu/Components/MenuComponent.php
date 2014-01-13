@@ -1,8 +1,9 @@
 <?php namespace JustMenu\Menu\Components;
 
+use \SplObjectStorage;
 use JustMenu\Support\Abbreviator;
 
-abstract class MenuComponent {
+abstract class MenuComponent extends SplObjectStorage {
 	/**
 	 * a composite of MenuComponents
 	 *
@@ -45,8 +46,8 @@ abstract class MenuComponent {
 	 */
 	protected $sizes = array();
 
-	public function __construct(){
-		$this->components = new \SplObjectStorage();
+	public function __construct(SplObjectStorage $components = null){
+		$this->components = $components ?: new SplObjectStorage;
 	}
 
 	public function add(MenuComponent $component){

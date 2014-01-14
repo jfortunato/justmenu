@@ -33,7 +33,6 @@ class ItemTest extends TestCase {
 		$this->category->shouldReceive('getSizes')->never();
 		$this->item->addSize(m::mock('JustMenu\Menu\Entity\Size', array(2.50, 'small', 'Sm.')));
 
-		//$this->category->add($this->item);
 		$this->assertSame(2.50, $this->item->getPrice('small'));
 	}
 }

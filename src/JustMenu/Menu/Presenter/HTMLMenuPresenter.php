@@ -12,10 +12,10 @@ class HTMLMenuPresenter extends MenuPresenter {
 	protected function renderCategory()
 	{
 		$data = array(
-			'title'       => $this->component->getEntity()->title,
-			'description' => $this->component->getEntity()->description,
-			'info'        => $this->component->getEntity()->info,
-			'sizes'       => $this->component->getEntity()->getAllShortSizes(),
+			'title'       => $this->component->title,
+			'description' => $this->component->description,
+			'info'        => $this->component->info,
+			'sizes'       => $this->component->getAllShortSizes(),
 			'items'       => $this->renderChildren(),
 		);
 
@@ -25,10 +25,10 @@ class HTMLMenuPresenter extends MenuPresenter {
 	protected function renderItem()
 	{
 		$data = array(
-			'title'       => $this->component->getEntity()->title,
-			'description' => $this->component->getEntity()->description,
-			'info'        => $this->component->getEntity()->info,
-			'prices'      => $this->component->getEntity()->getAllPrices(),
+			'title'       => $this->component->title,
+			'description' => $this->component->description,
+			'info'        => $this->component->info,
+			'prices'      => $this->component->getAllPrices(),
 		);
 
 		return $this->fetchView('item.html', $data);

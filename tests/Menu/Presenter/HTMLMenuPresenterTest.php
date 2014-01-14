@@ -12,10 +12,8 @@ class HTMLMenuPresenterTest extends TestCase {
 		$mockItem->description = 'bar';
 		$mockItem->info = 'baz';
 		$mockItem->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
-		$mockComponent = m::mock('JustMenu\Menu\MenuComponent', array($mockItem));
-		$mockComponent->shouldReceive('getEntity')->andReturn($mockItem);
 
-		$presenter = new HTMLMenuPresenter($mockComponent);
+		$presenter = new HTMLMenuPresenter($mockItem);
 		$rendered = $presenter->render();
 
 		$this->assertTag(['attributes' => ['data-item' => 'item']], $rendered);
@@ -32,10 +30,9 @@ class HTMLMenuPresenterTest extends TestCase {
 		$mockCategory->description = 'bar';
 		$mockCategory->info = 'baz';
 		$mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
-		$mockComponent = m::mock('JustMenu\Menu\MenuComponent', array($mockCategory));
-		$mockComponent->shouldReceive('getEntity')->andReturn($mockCategory);
+		$mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
 
-		$presenter = new HTMLMenuPresenter($mockComponent);
+		$presenter = new HTMLMenuPresenter($mockCategory);
 		$rendered = $presenter->render();
 
 		$this->assertTag(['attributes' => ['data-category' => 'category']], $rendered);
@@ -49,10 +46,9 @@ class HTMLMenuPresenterTest extends TestCase {
 	{
 		$mockCategory = m::mock('JustMenu\Menu\Entity\Category');
 		$mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
-		$mockComponent = m::mock('JustMenu\Menu\MenuComponent');
-		$mockComponent->shouldReceive('getEntity')->andReturn($mockCategory);
+		$mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
 
-		$presenter = new HTMLMenuPresenter($mockComponent);
+		$presenter = new HTMLMenuPresenter($mockCategory);
 
 		$this->assertNotEmpty($presenter->render());
 	}
@@ -61,15 +57,11 @@ class HTMLMenuPresenterTest extends TestCase {
 	{
 		$mockItem = m::mock('JustMenu\Menu\Entity\Item');
 		$mockItem->shouldReceive('getAllPrices')->once()->andReturn(['3.00']);
-		$mockItemComponent = m::mock('JustMenu\Menu\MenuComponent', array($mockItem));
-		$mockItemComponent->shouldReceive('getEntity')->andReturn($mockItem);
-		$mockCategory = m::mock('JustMenu\Menu\Entity\Category');
+		$mockCategory = m::mock('JustMenu\Menu\Entity\Category[getAllShortSizes]');
 		$mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg']);
-		$mockCategoryComponent = m::mock('JustMenu\Menu\MenuComponent[getEntity]', array($mockCategory));
-		$mockCategoryComponent->shouldReceive('getEntity')->andReturn($mockCategory);
-		$mockCategoryComponent->add($mockItemComponent);
+		$mockCategory->addItem($mockItem);
 
-		$presenter = new HTMLMenuPresenter($mockCategoryComponent);
+		$presenter = new HTMLMenuPresenter($mockCategory);
 
 		$rendered = $presenter->render();
 
@@ -80,9 +72,8 @@ class HTMLMenuPresenterTest extends TestCase {
 	public function testCanProperlyRenderMenuWithAttributes()
 	{
 		$mockMenu = m::mock('JustMenu\Menu\Menu');
-		$mockComponent = m::mock('JustMenu\Menu\MenuComponent', array($mockMenu));
-		$mockComponent->shouldReceive('getEntity')->andReturn($mockMenu);
-		$presenter = new HTMLMenuPresenter($mockComponent);
+		$mockMenu->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+		$presenter = new HTMLMenuPresenter($mockMenu);
 
 		$this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $presenter->render());
 	}
@@ -92,19 +83,13 @@ class HTMLMenuPresenterTest extends TestCase {
 	{
 		$mockItem = m::mock('JustMenu\Menu\Entity\Item');
 		$mockItem->shouldReceive('getAllPrices')->once()->andReturn(['3.00']);
-		$mockItemComponent = m::mock('JustMenu\Menu\MenuComponent', array($mockItem));
-		$mockItemComponent->shouldReceive('getEntity')->andReturn($mockItem);
-		$mockCategory = m::mock('JustMenu\Menu\Entity\Category');
+		$mockCategory = m::mock('JustMenu\Menu\Entity\Category[getAllShortSizes]');
 		$mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg']);
-		$mockCategoryComponent = m::mock('JustMenu\Menu\MenuComponent[getEntity]', array($mockCategory));
-		$mockCategoryComponent->shouldReceive('getEntity')->andReturn($mockCategory);
-		$mockCategoryComponent->add($mockItemComponent);
-		$mockMenu = m::mock('JustMenu\Menu\Menu');
-		$mockMenuComponent = m::mock('JustMenu\Menu\MenuComponent[getEntity]', array($mockMenu));
-		$mockMenuComponent->shouldReceive('getEntity')->andReturn($mockMenu);
-		$mockMenuComponent->add($mockCategoryComponent);
+		$mockCategory->addItem($mockItem);
+		$mockMenu = m::mock('JustMenu\Menu\Menu')->makePartial();
+		$mockMenu->addCategory($mockCategory);
 
-		$presenter = new HTMLMenuPresenter($mockMenuComponent);
+		$presenter = new HTMLMenuPresenter($mockMenu);
 		$rendered = $presenter->render();
 
 		$this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $rendered);

@@ -12,11 +12,11 @@ class XMLMenuPresenter extends MenuPresenter {
 	protected function renderCategory()
 	{
 		$data = array(
-			'title'       => $this->component->getEntity()->title,
-			'description' => $this->component->getEntity()->description,
-			'info'        => $this->component->getEntity()->info,
-			'sizes'        => $this->component->getEntity()->getSizes(),
-			'items'        => $this->renderChildren(),
+			'title'       => $this->component->title,
+			'description' => $this->component->description,
+			'info'        => $this->component->info,
+			'sizes'       => $this->component->getSizes(),
+			'items'       => $this->renderChildren(),
 		);
 
 		return $this->fetchView('category.xml', $data);
@@ -25,10 +25,10 @@ class XMLMenuPresenter extends MenuPresenter {
 	protected function renderItem()
 	{
 		$data = array(
-			'title'       => $this->component->getEntity()->title,
-			'description' => $this->component->getEntity()->description,
-			'info'        => $this->component->getEntity()->info,
-			'sizes'        => $this->component->getEntity()->getSizes(),
+			'title'       => $this->component->title,
+			'description' => $this->component->description,
+			'info'        => $this->component->info,
+			'sizes'       => $this->component->getSizes(),
 		);
 
 		return $this->fetchView('item.xml', $data);

@@ -15,12 +15,12 @@ class MenuBuilderTest extends TestCase {
 		$this->builder
 			->shouldReceive('assembleMenu')
 			->once()
-			->andReturn(m::mock('JustMenu\Menu\MenuComponent'));
+			->andReturn(m::mock('JustMenu\Menu\MenuComponentInterface'));
 
 		$this->builder->getMenuPresenter()
 			->shouldReceive('setComponent')
 			->once()
-			->with('JustMenu\Menu\MenuComponent')
+			->with('JustMenu\Menu\MenuComponentInterface')
 			->andReturn('wrapped_menu');
 
 		$this->assertSame('wrapped_menu', $this->builder->build());

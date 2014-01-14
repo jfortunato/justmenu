@@ -13,8 +13,8 @@ class SimpleMenuBuilderTest extends TestCase {
 
 		$menu = $builder->assembleMenu();
 
-		$this->assertInstanceOf('JustMenu\Menu\MenuComponent', $menu);
-		$this->assertInstanceOf('JustMenu\Menu\Menu', $menu->getEntity());
+		$this->assertInstanceOf('JustMenu\Menu\MenuComponentInterface', $menu);
+		$this->assertInstanceOf('JustMenu\Menu\Menu', $menu);
 	}
 
 }

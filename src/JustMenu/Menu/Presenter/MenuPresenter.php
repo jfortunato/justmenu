@@ -1,24 +1,22 @@
 <?php namespace	JustMenu\Menu\Presenter;
 
-use JustMenu\Menu\MenuComponent;
+use JustMenu\Menu\MenuComponentInterface;
 
 abstract class MenuPresenter {
 	protected $component;
 
-	public function __construct(MenuComponent $component = null)
+	public function __construct(MenuComponentInterface $component = null)
 	{
 		$this->component = $component;
 	}
 
 	public function render()
 	{
-		$entity = $this->component->getEntity();
-
-		if ($entity instanceof \JustMenu\Menu\Entity\Category) {
+		if ($this->component instanceof \JustMenu\Menu\Entity\Category) {
 			return $this->renderCategory();
-		} else if($entity instanceof \JustMenu\Menu\Entity\Item) {
+		} else if($this->component instanceof \JustMenu\Menu\Entity\Item) {
 			return $this->renderItem();
-		} else if($entity instanceof \JustMenu\Menu\Menu) {
+		} else if($this->component instanceof \JustMenu\Menu\Menu) {
 			return $this->renderMenu();
 		}
 
@@ -29,10 +27,7 @@ abstract class MenuPresenter {
 	{
 		$rendered = '';
 
-		$components = $this->component->components ?: new \SplObjectStorage;
-
-		for($components->rewind(); $components->valid(); $components->next()){
-			$component = $components->current();
+		foreach ($this->component->getChildrenComponents() as $component) {
 			$this->component = $component;
 			$rendered .= $this->render();
 		}
@@ -71,11 +66,11 @@ abstract class MenuPresenter {
 	/**
 	 * Sets the value of component
 	 *
-	 * @param MenuComponent $component description
+	 * @param MenuComponentInterface $component description
 	 *
 	 * @return MenuPresenter
 	 */
-	public function setComponent(MenuComponent $component)
+	public function setComponent(MenuComponentInterface $component)
 	{
 		$this->component = $component;
 		return $this;

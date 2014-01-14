@@ -1,8 +1,9 @@
 <?php namespace JustMenu\Menu\Entity;
 
 use JustMenu\Menu\Entity\Size;
+use JustMenu\Menu\MenuComponentInterface;
 
-class Category extends Entity {
+class Category extends Entity implements MenuComponentInterface {
 
 	protected $id;
 	protected $title;
@@ -10,6 +11,12 @@ class Category extends Entity {
 	protected $info;
 
 	protected $sizes = array();
+	protected $items = array();
+
+	public function addItem(Item $item)
+	{
+		$this->items[] = $item;
+	}
 
 	public function addSize(Size $size){
 		$this->sizes[] = $size;
@@ -35,6 +42,11 @@ class Category extends Entity {
 		}
 
 		return $sizes;
+	}
+
+	public function getChildrenComponents()
+	{
+		return $this->items;
 	}
 
 }

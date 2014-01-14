@@ -1,5 +1,6 @@
 <?php namespace JustMenu\Menu;
 
-interface MenuComponentInterface {
-	public function getChildrenComponents();
+interface MenuComponentInterface
+{
+    public function getChildrenComponents();
 }

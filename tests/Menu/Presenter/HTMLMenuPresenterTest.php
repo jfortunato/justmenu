@@ -3,101 +3,98 @@
 use Mockery as m;
 use JustMenu\Menu\Presenter\HTMLMenuPresenter;
 
-class HTMLMenuPresenterTest extends TestCase {
+class HTMLMenuPresenterTest extends TestCase
+{
+    public function setUp()
+    {
+        $this->mockItem = m::mock('JustMenu\Menu\Entity\Item');
+        $this->mockItem->title = 'foo';
+        $this->mockItem->description = 'bar';
+        $this->mockItem->info = 'baz';
 
-	public function setUp()
-	{
-		$this->mockItem = m::mock('JustMenu\Menu\Entity\Item');
-		$this->mockItem->title = 'foo';
-		$this->mockItem->description = 'bar';
-		$this->mockItem->info = 'baz';
+        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category');
+        $this->mockCategory->title = 'foo';
+        $this->mockCategory->description = 'bar';
+        $this->mockCategory->info = 'baz';
 
-		$this->mockCategory = m::mock('JustMenu\Menu\Entity\Category');
-		$this->mockCategory->title = 'foo';
-		$this->mockCategory->description = 'bar';
-		$this->mockCategory->info = 'baz';
+        $this->mockMenu = m::mock('JustMenu\Menu\Menu')->makePartial();
+    }
 
-		$this->mockMenu = m::mock('JustMenu\Menu\Menu')->makePartial();
-	}
+    public function testRenderProperlyRendersItemWithAttributes()
+    {
+        $this->mockItem->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
 
-	public function testRenderProperlyRendersItemWithAttributes()
-	{
-		$this->mockItem->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
+        $presenter = new HTMLMenuPresenter($this->mockItem);
+        $rendered = $presenter->render();
 
-		$presenter = new HTMLMenuPresenter($this->mockItem);
-		$rendered = $presenter->render();
+        $this->assertTag(['attributes' => ['data-item' => 'item']], $rendered);
+        $this->assertTag(['attributes' => ['data-title' => 'foo']], $rendered);
+        $this->assertTag(['attributes' => ['data-description' => 'bar']], $rendered);
+        $this->assertTag(['attributes' => ['data-info' => 'baz']], $rendered);
+        $this->assertTag(['attributes' => ['data-price' => '3.00']], $rendered);
+    }
 
-		$this->assertTag(['attributes' => ['data-item' => 'item']], $rendered);
-		$this->assertTag(['attributes' => ['data-title' => 'foo']], $rendered);
-		$this->assertTag(['attributes' => ['data-description' => 'bar']], $rendered);
-		$this->assertTag(['attributes' => ['data-info' => 'baz']], $rendered);
-		$this->assertTag(['attributes' => ['data-price' => '3.00']], $rendered);
-	}
+    public function testRenderProperlyRendersCategoryWithAttributes()
+    {
+        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
+        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
 
-	public function testRenderProperlyRendersCategoryWithAttributes()
-	{
-		$this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
-		$this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        $presenter = new HTMLMenuPresenter($this->mockCategory);
+        $rendered = $presenter->render();
 
-		$presenter = new HTMLMenuPresenter($this->mockCategory);
-		$rendered = $presenter->render();
+        $this->assertTag(['attributes' => ['data-category' => 'category']], $rendered);
+        $this->assertTag(['attributes' => ['data-title' => 'foo']], $rendered);
+        $this->assertTag(['attributes' => ['data-description' => 'bar']], $rendered);
+        $this->assertTag(['attributes' => ['data-info' => 'baz']], $rendered);
+        $this->assertTag(['attributes' => ['data-size' => 'lg.']], $rendered);
+    }
 
-		$this->assertTag(['attributes' => ['data-category' => 'category']], $rendered);
-		$this->assertTag(['attributes' => ['data-title' => 'foo']], $rendered);
-		$this->assertTag(['attributes' => ['data-description' => 'bar']], $rendered);
-		$this->assertTag(['attributes' => ['data-info' => 'baz']], $rendered);
-		$this->assertTag(['attributes' => ['data-size' => 'lg.']], $rendered);
-	}
+    public function testCanRenderCategoryWithNoItems()
+    {
+        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
+        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
 
-	public function testCanRenderCategoryWithNoItems()
-	{
-		$this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
-		$this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        $presenter = new HTMLMenuPresenter($this->mockCategory);
 
-		$presenter = new HTMLMenuPresenter($this->mockCategory);
+        $this->assertNotEmpty($presenter->render());
+    }
 
-		$this->assertNotEmpty($presenter->render());
-	}
+    public function testCanRenderCategoryWithItems()
+    {
+        $this->mockItem->shouldReceive('getAllPrices')->once()->andReturn(['3.00']);
+        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category[getAllShortSizes]');
+        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg']);
+        $this->mockCategory->addItem($this->mockItem);
 
-	public function testCanRenderCategoryWithItems()
-	{
-		$this->mockItem->shouldReceive('getAllPrices')->once()->andReturn(['3.00']);
-		$this->mockCategory = m::mock('JustMenu\Menu\Entity\Category[getAllShortSizes]');
-		$this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg']);
-		$this->mockCategory->addItem($this->mockItem);
+        $presenter = new HTMLMenuPresenter($this->mockCategory);
 
-		$presenter = new HTMLMenuPresenter($this->mockCategory);
+        $rendered = $presenter->render();
 
-		$rendered = $presenter->render();
+        $this->assertTag(['attributes' => ['data-category' => 'category']], $rendered);
+        $this->assertTag(['attributes' => ['data-item' => 'item']], $rendered);
+    }
 
-		$this->assertTag(['attributes' => ['data-category' => 'category']], $rendered);
-		$this->assertTag(['attributes' => ['data-item' => 'item']], $rendered);
-	}
+    public function testCanProperlyRenderMenuWithAttributes()
+    {
+        $this->mockMenu->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        $presenter = new HTMLMenuPresenter($this->mockMenu);
 
-	public function testCanProperlyRenderMenuWithAttributes()
-	{
-		$this->mockMenu->shouldReceive('getChildrenComponents')->once()->andReturn(array());
-		$presenter = new HTMLMenuPresenter($this->mockMenu);
+        $this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $presenter->render());
+    }
 
-		$this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $presenter->render());
-	}
+    public function testCanRenderMenuWithCategoriesAndItems()
+    {
+        $this->mockItem->shouldReceive('getAllPrices')->once()->andReturn(['3.00']);
+        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category[getAllShortSizes]');
+        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg']);
+        $this->mockCategory->addItem($this->mockItem);
+        $this->mockMenu->addCategory($this->mockCategory);
 
+        $presenter = new HTMLMenuPresenter($this->mockMenu);
+        $rendered = $presenter->render();
 
-	public function testCanRenderMenuWithCategoriesAndItems()
-	{
-		$this->mockItem->shouldReceive('getAllPrices')->once()->andReturn(['3.00']);
-		$this->mockCategory = m::mock('JustMenu\Menu\Entity\Category[getAllShortSizes]');
-		$this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg']);
-		$this->mockCategory->addItem($this->mockItem);
-		$this->mockMenu->addCategory($this->mockCategory);
-
-		$presenter = new HTMLMenuPresenter($this->mockMenu);
-		$rendered = $presenter->render();
-
-		$this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $rendered);
-		$this->assertTag(['attributes' => ['data-category' => 'category']], $rendered);
-		$this->assertTag(['attributes' => ['data-item' => 'item']], $rendered);
-	}
-
-
+        $this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $rendered);
+        $this->assertTag(['attributes' => ['data-category' => 'category']], $rendered);
+        $this->assertTag(['attributes' => ['data-item' => 'item']], $rendered);
+    }
 }

@@ -1,52 +1,54 @@
 <?php namespace JustMenu\Menu\Entity;
 
-use JustMenu\Menu\Entity\Size;
 use JustMenu\Menu\MenuComponentInterface;
 
-class Category extends Entity implements MenuComponentInterface {
+class Category extends Entity implements MenuComponentInterface
+{
+    protected $id;
+    protected $title;
+    protected $description;
+    protected $info;
 
-	protected $id;
-	protected $title;
-	protected $description;
-	protected $info;
+    protected $sizes = array();
+    protected $items = array();
 
-	protected $sizes = array();
-	protected $items = array();
+    public function addItem(Item $item)
+    {
+        $this->items[] = $item;
+    }
 
-	public function addItem(Item $item)
-	{
-		$this->items[] = $item;
-	}
+    public function addSize(Size $size)
+    {
+        $this->sizes[] = $size;
+    }
 
-	public function addSize(Size $size){
-		$this->sizes[] = $size;
-	}
+    public function getSizes()
+    {
+        return $this->sizes;
+    }
 
-	public function getSizes(){
-		return $this->sizes;
-	}
+    public function getAllLongSizes()
+    {
+        $sizes = array();
+        foreach ($this->sizes as $size) {
+            $sizes[] = $size->size;
+        }
 
-	public function getAllLongSizes(){
-		$sizes = array();
-		foreach ($this->sizes as $size) {
-			$sizes[] = $size->size;
-		}
+        return $sizes;
+    }
 
-		return $sizes;
-	}
+    public function getAllShortSizes()
+    {
+        $sizes = array();
+        foreach ($this->sizes as $size) {
+            $sizes[] = $size->size_short;
+        }
 
-	public function getAllShortSizes(){
-		$sizes = array();
-		foreach ($this->sizes as $size) {
-			$sizes[] = $size->size_short;
-		}
+        return $sizes;
+    }
 
-		return $sizes;
-	}
-
-	public function getChildrenComponents()
-	{
-		return $this->items;
-	}
-
+    public function getChildrenComponents()
+    {
+        return $this->items;
+    }
 }

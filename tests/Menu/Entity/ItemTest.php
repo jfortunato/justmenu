@@ -1,6 +1,7 @@
 <?php
 
 use Mockery as m;
+use JustMenu\Menu\Entity\Item;
 
 class ItemTest extends TestCase
 {

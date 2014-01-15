@@ -1,4 +1,5 @@
 <Item>
+	<id><?= $id; ?></id>
 	<title><?= $title; ?></title>
 	<description><?= $description; ?></description>
 	<info><?= $info; ?></info>

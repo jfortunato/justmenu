@@ -12,6 +12,7 @@ class HTMLMenuPresenter extends MenuPresenter
     protected function renderCategory()
     {
         $data = array(
+            'id'          => $this->component->id,
             'title'       => $this->component->title,
             'description' => $this->component->description,
             'info'        => $this->component->info,
@@ -25,6 +26,7 @@ class HTMLMenuPresenter extends MenuPresenter
     protected function renderItem()
     {
         $data = array(
+            'id'          => $this->component->id,
             'title'       => $this->component->title,
             'description' => $this->component->description,
             'info'        => $this->component->info,

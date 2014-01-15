@@ -11,7 +11,7 @@ class Entity
 
     public function __set($property, $value)
     {
-        if ($property !== 'id' && property_exists($this, $property)) {
+        if (property_exists($this, $property)) {
             $this->$property = $value;
         }
     }

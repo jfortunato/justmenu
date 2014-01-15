@@ -1,14 +1,11 @@
 <?php
 
 use Mockery as m;
-use JustMenu\Menu\Entity\Item;
-use JustMenu\Menu\Entity\Category;
 
 class ItemTest extends TestCase
 {
     public function setUp()
     {
-        //$this->category = m::mock('JustMenu\Menu\Entity\Category');
         $this->item = new Item;
         $this->item->category = m::mock('JustMenu\Menu\Entity\Category');
     }

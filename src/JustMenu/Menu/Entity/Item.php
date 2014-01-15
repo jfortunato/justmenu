@@ -12,11 +12,6 @@ class Item extends Entity implements MenuComponentInterface
     protected $category;
     protected $sizes = array();
 
-    //public function __construct(Category $category)
-    //{
-        //$this->category = $category;
-    //}
-
     public function category()
     {
         return $this->category;

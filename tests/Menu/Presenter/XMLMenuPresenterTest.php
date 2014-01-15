@@ -2,7 +2,6 @@
 
 use Mockery as m;
 use JustMenu\Menu\Presenter\XMLMenuPresenter;
-use JustMenu\Menu\Entity\Menu;
 
 class XMLMenuPresenterTest extends TestCase
 {

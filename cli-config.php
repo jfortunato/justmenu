@@ -1,5 +1,5 @@
 <?php
 
-require 'bootstrap.php';
+require __DIR__ . '/bootstrap/bootstrap.php';
 
-return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);
+return $container['doctrine_console'];

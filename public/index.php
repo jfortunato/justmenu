@@ -1,12 +1,9 @@
 <?php
 
-use JustMenu\Menu\Builder\SimpleMenuBuilder;
-use JustMenu\Menu\Presenter\HTMLMenuPresenter;
-
 // bootstrap the application
-require_once '../bootstrap.php';
+require_once '../bootstrap/bootstrap.php';
 
-$builder = new SimpleMenuBuilder(new HTMLMenuPresenter);
+$builder = $container['menu_builder'];
 $view = $builder->build();
 $view = $view->render();
 

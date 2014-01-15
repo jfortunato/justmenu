@@ -1,0 +1,22 @@
+JustMenu\Menu\Entity\Size:
+    type: entity
+    table: sizes
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        size:
+            type: string
+        size_short:
+            type: string
+        price:
+            type: string
+    manyToOne:
+        category:
+            targetEntity: JustMenu\Menu\Entity\Category
+            inversedBy: sizes
+        item:
+            targetEntity: JustMenu\Menu\Entity\Item
+            inversedBy: sizes

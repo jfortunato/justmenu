@@ -1,5 +1,7 @@
 <?php namespace JustMenu\Menu\Entity;
 
+use JustMenu\Support\Abbreviator as Abbr;
+
 class Size extends Entity
 {
     protected $id;
@@ -7,10 +9,13 @@ class Size extends Entity
     protected $size_short;
     protected $price;
 
+    protected $category;
+    protected $item;
+
     public function __construct($price, $size, $size_short = '')
     {
         $this->price = $price;
         $this->size = $size;
-        $this->size_short = $size_short ?: Abbreviator::abbreviate($size);
+        $this->size_short = $size_short ?: Abbr::abbreviate($size);
     }
 }

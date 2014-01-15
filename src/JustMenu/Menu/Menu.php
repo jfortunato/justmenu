@@ -15,4 +15,14 @@ class Menu implements MenuComponentInterface
     {
         return $this->categories;
     }
+
+    /**
+     * Gets the value of $categories
+     *
+     * @return Category
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 }

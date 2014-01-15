@@ -3,11 +3,11 @@
 class Abbreviator
 {
     private static $knownAbbreviations = array(
-        'small' => 'Sm.',
+        'small'  => 'Sm.',
         'medium' => 'Md.',
-        'large' => 'Lg.',
-        'pint' => 'Pt.',
-        'quart' => 'Qt.',
+        'large'  => 'Lg.',
+        'pint'   => 'Pt.',
+        'quart'  => 'Qt.',
     );
 
     public static function abbreviate($unabbreviated)

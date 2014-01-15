@@ -33,7 +33,10 @@ class XMLMenuPresenterTest extends TestCase
 
     public function testItemWithSizes()
     {
-        $this->mockItem->shouldReceive('getSizes')->once()->andReturn(array(0 => ['size' => 'small', 'size_short' => 'sm', 'price' => '3.00']));
+        $this->mockItem->shouldReceive('getSizes')->once()->andReturn(array($mockSize = m::mock('JustMenu\Menu\Entity\Size')));
+        $mockSize->size = 'small';
+        $mockSize->size_short = 'sm';
+        $mockSize->price = '3.00';
         $presenter = new XMLMenuPresenter($this->mockItem);
 
         $this->assertTag(['tag' => 'size', 'parent' => ['tag' => 'Item'], 'content' => 'small', 'attributes' => ['price' => '3.00']], $presenter->render());
@@ -54,7 +57,10 @@ class XMLMenuPresenterTest extends TestCase
 
     public function testCategoryWithDefaultSizes()
     {
-        $this->mockCategory->shouldReceive('getSizes')->once()->andReturn(array(0 => ['size' => 'small', 'size_short' => 'sm', 'price' => '3.00']));
+        $this->mockCategory->shouldReceive('getSizes')->once()->andReturn(array($mockSize = m::mock('JustMenu\Menu\Entity\Size')));
+        $mockSize->size = 'small';
+        $mockSize->size_short = 'sm';
+        $mockSize->price = '3.00';
         $presenter = new XMLMenuPresenter($this->mockCategory);
 
         $this->assertTag(['tag' => 'default-size', 'parent' => ['tag' => 'Category'], 'content' => 'small', 'attributes' => ['price' => '3.00']], $presenter->render());

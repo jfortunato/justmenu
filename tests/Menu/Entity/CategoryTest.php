@@ -12,6 +12,24 @@ class CategoryTest extends TestCase
         $this->mockSizeLarge = m::mock('JustMenu\Menu\Entity\Size', array('5.00', 'large', 'Lg.'));
     }
 
+    public function testCanAddItem()
+    {
+        $this->assertCount(0, $this->category->items);
+
+        $this->category->addItem(m::mock('JustMenu\Menu\Entity\Item'));
+
+        $this->assertCount(1, $this->category->items);
+    }
+
+    public function testCanAddSize()
+    {
+        $this->assertCount(0, $this->category->sizes);
+
+        $this->category->addSize(m::mock('JustMenu\Menu\Entity\Size'));
+
+        $this->assertCount(1, $this->category->sizes);
+    }
+
     public function testGetAllLongSizes()
     {
         $this->category->addSize($this->mockSizeSmall);
@@ -28,11 +46,9 @@ class CategoryTest extends TestCase
         $this->assertSame(array('Sm.', 'Lg.'), $this->category->getAllShortSizes());
     }
 
-    public function testGetAllShortSizesWithAbbreviated()
+    public function testCanGetChildrenComponents()
     {
-        $this->category->addSize($this->mockSizeSmall);
-        $this->category->addSize($this->mockSizeLarge);
-
-        $this->assertSame(array('Sm.', 'Lg.'), $this->category->getAllShortSizes());
+        $this->assertSame($this->category->items, $this->category->getChildrenComponents());
     }
+
 }

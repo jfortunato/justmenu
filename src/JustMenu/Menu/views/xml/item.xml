@@ -3,6 +3,6 @@
 	<description><?= $description; ?></description>
 	<info><?= $info; ?></info>
 	<?php foreach($sizes as $size): ?>
-	<size price="<?= $size['price']; ?>"><?= $size['size']; ?></size>
+    <size price="<?= $size->price; ?>"><?= $size->size; ?></size>
 	<?php endforeach; ?>
 </Item>

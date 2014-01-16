@@ -11,20 +11,16 @@ $container = new Pimple();
 
 $container['doctrine'] = function($c) {
     $isDevMode = true;
-    $config = Setup::createYAMLMetadataConfiguration(array(PROJECT_ROOT."/config/yaml"), $isDevMode);
+    $config = Setup::createYAMLMetadataConfiguration(array(PROJECT_ROOT."/database/yaml"), $isDevMode);
 
     // database configuration parameters
     $conn = array(
         'driver' => 'pdo_sqlite',
-        'path' => PROJECT_ROOT . '/db.sqlite',
+        'path' => PROJECT_ROOT . '/database/db.sqlite',
     );
 
     // obtaining the entity manager
     return EntityManager::create($conn, $config);
-};
-
-$container['doctrine_console'] = function($c) {
-    return ConsoleRunner::createHelperSet($c['doctrine']);
 };
 
 $container['manager'] = function($c){

@@ -7,6 +7,9 @@ JustMenu\Menu\Entity\Item:
             generator:
                 strategy: AUTO
     fields:
+        number:
+            type: string
+            nullable: true
         title:
             type: string
         description:

@@ -11,8 +11,10 @@
 		"mockery/mockery": "dev-master",
 		"filp/whoops": "1.*",
         "doctrine/orm": "2.4.*",
+        "doctrine/data-fixtures": "*",
         "symfony/yaml": "2.*",
         "pimple/pimple": "*",
+        "fzaninotto/faker": "*"
     },
 	"autoload": {
 		"classmap": [

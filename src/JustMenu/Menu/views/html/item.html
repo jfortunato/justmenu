@@ -5,6 +5,9 @@
 		<p data-info="<?= $info; ?>"><?= $info; ?></p>
 	</td>
 	<?php foreach($prices as $price): ?>
-	<th data-price="<?= $price; ?>"><?= $price; ?></th>
+    <td data-price="<?= $price; ?>" class="text-right">
+        <p><?= $price; ?></p>
+        <p><a href="#" class="btn btn-default" data-select>Select</a></p>
+    </td>
 	<?php endforeach; ?>
 </tr>

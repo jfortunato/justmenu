@@ -5,6 +5,7 @@ use JustMenu\Menu\MenuComponentInterface;
 class Item extends Entity implements MenuComponentInterface
 {
     protected $id;
+    protected $number;
     protected $title;
     protected $description;
     protected $info;

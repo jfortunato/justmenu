@@ -14,9 +14,9 @@ JustMenu\Menu\Entity\Category:
         info:
             type: string
     oneToMany:
-        sizes:
-            targetEntity: JustMenu\Menu\Entity\Size
-            mappedBy: category
         items:
             targetEntity: JustMenu\Menu\Entity\Item
+            mappedBy: category
+        sizes:
+            targetEntity: JustMenu\Menu\Entity\Size
             mappedBy: category

@@ -1,0 +1,19 @@
+JustMenu\Menu\Entity\Choice:
+    type: entity
+    table: choices
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+        description:
+            type: string
+        info:
+            type: string
+    oneToMany:
+        items:
+            targetEntity: JustMenu\Menu\Entity\Item
+            mappedBy: choice

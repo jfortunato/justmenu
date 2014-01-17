@@ -20,6 +20,9 @@ JustMenu\Menu\Entity\Item:
         category:
             targetEntity: JustMenu\Menu\Entity\Category
             inversedBy: items
+        choice:
+            targetEntity: JustMenu\Menu\Entity\Choice
+            inversedBy: items
     oneToMany:
         sizes:
             targetEntity: JustMenu\Menu\Entity\Size

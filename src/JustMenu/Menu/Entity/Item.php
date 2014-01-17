@@ -12,6 +12,7 @@ class Item extends Entity implements MenuComponentInterface
 
     protected $category;
     protected $sizes = array();
+    protected $choice;
 
     public function category()
     {
@@ -65,5 +66,10 @@ class Item extends Entity implements MenuComponentInterface
     public function getChildrenComponents()
     {
         return array();
+    }
+
+    public function hasChoice()
+    {
+        return $this->choice ? true:false;
     }
 }

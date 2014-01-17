@@ -38,12 +38,28 @@ class SeedItems extends AbstractFixture implements DependentFixtureInterface
         $this->addReference('veggie lo mein', $item);
         $manager->persist($item);
 
+        $item = new Item;
+        $item->category = $this->getReference('lo mein');
+        $item->choice = $this->getReference('dumpling choice');
+        $item->title = 'Steamed Dumplings';
+        $item->description = '';
+        $item->info = '';
+        $manager->persist($item);
+
+        $item = new Item;
+        $item->category = $this->getReference('lo mein');
+        $item->choice = $this->getReference('dumpling choice');
+        $item->title = 'Fried Dumplings';
+        $item->description = '';
+        $item->info = '';
+        $manager->persist($item);
+
         // uncomment to run
         $manager->flush();
     }
 
     public function getDependencies()
     {
-        return array('SeedCategories');
+        return array('SeedCategories', 'SeedChoices');
     }
 }

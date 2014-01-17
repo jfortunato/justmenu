@@ -1,4 +1,4 @@
-<tr data-item="<?= $id; ?>">
+<tr data-<?= $isChoice ? 'choice':'item'; ?>="<?= $id; ?>">
 	<td>
 		<strong data-title="<?= $title; ?>"><?= $title; ?></strong>
 		<p data-description="<?= $description; ?>"><?= $description; ?></p>

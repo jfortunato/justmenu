@@ -2,6 +2,8 @@
 
 class HTMLMenuPresenter extends MenuPresenter
 {
+    protected $renderedChoiceIds = array();
+
     protected function renderMenu()
     {
         $categories = $this->renderChildren();
@@ -25,12 +27,25 @@ class HTMLMenuPresenter extends MenuPresenter
 
     protected function renderItem()
     {
+        if ($this->component->hasChoice()) {
+            $component = $this->component->choice;
+
+            if (in_array($component->id, $this->renderedChoiceIds)) {
+                return;
+            }
+
+            $this->renderedChoiceIds[] = $component->id;
+        } else {
+            $component = $this->component;
+        }
+
         $data = array(
-            'id'          => $this->component->id,
-            'title'       => $this->component->title,
-            'description' => $this->component->description,
-            'info'        => $this->component->info,
-            'prices'      => $this->component->getAllPrices(),
+            'id'          => $component->id,
+            'title'       => $component->title,
+            'description' => $component->description,
+            'info'        => $component->info,
+            'prices'      => $component->getAllPrices(),
+            'isChoice'    => $component === $this->component ? false:true,
         );
 
         return $this->fetchView('item.html', $data);

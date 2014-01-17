@@ -128,4 +128,12 @@ class ItemTest extends TestCase
         $this->assertSame(array(), $this->item->getChildrenComponents());
     }
 
+    public function testHasChoice()
+    {
+        $this->assertFalse($this->item->hasChoice());
+
+        $this->item->choice = m::mock('JustMenu\Menu\Entity\Choice');
+
+        $this->assertTrue($this->item->hasChoice());
+    }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use Doctrine\Common\Persistence\ObjectManager;
-use JustMenu\Menu\Entity\Category;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use JustMenu\Menu\Entity\Choice;
 

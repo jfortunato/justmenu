@@ -26,11 +26,11 @@ class MenuBuilder
     protected $menu;
 
     /**
-     * Construct a new MenuBuilder with required ManagerInterface 
+     * Construct a new MenuBuilder with required ManagerInterface
      * and MenuPresenter.
      *
-     * @param ManagerInterface $entityManager
-     * @param MenuPresenter $presenter
+     * @param  ManagerInterface $entityManager
+     * @param  MenuPresenter    $presenter
      * @return void
      */
     public function __construct(ManagerInterface $entityManager, MenuPresenter $presenter, Menu $menu = null)
@@ -56,7 +56,7 @@ class MenuBuilder
     protected function buildMenu()
     {
         $categories = $this->entityManager->assembleCategories();
-        foreach($categories as $category){
+        foreach ($categories as $category) {
             $this->menu->addCategory($category);
         }
     }

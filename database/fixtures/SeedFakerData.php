@@ -13,16 +13,16 @@ class SeedFakerData implements FixtureInterface
         $populator = new Populator($generator, $manager);
 
         $populator->addEntity('\JustMenu\Menu\Entity\Category', 2, array(
-            'title' => function() use ($generator) { return $generator->sentence(2); },
-            'description' => function() use ($generator) { return $generator->sentence(4); },
+            'title' => function () use ($generator) { return $generator->sentence(2); },
+            'description' => function () use ($generator) { return $generator->sentence(4); },
         ));
 
         $populator->addEntity('\JustMenu\Menu\Entity\Item', 4);
 
         $populator->addEntity('\JustMenu\Menu\Entity\Size', 4, array(
-            'size' => function() use ($generator) { return $generator->word(); },
-            'size_short' => function() use ($generator) { return $generator->word(); },
-            'price' => function() use ($generator) { return $generator->randomFloat(2, 1, 15); },
+            'size' => function () use ($generator) { return $generator->word(); },
+            'size_short' => function () use ($generator) { return $generator->word(); },
+            'price' => function () use ($generator) { return $generator->randomFloat(2, 1, 15); },
         ));
 
         // uncomment to run

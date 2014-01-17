@@ -13,6 +13,8 @@ JustMenu\Menu\Entity\Category:
             type: string
         info:
             type: string
+        indexed_order:
+            type: smallint
     oneToMany:
         items:
             targetEntity: JustMenu\Menu\Entity\Item

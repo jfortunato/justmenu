@@ -12,6 +12,7 @@ class SeedCategories extends AbstractFixture
         $category->title = 'Chow Fun';
         $category->description = 'rice noodle';
         $category->info = 'Comes with side of white rice';
+        $category->indexed_order = 0;
         $manager->persist($category);
         $this->addReference('chow fun', $category);
 
@@ -19,6 +20,7 @@ class SeedCategories extends AbstractFixture
         $category->title = 'Lo Mein';
         $category->description = 'soft noodle';
         $category->info = 'Comes with a soda.';
+        $category->indexed_order = 1;
         $manager->persist($category);
         $this->addReference('lo mein', $category);
 

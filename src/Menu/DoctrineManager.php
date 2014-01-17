@@ -11,11 +11,11 @@ class DoctrineManager implements ManagerInterface
         $this->entityManager = $entityManager;
     }
 
-    public function assembleCategories()
+    public function assembleCategoriesByIndex()
     {
         $categoryRepository = $this->entityManager->getRepository('JustMenu\Menu\Entity\Category');
 
-         return $categoryRepository->findAll();
+         return $categoryRepository->findBy(array(), array('indexed_order' => 'ASC'));
     }
 
     /**

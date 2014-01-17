@@ -8,6 +8,7 @@ class Category extends Entity implements MenuComponentInterface
     protected $title;
     protected $description;
     protected $info;
+    protected $indexed_order;
 
     protected $sizes = array();
     protected $items = array();

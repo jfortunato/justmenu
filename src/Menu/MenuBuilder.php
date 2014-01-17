@@ -55,7 +55,7 @@ class MenuBuilder
 
     protected function buildMenu()
     {
-        $categories = $this->entityManager->assembleCategories();
+        $categories = $this->entityManager->assembleCategoriesByIndex();
         foreach ($categories as $category) {
             $this->menu->addCategory($category);
         }

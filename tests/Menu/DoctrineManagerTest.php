@@ -11,7 +11,7 @@ class DoctrineManagerTest extends TestCase
         $this->manager = new DoctrineManager(m::mock('Doctrine\ORM\EntityManager'));
     }
 
-    public function testCanAssembleCategories()
+    public function testCanAssembleCategoriesByIndex()
     {
         $this->manager->getEntityManager()
             ->shouldReceive('getRepository')
@@ -19,9 +19,9 @@ class DoctrineManagerTest extends TestCase
             ->with('JustMenu\Menu\Entity\Category')
             ->andReturn($repository = m::mock('repository'));
 
-        $repository->shouldReceive('findAll')->andReturn(array('category'));
+        $repository->shouldReceive('findBy')->with(array(), array('indexed_order' => 'ASC'))->andReturn(array('category'));
 
-        $this->assertSame(array('category'), $this->manager->assembleCategories());
+        $this->assertSame(array('category'), $this->manager->assembleCategoriesByIndex());
     }
 
 }

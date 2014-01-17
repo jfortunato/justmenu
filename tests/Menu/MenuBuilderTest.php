@@ -14,7 +14,7 @@ class MenuBuilderTest extends TestCase
     public function testBuildReturnsMenuWrappedWithPresenter()
     {
         $this->builder->getManager()
-            ->shouldReceive('assembleCategories')
+            ->shouldReceive('assembleCategoriesByIndex')
             ->once()
             ->andReturn(array(m::mock('JustMenu\Menu\Entity\Category'), m::mock('JustMenu\Menu\Entity\Category')));
 

@@ -20,8 +20,9 @@
 		"classmap": [
 			"tests/TestCase.php"
 		],
-		"psr-0": {
-			"JustMenu": "src/"
+		"psr-4": {
+			"JustMenu\\": "src/",
+			"JustMenu\\Tests\\": "tests/"
 		}
 	}
 }

@@ -1,5 +1,6 @@
-<?php
+<?php namespace JustMenu\Tests\Support;
 
+use JustMenu\Tests\TestCase;
 use JustMenu\Support\Abbreviator;
 
 class AbbreviatorTest extends TestCase

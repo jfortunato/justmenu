@@ -1,5 +1,6 @@
-<?php
+<?php namespace JustMenu\Tests\Menu;
 
+use JustMenu\Tests\TestCase;
 use Mockery as m;
 use JustMenu\Menu\MenuBuilder;
 

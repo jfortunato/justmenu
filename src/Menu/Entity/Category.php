@@ -12,6 +12,7 @@ class Category extends Entity implements MenuComponentInterface
 
     protected $sizes = array();
     protected $items = array();
+    protected $categoryOptions = array();
 
     public function addItem(Item $item)
     {

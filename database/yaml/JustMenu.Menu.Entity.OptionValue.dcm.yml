@@ -1,0 +1,17 @@
+JustMenu\Menu\Entity\OptionValue:
+    type: entity
+    table: option_values
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+        default_price:
+            type: float
+    manyToOne:
+        option:
+            targetEntity: JustMenu\Menu\Entity\Option
+            inversedBy: values

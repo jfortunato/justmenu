@@ -1,0 +1,18 @@
+JustMenu\Menu\Entity\CategoryOption:
+    type: entity
+    table: category_options
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        required:
+            type: boolean
+    manyToOne:
+        category:
+            targetEntity: JustMenu\Menu\Entity\Category
+            inversedBy: categoryOptions
+        option:
+            targetEntity: JustMenu\Menu\Entity\Option
+            inversedBy: categoryOptions

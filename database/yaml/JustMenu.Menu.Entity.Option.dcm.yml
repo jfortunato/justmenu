@@ -1,6 +1,6 @@
-JustMenu\Menu\Entity\Category:
+JustMenu\Menu\Entity\Option:
     type: entity
-    table: categories
+    table: options
     id:
         id:
             type: integer
@@ -13,15 +13,12 @@ JustMenu\Menu\Entity\Category:
             type: string
         info:
             type: string
-        indexed_order:
+        choice_mode:
             type: smallint
     oneToMany:
-        items:
-            targetEntity: JustMenu\Menu\Entity\Item
-            mappedBy: category
-        sizes:
-            targetEntity: JustMenu\Menu\Entity\Size
-            mappedBy: category
         categoryOptions:
             targetEntity: JustMenu\Menu\Entity\CategoryOption
-            mappedBy: category
+            mappedBy: option
+        values:
+            targetEntity: JustMenu\Menu\Entity\OptionValue
+            mappedBy: option

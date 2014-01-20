@@ -1,6 +1,7 @@
 <?php namespace JustMenu\Menu\Entity;
 
 use JustMenu\Menu\MenuComponentInterface;
+use JustMenu\Menu\Presenter\MenuPresenter;
 
 class Item extends Entity implements MenuComponentInterface
 {
@@ -72,4 +73,10 @@ class Item extends Entity implements MenuComponentInterface
     {
         return $this->choice ? true:false;
     }
+
+    public function render(MenuPresenter $presenter)
+    {
+        return $presenter->renderItem();
+    }
+
 }

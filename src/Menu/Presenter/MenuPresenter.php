@@ -13,15 +13,7 @@ abstract class MenuPresenter
 
     public function render()
     {
-        if ($this->component instanceof \JustMenu\Menu\Entity\Category) {
-            return $this->renderCategory();
-        } elseif ($this->component instanceof \JustMenu\Menu\Entity\Item) {
-            return $this->renderItem();
-        } elseif ($this->component instanceof \JustMenu\Menu\Menu) {
-            return $this->renderMenu();
-        }
-
-        throw new \Exception;
+        return $this->component->render($this);
     }
 
     protected function renderChildren()
@@ -78,7 +70,7 @@ abstract class MenuPresenter
         return $this;
     }
 
-    abstract protected function renderMenu();
-    abstract protected function renderCategory();
-    abstract protected function renderItem();
+    abstract public function renderMenu();
+    abstract public function renderCategory();
+    abstract public function renderItem();
 }

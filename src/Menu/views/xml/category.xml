@@ -1,10 +1,10 @@
 <Category>
-	<id><?= $id; ?></id>
-	<title><?= $title; ?></title>
-	<description><?= $description; ?></description>
-	<info><?= $info; ?></info>
-	<?php foreach($sizes as $size): ?>
+    <id><?= $id; ?></id>
+    <title><?= $title; ?></title>
+    <description><?= $description; ?></description>
+    <info><?= $info; ?></info>
+    <?php foreach($sizes as $size): ?>
     <default-size price="<?= $size->price; ?>"><?= $size->size; ?></default-size>
-	<?php endforeach; ?>
-	<?= $items; ?>
+    <?php endforeach; ?>
+    <?= $items; ?>
 </Category>

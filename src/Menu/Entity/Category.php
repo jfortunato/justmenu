@@ -1,6 +1,7 @@
 <?php namespace JustMenu\Menu\Entity;
 
 use JustMenu\Menu\MenuComponentInterface;
+use JustMenu\Menu\Presenter\MenuPresenter;
 
 class Category extends Entity implements MenuComponentInterface
 {
@@ -52,5 +53,10 @@ class Category extends Entity implements MenuComponentInterface
     public function getChildrenComponents()
     {
         return $this->items;
+    }
+
+    public function render(MenuPresenter $presenter)
+    {
+        return $presenter->renderCategory();
     }
 }

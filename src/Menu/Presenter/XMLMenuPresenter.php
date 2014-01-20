@@ -2,14 +2,14 @@
 
 class XMLMenuPresenter extends MenuPresenter
 {
-    protected function renderMenu()
+    public function renderMenu()
     {
         $categories = $this->renderChildren();
 
         return $this->fetchView('menu.xml', compact('categories'));
     }
 
-    protected function renderCategory()
+    public function renderCategory()
     {
         $data = array(
             'id'          => $this->component->id,
@@ -23,7 +23,7 @@ class XMLMenuPresenter extends MenuPresenter
         return $this->fetchView('category.xml', $data);
     }
 
-    protected function renderItem()
+    public function renderItem()
     {
         $data = array(
             'id'          => $this->component->id,

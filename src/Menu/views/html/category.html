@@ -1,21 +1,21 @@
 <div class="panel panel-info" data-category="<?= $id; ?>">
-	<div class="panel-heading text-center">
-		<h3 data-title="<?= $title; ?>"><?= $title; ?> <span data-description="<?= $description; ?>">(<?= $description; ?>)</span></h3>
-		<h4 data-info="<?= $info; ?>"><?= $info; ?></h4>
-	</div>
-	<div class="panel-body">
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th></th>
-					<?php foreach($sizes as $size): ?>
-					<th data-size="<?= $size; ?>" class="text-right"><?= $size; ?></th>
-					<?php endforeach; ?>
-				</tr>
-			</thead>
-			<tbody>
-				<?= $items; ?>
-			</tbody>
-		</table>
-	</div>
+    <div class="panel-heading text-center">
+        <h3 data-title="<?= $title; ?>"><?= $title; ?> <span data-description="<?= $description; ?>">(<?= $description; ?>)</span></h3>
+        <h4 data-info="<?= $info; ?>"><?= $info; ?></h4>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <?php foreach($sizes as $size): ?>
+                    <th data-size="<?= $size; ?>" class="text-right"><?= $size; ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?= $items; ?>
+            </tbody>
+        </table>
+    </div>
 </div>

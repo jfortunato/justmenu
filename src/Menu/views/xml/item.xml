@@ -1,9 +1,9 @@
 <Item>
-	<id><?= $id; ?></id>
-	<title><?= $title; ?></title>
-	<description><?= $description; ?></description>
-	<info><?= $info; ?></info>
-	<?php foreach($sizes as $size): ?>
+    <id><?= $id; ?></id>
+    <title><?= $title; ?></title>
+    <description><?= $description; ?></description>
+    <info><?= $info; ?></info>
+    <?php foreach($sizes as $size): ?>
     <size price="<?= $size->price; ?>"><?= $size->size; ?></size>
-	<?php endforeach; ?>
+    <?php endforeach; ?>
 </Item>

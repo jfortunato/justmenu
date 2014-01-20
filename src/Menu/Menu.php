@@ -1,6 +1,7 @@
 <?php namespace JustMenu\Menu;
 
 use JustMenu\Menu\Entity\Category;
+use JustMenu\Menu\Presenter\MenuPresenter;
 
 class Menu implements MenuComponentInterface
 {
@@ -24,5 +25,10 @@ class Menu implements MenuComponentInterface
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    public function render(MenuPresenter $presenter)
+    {
+        return $presenter->renderMenu();
     }
 }

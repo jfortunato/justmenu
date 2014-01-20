@@ -1,13 +1,13 @@
 <tr data-<?= $isChoice ? 'choice':'item'; ?>="<?= $id; ?>">
-	<td>
-		<strong data-title="<?= $title; ?>"><?= $title; ?></strong>
-		<p data-description="<?= $description; ?>"><?= $description; ?></p>
-		<p data-info="<?= $info; ?>"><?= $info; ?></p>
-	</td>
-	<?php foreach($prices as $price): ?>
+    <td>
+        <strong data-title="<?= $title; ?>"><?= $title; ?></strong>
+        <p data-description="<?= $description; ?>"><?= $description; ?></p>
+        <p data-info="<?= $info; ?>"><?= $info; ?></p>
+    </td>
+    <?php foreach($prices as $price): ?>
     <td data-price="<?= $price; ?>" class="text-right">
         <p><?= $price; ?></p>
         <p><a href="#" class="btn btn-default" data-select>Select</a></p>
     </td>
-	<?php endforeach; ?>
+    <?php endforeach; ?>
 </tr>

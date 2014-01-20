@@ -137,4 +137,12 @@ class ItemTest extends TestCase
 
         $this->assertTrue($this->item->hasChoice());
     }
+
+    public function testCanRenderItem()
+    {
+        $mockPresenter = m::mock('JustMenu\Menu\Presenter\MenuPresenter');
+        $mockPresenter->shouldReceive('renderItem')->once();
+
+        $this->item->render($mockPresenter);
+    }
 }

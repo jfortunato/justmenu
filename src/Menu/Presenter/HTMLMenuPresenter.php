@@ -4,14 +4,14 @@ class HTMLMenuPresenter extends MenuPresenter
 {
     protected $renderedChoiceIds = array();
 
-    protected function renderMenu()
+    public function renderMenu()
     {
         $categories = $this->renderChildren();
 
         return $this->fetchView('menu.html', compact('categories'));
     }
 
-    protected function renderCategory()
+    public function renderCategory()
     {
         $data = array(
             'id'          => $this->component->id,
@@ -25,7 +25,7 @@ class HTMLMenuPresenter extends MenuPresenter
         return $this->fetchView('category.html', $data);
     }
 
-    protected function renderItem()
+    public function renderItem()
     {
         if ($this->component->hasChoice()) {
             $component = $this->component->choice;

@@ -52,4 +52,12 @@ class CategoryTest extends TestCase
         $this->assertSame($this->category->items, $this->category->getChildrenComponents());
     }
 
+    public function testCanRenderCategory()
+    {
+        $mockPresenter = m::mock('JustMenu\Menu\Presenter\MenuPresenter');
+        $mockPresenter->shouldReceive('renderCategory')->once();
+
+        $this->category->render($mockPresenter);
+    }
+
 }

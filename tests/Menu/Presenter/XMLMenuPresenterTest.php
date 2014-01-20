@@ -13,7 +13,7 @@ class XMLMenuPresenterTest extends TestCase
         $this->mockCategory->description = 'bar';
         $this->mockCategory->info = 'baz';
 
-        $this->mockItem = m::mock('JustMenu\Menu\Entity\Item', array('getSizes' => []));
+        $this->mockItem = m::mock('JustMenu\Menu\Entity\Item', array('getSizes' => []))->makePartial();
         $this->mockItem->title = 'foo';
         $this->mockItem->description = 'bar';
         $this->mockItem->info = 'baz';

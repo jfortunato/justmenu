@@ -11,23 +11,23 @@ class SeedSizes extends AbstractFixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $size = new Size('3.99', 'pint', 'Pt.');
-        $size->category = $this->getReference('chow fun');
+        $size->menu_component = $this->getReference('chow fun');
         $manager->persist($size);
 
         $size = new Size('5.50', 'quart', 'Qt.');
-        $size->category = $this->getReference('chow fun');
+        $size->menu_component = $this->getReference('chow fun');
         $manager->persist($size);
 
         $size = new Size('3.99', 'pint', 'Pt.');
-        $size->category = $this->getReference('lo mein');
+        $size->menu_component = $this->getReference('lo mein');
         $manager->persist($size);
 
         $size = new Size('5.50', 'quart', 'Qt.');
-        $size->category = $this->getReference('lo mein');
+        $size->menu_component = $this->getReference('lo mein');
         $manager->persist($size);
 
         $size = new Size('4.45', 'pint', 'Pt.');
-        $size->item = $this->getReference('veggie lo mein');
+        $size->menu_component = $this->getReference('veggie lo mein');
         $manager->persist($size);
 
         // uncomment to run

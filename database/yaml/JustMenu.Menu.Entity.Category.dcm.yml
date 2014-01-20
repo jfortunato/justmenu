@@ -1,26 +1,12 @@
 JustMenu\Menu\Entity\Category:
     type: entity
     table: categories
-    id:
-        id:
-            type: integer
-            generator:
-                strategy: AUTO
     fields:
-        title:
-            type: string
-        description:
-            type: string
-        info:
-            type: string
         indexed_order:
             type: smallint
     oneToMany:
         items:
             targetEntity: JustMenu\Menu\Entity\Item
-            mappedBy: category
-        sizes:
-            targetEntity: JustMenu\Menu\Entity\Size
             mappedBy: category
         categoryOptions:
             targetEntity: JustMenu\Menu\Entity\CategoryOption

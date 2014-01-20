@@ -1,0 +1,26 @@
+JustMenu\Menu\Entity\MenuComponent:
+    type: entity
+    table: menu_components
+    inheritanceType: JOINED
+    discriminatorColumn:
+        name: component_type
+        type: string
+    discriminatorMap:
+        category: JustMenu\Menu\Entity\Category
+        item: JustMenu\Menu\Entity\Item
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+        description:
+            type: string
+        info:
+            type: string
+    oneToMany:
+        sizes:
+            targetEntity: JustMenu\Menu\Entity\Size
+            mappedBy: menu_component

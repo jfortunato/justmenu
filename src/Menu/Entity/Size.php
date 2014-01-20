@@ -9,8 +9,7 @@ class Size extends Entity
     protected $size_short;
     protected $price;
 
-    protected $category;
-    protected $item;
+    protected $menu_component;
 
     public function __construct($price, $size, $size_short = '')
     {

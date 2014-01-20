@@ -1,21 +1,10 @@
 JustMenu\Menu\Entity\Item:
     type: entity
     table: items
-    id:
-        id:
-            type: integer
-            generator:
-                strategy: AUTO
     fields:
         number:
             type: string
             nullable: true
-        title:
-            type: string
-        description:
-            type: string
-        info:
-            type: string
     manyToOne:
         category:
             targetEntity: JustMenu\Menu\Entity\Category
@@ -23,7 +12,3 @@ JustMenu\Menu\Entity\Item:
         choice:
             targetEntity: JustMenu\Menu\Entity\Choice
             inversedBy: items
-    oneToMany:
-        sizes:
-            targetEntity: JustMenu\Menu\Entity\Size
-            mappedBy: item

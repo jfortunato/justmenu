@@ -14,9 +14,6 @@ JustMenu\Menu\Entity\Size:
         price:
             type: string
     manyToOne:
-        category:
-            targetEntity: JustMenu\Menu\Entity\Category
-            inversedBy: sizes
-        item:
-            targetEntity: JustMenu\Menu\Entity\Item
+        menu_component:
+            targetEntity: JustMenu\Menu\Entity\MenuComponent
             inversedBy: sizes

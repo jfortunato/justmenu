@@ -1,28 +1,17 @@
 <?php namespace JustMenu\Menu\Entity;
 
-use JustMenu\Menu\MenuComponentInterface;
 use JustMenu\Menu\Presenter\MenuPresenter;
 
-class Category extends Entity implements MenuComponentInterface
+class Category extends MenuComponent
 {
-    protected $id;
-    protected $title;
-    protected $description;
-    protected $info;
     protected $indexed_order;
 
-    protected $sizes = array();
     protected $items = array();
     protected $categoryOptions = array();
 
     public function addItem(Item $item)
     {
         $this->items[] = $item;
-    }
-
-    public function addSize(Size $size)
-    {
-        $this->sizes[] = $size;
     }
 
     public function getSizes()

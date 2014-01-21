@@ -8,14 +8,13 @@ class HTMLMenuPresenterTest extends TestCase
 {
     public function setUp()
     {
-        $this->mockItem = m::mock('JustMenu\Menu\Entity\Item');
+        $this->mockItem = m::mock('JustMenu\Menu\Entity\Item', array('hasChoice' => false));
         $this->mockItem->id = '1';
         $this->mockItem->title = 'foo';
         $this->mockItem->description = 'bar';
         $this->mockItem->info = 'baz';
-        $this->mockItem->shouldReceive('hasChoice')->andReturn(false);
 
-        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category');
+        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category', array('hasSpecialTime' => false));
         $this->mockCategory->id = '1';
         $this->mockCategory->title = 'foo';
         $this->mockCategory->description = 'bar';
@@ -162,4 +161,54 @@ class HTMLMenuPresenterTest extends TestCase
         $this->assertNotTag(['attributes' => ['data-item' => '1']], $rendered);
         $this->assertNotTag(['attributes' => ['data-item' => '2']], $rendered);
     }
+
+    public function testSpecialTimesIsNotRenderedWithNoCategorySpecialTimes()
+    {
+        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
+        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        $this->mockCategory->shouldReceive('hasSpecialTime')->once()->andReturn(false);
+
+        $presenter = new HTMLMenuPresenter($this->mockCategory);
+        $rendered = $presenter->renderCategory();
+
+        $this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
+        $this->assertNotTag(['attributes' => ['data-special-times' => 'true']], $rendered);
+    }
+
+    public function testCategoryWithSpecialTimesRendersWithAttribute()
+    {
+        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
+        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        $this->mockCategory->shouldReceive('hasSpecialTime')->once()->andReturn(true);
+        $mockSpecialTime = m::mock('JustMenu\Menu\Entity\SpecialTime');
+        $mockSpecialTime->days = 0;
+        $this->mockCategory->special_time = $mockSpecialTime;
+
+        $presenter = new HTMLMenuPresenter($this->mockCategory);
+        $rendered = $presenter->renderCategory();
+        
+        $this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
+        $this->assertTag(['attributes' => ['data-special-times' => 'true']], $rendered);
+    }
+
+    public function testAvailabilityIsAvailableWithNoSpecialTimeForItem()
+    {
+        $this->mockItem->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
+
+        $presenter = new HTMLMenuPresenter($this->mockItem);
+        $rendered = $presenter->renderItem();
+
+        $this->assertTag(['attributes' => ['data-availability' => 'available']], $rendered);
+    }
+
+    public function testAvailabilityIsAvailableWithWhileWithinSpecialTime()
+    {
+        //
+    }
+
+    public function testAvailabilityIsUnavailableWhileNotWithinSpecialTime()
+    {
+        //
+    }
+
 }

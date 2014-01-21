@@ -2,6 +2,9 @@
     <div class="panel-heading text-center">
         <h3 data-title="<?= $title; ?>"><?= $title; ?> <span data-description="<?= $description; ?>">(<?= $description; ?>)</span></h3>
         <h4 data-info="<?= $info; ?>"><?= $info; ?></h4>
+        <?php if(!empty($special_times)): ?>
+        <p data-special-times="true"><?= $special_times; ?></p>
+        <?php endif ?>
     </div>
     <div class="panel-body">
         <table class="table table-striped table-hover">

@@ -1,0 +1,17 @@
+JustMenu\Menu\Entity\SpecialTime:
+    type: entity
+    table: special_times
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        days:
+            type: string
+        times:
+            type: string
+    oneToOne:
+        menu_component:
+            targetEntity: JustMenu\Menu\Entity\MenuComponent
+            inversedBy: special_time

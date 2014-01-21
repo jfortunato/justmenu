@@ -1,5 +1,8 @@
 <?php namespace JustMenu\Menu\Presenter;
 
+use Carbon\Carbon;
+use JustMenu\Support\TimeHelper;
+
 class HTMLMenuPresenter extends MenuPresenter
 {
     protected $renderedChoiceIds = array();
@@ -14,12 +17,13 @@ class HTMLMenuPresenter extends MenuPresenter
     public function renderCategory()
     {
         $data = array(
-            'id'          => $this->component->id,
-            'title'       => $this->component->title,
-            'description' => $this->component->description,
-            'info'        => $this->component->info,
-            'sizes'       => $this->component->getAllShortSizes(),
-            'items'       => $this->renderChildren(),
+            'id'            => $this->component->id,
+            'title'         => $this->component->title,
+            'description'   => $this->component->description,
+            'special_times' => $this->component->hasSpecialTime() ? TimeHelper::convertSpecialTimes($this->component->special_time):'',
+            'info'          => $this->component->info,
+            'sizes'         => $this->component->getAllShortSizes(),
+            'items'         => $this->renderChildren(),
         );
 
         return $this->fetchView('category.html', $data);
@@ -40,12 +44,13 @@ class HTMLMenuPresenter extends MenuPresenter
         }
 
         $data = array(
-            'id'          => $component->id,
-            'title'       => $component->title,
-            'description' => $component->description,
-            'info'        => $component->info,
-            'prices'      => $component->getAllPrices(),
-            'isChoice'    => $component === $this->component ? false:true,
+            'id'           => $component->id,
+            'title'        => $component->title,
+            'description'  => $component->description,
+            'info'         => $component->info,
+            'availability' => 'available',
+            'prices'       => $component->getAllPrices(),
+            'isChoice'     => $component === $this->component ? false:true,
         );
 
         return $this->fetchView('item.html', $data);

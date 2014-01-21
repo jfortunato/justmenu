@@ -24,3 +24,7 @@ JustMenu\Menu\Entity\MenuComponent:
         sizes:
             targetEntity: JustMenu\Menu\Entity\Size
             mappedBy: menu_component
+    oneToOne:
+        special_time:
+            targetEntity: JustMenu\Menu\Entity\SpecialTime
+            mappedBy: menu_component

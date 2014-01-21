@@ -145,4 +145,18 @@ class ItemTest extends TestCase
 
         $this->item->render($mockPresenter);
     }
+
+    public function testHasSpecialTimeReturnsFalseWithNoSpecailTime()
+    {
+        $this->assertFalse($this->item->hasSpecialTime());
+    }
+
+    public function testHasSpecialTimeReturnsTrueWithSpecialTime()
+    {
+        $mockSpecialTime = m::mock('JustMenu\Menu\Entity\SpecialTime');
+        $this->item->special_time = $mockSpecialTime;
+
+        $this->assertTrue($this->item->hasSpecialTime());
+    }
+
 }

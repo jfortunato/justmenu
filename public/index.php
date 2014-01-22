@@ -4,8 +4,11 @@
 require_once '../bootstrap/bootstrap.php';
 
 $builder = $container['menu_builder'];
-$view = $builder->build();
-$view = $view->render();
+$menu = $builder->build();
+$view = $menu->render();
+
+$cart = $container['cart'];
+$view = $cart->render() . $view;
 
 ?>
 <!DOCTYPE html>

@@ -1,13 +1,17 @@
 <?php namespace JustMenu\Menu\Presenter;
 
 use JustMenu\Menu\MenuComponentInterface;
+use JustMenu\View\ViewFinder;
 
 abstract class MenuPresenter
 {
     protected $component;
 
-    public function __construct(MenuComponentInterface $component = null)
+    protected $viewFinder;
+
+    public function __construct(ViewFinder $viewFinder, MenuComponentInterface $component = null)
     {
+        $this->viewFinder = $viewFinder;
         $this->component = $component;
     }
 
@@ -26,24 +30,6 @@ abstract class MenuPresenter
         }
 
         return $rendered;
-    }
-
-    protected function fetchView($view, $data)
-    {
-        ob_start();
-
-        extract($data);
-
-        $type = $this->determineFileType($view);
-
-        include __DIR__ . "/../views/{$type}/{$view}";
-
-        return ltrim(ob_get_clean());
-    }
-
-    protected function determineFileType($view)
-    {
-        return pathinfo($view, PATHINFO_EXTENSION);
     }
 
     /**
@@ -68,6 +54,16 @@ abstract class MenuPresenter
         $this->component = $component;
 
         return $this;
+    }
+
+    /**
+     * Gets the value of ViewFinder
+     *
+     * @return ViewFinder
+     */
+    public function getViewFinder()
+    {
+        return $this->viewFinder;
     }
 
     abstract public function renderMenu();

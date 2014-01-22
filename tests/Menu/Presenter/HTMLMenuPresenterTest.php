@@ -8,207 +8,233 @@ class HTMLMenuPresenterTest extends TestCase
 {
     public function setUp()
     {
-        $this->mockItem = m::mock('JustMenu\Menu\Entity\Item', array('hasChoice' => false));
-        $this->mockItem->id = '1';
-        $this->mockItem->title = 'foo';
-        $this->mockItem->description = 'bar';
-        $this->mockItem->info = 'baz';
+        $this->presenter = new HTMLMenuPresenter(m::mock('JustMenu\View\ViewFinder'));
 
-        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category', array('hasSpecialTime' => false));
-        $this->mockCategory->id = '1';
-        $this->mockCategory->title = 'foo';
-        $this->mockCategory->description = 'bar';
-        $this->mockCategory->info = 'baz';
+        $this->mockItem = m::mock('JustMenu\Menu\Entity\Item', array('hasChoice' => false, 'getAllPrices' => 'foo'));
 
-        $this->mockMenu = m::mock('JustMenu\Menu\Menu');
+        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category', array('hasSpecialTime' => false, 'getAllShortSizes' => 'foo', 'getChildrenComponents' => array()));
+
+        $this->mockMenu = m::mock('JustMenu\Menu\Menu', array('getChildrenComponents' => array()));
     }
 
-    public function testRenderProperlyRendersItemWithAttributes()
+    public function testProperlySetsDataOnItem()
     {
-        $this->mockItem->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
+        $this->presenter->setComponent($this->mockItem);
 
-        $presenter = new HTMLMenuPresenter($this->mockItem);
-        $rendered = $presenter->renderItem();
+        $data = array(
+            'id' => null,
+            'title' => null,
+            'description' => null,
+            'info' => null,
+            'availability' => 'available',
+            'prices' => 'foo',
+            'isChoice' => false,
+        );
 
-        $this->assertTag(['attributes' => ['data-item' => '1']], $rendered);
-        $this->assertTag(['attributes' => ['data-title' => 'foo']], $rendered);
-        $this->assertTag(['attributes' => ['data-description' => 'bar']], $rendered);
-        $this->assertTag(['attributes' => ['data-info' => 'baz']], $rendered);
-        $this->assertTag(['attributes' => ['data-price' => '3.00']], $rendered);
+        $this->presenter->getViewFinder()->shouldReceive('fetch')
+            ->with(PROJECT_ROOT.'views/html/item.html', $data)
+            ->once()
+            ->andReturn('foo');
+
+        $this->assertSame('foo', $this->presenter->renderItem());
     }
 
-    public function testRenderProperlyRendersCategoryWithAttributes()
+    public function testProperlySetsDataOnCategory()
     {
-        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
-        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        $this->presenter->setComponent($this->mockCategory);
 
-        $presenter = new HTMLMenuPresenter($this->mockCategory);
-        $rendered = $presenter->renderCategory();
+        $data = array(
+            'id' => null,
+            'title' => null,
+            'description' => null,
+            'special_times' => '',
+            'info' => null,
+            'sizes' => 'foo',
+            'items' => '',
+        );
 
-        $this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
-        $this->assertTag(['attributes' => ['data-title' => 'foo']], $rendered);
-        $this->assertTag(['attributes' => ['data-description' => 'bar']], $rendered);
-        $this->assertTag(['attributes' => ['data-info' => 'baz']], $rendered);
-        $this->assertTag(['attributes' => ['data-size' => 'lg.']], $rendered);
+        $this->presenter->getViewFinder()->shouldReceive('fetch')
+            ->with(PROJECT_ROOT.'views/html/category.html', $data)
+            ->once()
+            ->andReturn('foo');
+
+        $this->assertSame('foo', $this->presenter->renderCategory());
     }
 
-    public function testCanRenderCategoryWithNoItems()
+    public function testProperlySetsDataOnMenu()
     {
-        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
-        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        $this->presenter->setComponent($this->mockMenu);
 
-        $presenter = new HTMLMenuPresenter($this->mockCategory);
+        $data = array(
+            'categories' => '',
+        );
 
-        $this->assertNotEmpty($presenter->renderCategory());
+        $this->presenter->getViewFinder()->shouldReceive('fetch')
+            ->with(PROJECT_ROOT.'views/html/menu.html', $data)
+            ->once()
+            ->andReturn('foo');
+
+        $this->assertSame('foo', $this->presenter->renderMenu());
     }
 
-    public function testCanRenderCategoryWithItems()
-    {
-        $this->mockItem->shouldReceive('render')->once()->andReturn('<div data-item="1"></div>');
-        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg']);
-        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array($this->mockItem));
 
-        $presenter = new HTMLMenuPresenter($this->mockCategory);
-        $rendered = $presenter->renderCategory();
+    //public function testCanRenderCategoryWithNoItems()
+    //{
+        //$this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
+        //$this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
 
-        $this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
-        $this->assertTag(['attributes' => ['data-item' => '1']], $rendered);
-    }
+        //$this->presenter->setComponent($this->mockCategory);
 
-    public function testCanProperlyRenderMenuWithAttributes()
-    {
-        $this->mockMenu->shouldReceive('getChildrenComponents')->once()->andReturn(array());
-        $presenter = new HTMLMenuPresenter($this->mockMenu);
+        //$this->assertNotEmpty($this->presenter->renderCategory());
+    //}
 
-        $this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $presenter->renderMenu());
-    }
+    //public function testCanRenderCategoryWithItems()
+    //{
+        //$this->mockItem->shouldReceive('render')->once()->andReturn('<div data-item="1"></div>');
+        //$this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg']);
+        //$this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array($this->mockItem));
 
-    public function testCanRenderMenuWithCategoriesAndItems()
-    {
-        $this->mockCategory->shouldReceive('render')->once()->andReturn('<div data-category="1"><div data-item="1"></div></div>');
-        $this->mockMenu->shouldReceive('getChildrenComponents')->once()->andReturn(array($this->mockCategory));
+        //$this->presenter->setComponent($this->mockCategory);
+        //$rendered = $this->presenter->renderCategory();
 
-        $presenter = new HTMLMenuPresenter($this->mockMenu);
-        $rendered = $presenter->renderMenu();
+        //$this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
+        //$this->assertTag(['attributes' => ['data-item' => '1']], $rendered);
+    //}
 
-        $this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $rendered);
-        $this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
-        $this->assertTag(['attributes' => ['data-item' => '1']], $rendered);
-    }
+    //public function testCanProperlyRenderMenuWithAttributes()
+    //{
+        //$this->mockMenu->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        //$this->presenter->setComponent($this->mockMenu);
 
-    public function testItemsWithChoiceDontGetRendered()
-    {
-        $mockItem = m::mock('JustMenu\Menu\Entity\Item');
-        $mockItem->id = 1;
-        $mockItem->choice = m::mock('JustMenu\Menu\Entity\Choice', array('getAllPrices' => [3.00]));
+        //$this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $this->presenter->renderMenu());
+    //}
 
-        $mockItem->shouldReceive('getAllPrices')->never();
-        $mockItem->shouldReceive('hasChoice')->once()->andReturn(true);
+    //public function testCanRenderMenuWithCategoriesAndItems()
+    //{
+        //$this->mockCategory->shouldReceive('render')->once()->andReturn('<div data-category="1"><div data-item="1"></div></div>');
+        //$this->mockMenu->shouldReceive('getChildrenComponents')->once()->andReturn(array($this->mockCategory));
 
-        $presenter = new HTMLMenuPresenter($mockItem);
-        $rendered = $presenter->renderItem();
-        $rendered = "<html>$rendered</html>";
+        //$this->presenter->setComponent($this->mockMenu);
+        //$rendered = $this->presenter->renderMenu();
 
-        $this->assertNotTag(['attributes' => ['data-item' => '1']], $rendered);
-    }
+        //$this->assertTag(['attributes' => ['data-justmenu' => 'justmenu']], $rendered);
+        //$this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
+        //$this->assertTag(['attributes' => ['data-item' => '1']], $rendered);
+    //}
 
-    public function testItemsWithChoiceRendersTheSingleChoiceInstead()
-    {
-        $mockChoice = m::mock('JustMenu\Menu\Entity\Choice');
-        $mockChoice->id = 4;
-        $mockChoice->title = 'foo choice';
-        $mockChoice->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
+    //public function testItemsWithChoiceDontGetRendered()
+    //{
+        //$mockItem = m::mock('JustMenu\Menu\Entity\Item');
+        //$mockItem->id = 1;
+        //$mockItem->choice = m::mock('JustMenu\Menu\Entity\Choice', array('getAllPrices' => [3.00]));
 
-        $mockItem1 = m::mock('JustMenu\Menu\Entity\Item');
-        $mockItem1->id = 1;
-        $mockItem1->choice = $mockChoice;
-        $mockItem1->shouldReceive('getAllPrices')->never();
-        $mockItem1->shouldReceive('hasChoice')->once()->andReturn(true);
+        //$mockItem->shouldReceive('getAllPrices')->never();
+        //$mockItem->shouldReceive('hasChoice')->once()->andReturn(true);
 
-        $presenter = new HTMLMenuPresenter($mockItem1);
-        $rendered = $presenter->renderItem();
+        //$this->presenter->setComponent($mockItem);
+        //$rendered = $this->presenter->renderItem();
+        //$rendered = "<html>$rendered</html>";
 
-        $this->assertTag(['attributes' => ['data-choice' => '4']], $rendered);
-        $this->assertTag(['attributes' => ['data-title' => 'foo choice']], $rendered);
-        $this->assertNotTag(['attributes' => ['data-item' => '1']], $rendered);
-    }
+        //$this->assertNotTag(['attributes' => ['data-item' => '1']], $rendered);
+    //}
 
-    public function testItemsWithChoiceRendersTheFirstItemChoiceThenSkipsOthers()
-    {
-        $mockChoice = m::mock('JustMenu\Menu\Entity\Choice');
-        $mockChoice->id = 4;
-        $mockChoice->title = 'foo choice';
-        $mockChoice->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
+    //public function testItemsWithChoiceRendersTheSingleChoiceInstead()
+    //{
+        //$mockChoice = m::mock('JustMenu\Menu\Entity\Choice');
+        //$mockChoice->id = 4;
+        //$mockChoice->title = 'foo choice';
+        //$mockChoice->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
 
-        $mockItem1 = m::mock('JustMenu\Menu\Entity\Item');
-        $mockItem1->id = 1;
-        $mockItem1->choice = $mockChoice;
-        $mockItem1->shouldReceive('getAllPrices')->never()->andReturn([3.00]);
-        $mockItem1->shouldReceive('hasChoice')->once()->andReturn(true);
+        //$mockItem1 = m::mock('JustMenu\Menu\Entity\Item');
+        //$mockItem1->id = 1;
+        //$mockItem1->choice = $mockChoice;
+        //$mockItem1->shouldReceive('getAllPrices')->never();
+        //$mockItem1->shouldReceive('hasChoice')->once()->andReturn(true);
 
-        $mockItem2 = m::mock('JustMenu\Menu\Entity\Item');
-        $mockItem2->id = 2;
-        $mockItem2->choice = $mockChoice;
-        $mockItem2->shouldReceive('getAllPrices')->never()->andReturn([3.00]);
-        $mockItem2->shouldReceive('hasChoice')->once()->andReturn(true);
+        //$this->presenter->setComponent($mockItem1);
+        //$rendered = $this->presenter->renderItem();
 
-        $presenter = new HTMLMenuPresenter($mockItem1);
-        $rendered = $presenter->renderItem();
-        $presenter->setComponent($mockItem2);
-        $rendered .= $presenter->renderItem();
+        //$this->assertTag(['attributes' => ['data-choice' => '4']], $rendered);
+        //$this->assertTag(['attributes' => ['data-title' => 'foo choice']], $rendered);
+        //$this->assertNotTag(['attributes' => ['data-item' => '1']], $rendered);
+    //}
 
-        $this->assertTag(['attributes' => ['data-choice' => '4']], $rendered);
-        $this->assertNotTag(['attributes' => ['data-item' => '1']], $rendered);
-        $this->assertNotTag(['attributes' => ['data-item' => '2']], $rendered);
-    }
+    //public function testItemsWithChoiceRendersTheFirstItemChoiceThenSkipsOthers()
+    //{
+        //$mockChoice = m::mock('JustMenu\Menu\Entity\Choice');
+        //$mockChoice->id = 4;
+        //$mockChoice->title = 'foo choice';
+        //$mockChoice->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
 
-    public function testSpecialTimesIsNotRenderedWithNoCategorySpecialTimes()
-    {
-        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
-        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
-        $this->mockCategory->shouldReceive('hasSpecialTime')->once()->andReturn(false);
+        //$mockItem1 = m::mock('JustMenu\Menu\Entity\Item');
+        //$mockItem1->id = 1;
+        //$mockItem1->choice = $mockChoice;
+        //$mockItem1->shouldReceive('getAllPrices')->never()->andReturn([3.00]);
+        //$mockItem1->shouldReceive('hasChoice')->once()->andReturn(true);
 
-        $presenter = new HTMLMenuPresenter($this->mockCategory);
-        $rendered = $presenter->renderCategory();
+        //$mockItem2 = m::mock('JustMenu\Menu\Entity\Item');
+        //$mockItem2->id = 2;
+        //$mockItem2->choice = $mockChoice;
+        //$mockItem2->shouldReceive('getAllPrices')->never()->andReturn([3.00]);
+        //$mockItem2->shouldReceive('hasChoice')->once()->andReturn(true);
 
-        $this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
-        $this->assertNotTag(['attributes' => ['data-special-times' => 'true']], $rendered);
-    }
+        //$this->presenter->setComponent($mockItem1);
+        //$rendered = $this->presenter->renderItem();
+        //$this->presenter->setComponent($mockItem2);
+        //$rendered .= $this->presenter->renderItem();
 
-    public function testCategoryWithSpecialTimesRendersWithAttribute()
-    {
-        $this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
-        $this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
-        $this->mockCategory->shouldReceive('hasSpecialTime')->once()->andReturn(true);
-        $mockSpecialTime = m::mock('JustMenu\Menu\Entity\SpecialTime');
-        $mockSpecialTime->days = 0;
-        $this->mockCategory->special_time = $mockSpecialTime;
+        //$this->assertTag(['attributes' => ['data-choice' => '4']], $rendered);
+        //$this->assertNotTag(['attributes' => ['data-item' => '1']], $rendered);
+        //$this->assertNotTag(['attributes' => ['data-item' => '2']], $rendered);
+    //}
 
-        $presenter = new HTMLMenuPresenter($this->mockCategory);
-        $rendered = $presenter->renderCategory();
+    //public function testSpecialTimesIsNotRenderedWithNoCategorySpecialTimes()
+    //{
+        //$this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
+        //$this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        //$this->mockCategory->shouldReceive('hasSpecialTime')->once()->andReturn(false);
+
+        //$this->presenter->setComponent($this->mockCategory);
+        //$rendered = $this->presenter->renderCategory();
+
+        //$this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
+        //$this->assertNotTag(['attributes' => ['data-special-times' => 'true']], $rendered);
+    //}
+
+    //public function testCategoryWithSpecialTimesRendersWithAttribute()
+    //{
+        //$this->mockCategory->shouldReceive('getAllShortSizes')->once()->andReturn(['lg.']);
+        //$this->mockCategory->shouldReceive('getChildrenComponents')->once()->andReturn(array());
+        //$this->mockCategory->shouldReceive('hasSpecialTime')->once()->andReturn(true);
+        //$mockSpecialTime = m::mock('JustMenu\Menu\Entity\SpecialTime');
+        //$mockSpecialTime->days = 0;
+        //$this->mockCategory->special_time = $mockSpecialTime;
+
+        //$this->presenter->setComponent($this->mockCategory);
+        //$rendered = $this->presenter->renderCategory();
         
-        $this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
-        $this->assertTag(['attributes' => ['data-special-times' => 'true']], $rendered);
-    }
+        //$this->assertTag(['attributes' => ['data-category' => '1']], $rendered);
+        //$this->assertTag(['attributes' => ['data-special-times' => 'true']], $rendered);
+    //}
 
-    public function testAvailabilityIsAvailableWithNoSpecialTimeForItem()
-    {
-        $this->mockItem->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
+    //public function testAvailabilityIsAvailableWithNoSpecialTimeForItem()
+    //{
+        //$this->mockItem->shouldReceive('getAllPrices')->once()->andReturn([3.00]);
 
-        $presenter = new HTMLMenuPresenter($this->mockItem);
-        $rendered = $presenter->renderItem();
+        //$this->presenter->setComponent($this->mockItem);
+        //$rendered = $this->presenter->renderItem();
 
-        $this->assertTag(['attributes' => ['data-availability' => 'available']], $rendered);
-    }
+        //$this->assertTag(['attributes' => ['data-availability' => 'available']], $rendered);
+    //}
 
-    public function testAvailabilityIsAvailableWithWhileWithinSpecialTime()
-    {
-        //
-    }
+    //public function testAvailabilityIsAvailableWithWhileWithinSpecialTime()
+    //{
+        ////
+    //}
 
-    public function testAvailabilityIsUnavailableWhileNotWithinSpecialTime()
-    {
-        //
-    }
+    //public function testAvailabilityIsUnavailableWhileNotWithinSpecialTime()
+    //{
+        ////
+    //}
 
 }

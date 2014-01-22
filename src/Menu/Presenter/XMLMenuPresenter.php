@@ -6,7 +6,7 @@ class XMLMenuPresenter extends MenuPresenter
     {
         $categories = $this->renderChildren();
 
-        return $this->fetchView('menu.xml', compact('categories'));
+        return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/menu.xml', compact('categories'));
     }
 
     public function renderCategory()
@@ -20,7 +20,7 @@ class XMLMenuPresenter extends MenuPresenter
             'items'       => $this->renderChildren(),
         );
 
-        return $this->fetchView('category.xml', $data);
+        return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/category.xml', $data);
     }
 
     public function renderItem()
@@ -33,6 +33,6 @@ class XMLMenuPresenter extends MenuPresenter
             'sizes'       => $this->component->getSizes(),
         );
 
-        return $this->fetchView('item.xml', $data);
+        return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/item.xml', $data);
     }
 }

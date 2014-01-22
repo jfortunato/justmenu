@@ -11,7 +11,7 @@ class HTMLMenuPresenter extends MenuPresenter
     {
         $categories = $this->renderChildren();
 
-        return $this->fetchView('menu.html', compact('categories'));
+        return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/menu.html', compact('categories'));
     }
 
     public function renderCategory()
@@ -26,7 +26,7 @@ class HTMLMenuPresenter extends MenuPresenter
             'items'         => $this->renderChildren(),
         );
 
-        return $this->fetchView('category.html', $data);
+        return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/category.html', $data);
     }
 
     public function renderItem()
@@ -53,6 +53,6 @@ class HTMLMenuPresenter extends MenuPresenter
             'isChoice'     => $component === $this->component ? false:true,
         );
 
-        return $this->fetchView('item.html', $data);
+        return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/item.html', $data);
     }
 }

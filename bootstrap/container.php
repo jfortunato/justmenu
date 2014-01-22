@@ -5,6 +5,8 @@ use Doctrine\ORM\EntityManager;
 use JustMenu\Menu\Presenter\HTMLMenuPresenter as Presenter;
 use JustMenu\Menu\MenuBuilder as Builder;
 use JustMenu\Menu\DoctrineManager as Manager;
+use JustMenu\View\ViewFinder;
+use JustMenu\Cart\Cart;
 
 $container = new Pimple();
 
@@ -26,8 +28,18 @@ $container['manager'] = function ($c) {
     return new Manager($c['doctrine']);
 };
 
-$container['menu_builder'] = function ($c) {
-    $presenter = new Presenter;
+$container['view_finder'] = function ($c) {
+    return new ViewFinder;
+};
 
-    return new Builder($c['manager'], $presenter);
+$container['presenter'] = function ($c) {
+    return new Presenter($c['view_finder']);
+};
+
+$container['menu_builder'] = function ($c) {
+    return new Builder($c['manager'], $c['presenter']);
+};
+
+$container['cart'] = function ($c) {
+    return new Cart($c['view_finder']);
 };

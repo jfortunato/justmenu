@@ -1,19 +1,16 @@
 <div data-justmenu-cart class="panel panel-success">
     <div class="panel-heading">
-        <h2>Open For Orders</h2>
+        <h2>Open For Orders <button id="empty-cart" type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></button></h2>
     </div>
     <div class="panel-body">
-        <ul class="list-unstyled" id="cart-contents">
-            <li><span class="glyphicon glyphicon-remove"></span>General Tso's Chicken (Qt.)<span class="pull-right">$9.00</span></li>
-            <li><span class="glyphicon glyphicon-remove"></span>Sweet and Sour Chicken (Pt.)<span class="pull-right">$6.00</span></li>
-        </ul>
+        <ul class="list-unstyled" id="cart-contents"></ul>
     </div>
     <div class="panel-footer">
-        <ul class="list-unstyled">
-            <li>Sub-Total <span class="pull-right">$15.00</span></li>
-            <li>Tax <span class="pull-right">$0.00</span></li>
+        <ul class="list-unstyled" id="cart-totals">
+            <li>Sub-Total <span class="pull-right" data-subtotal>$15.00</span></li>
+            <li>Tax <span class="pull-right" data-tax>$0.00</span></li>
             <hr>
-            <li>Total <span class="pull-right">$15.00</span></li>
+            <li>Total <span class="pull-right" data-total>$15.00</span></li>
         </ul>
     </div>
 </div>

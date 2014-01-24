@@ -21,26 +21,12 @@
         var that = this;
         var viewCommands = {
             showCart: function () {
-                var items = parameter;
-                // contents
-                that.$cartContents.innerHTML = that.template.showItems(items);
-
-                // totals
-                var subtotal = 0, tax = 0, total = 0;
-                items.forEach(function (item) {
-                    subtotal += parseFloat(item.price);
-                });
-                tax = 0.00;
-                total = subtotal + tax;
-                that.$subTotal.innerHTML = '$'+subtotal.toFixed(2);
-                that.$tax.innerHTML = '$'+tax.toFixed(2);
-                that.$total.innerHTML = '$'+total.toFixed(2);
+                that.$cartContents.innerHTML = that.template.showItems(parameter);
+                that.showTotals(parameter);
             },
             showUndoEmptyCart: function () {
                 that.$cartContents.innerHTML = that.template.showUndoEmpty();
-                that.$subTotal.innerHTML = '$0.00';
-                that.$tax.innerHTML = '$0.00';
-                that.$total.innerHTML = '$0.00';
+                that.showTotals();
             }
         };
 
@@ -51,15 +37,9 @@
         if (event === 'addToCart') {
             this.$selectBtns.forEach(function (el) {
                 el.addEventListener('click', function (e) {
-                    var item = {
-                        item_id: $closest(e.target, '[data-item]').dataset.item,
-                        title: $closest(e.target, '[data-item]').querySelector('[data-title]').dataset.title,
-                        size: e.target.dataset.selectSize,
-                        price: $closest(e.target, '[data-price]').dataset.price
-                    };
-
+                    var item = this.makeItemFromProperties(e.target);
                     handler(item);
-                });
+                }.bind(this));
             }.bind(this));
         } else if (event === 'removeFromCart') {
             $live('#cart-contents .glyphicon-remove', 'click', function (e) {
@@ -75,6 +55,34 @@
                 handler();
             }.bind(this));
         }
+    };
+
+    View.prototype.showTotals = function(items) {
+        var subtotal = 0, tax = 0, total = 0;
+
+        if (items && items.length >= 1) {
+            items.forEach(function (item) {
+                subtotal += parseFloat(item.price);
+            });
+        }
+
+        tax = 0.00;
+        total = subtotal + tax;
+
+        this.$subTotal.innerHTML = '$'+subtotal.toFixed(2);
+        this.$tax.innerHTML = '$'+tax.toFixed(2);
+        this.$total.innerHTML = '$'+total.toFixed(2);
+    };
+
+    View.prototype.makeItemFromProperties = function(selectedBtn) {
+        var item = {
+            item_id: $closest(selectedBtn, '[data-item]').dataset.item,
+            title: $closest(selectedBtn, '[data-item]').querySelector('[data-title]').dataset.title,
+            size: selectedBtn.dataset.selectSize,
+            price: $closest(selectedBtn, '[data-price]').dataset.price
+        };
+
+        return item;
     };
 
     window.JustMenu = window.JustMenu || {};

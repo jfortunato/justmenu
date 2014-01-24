@@ -17,7 +17,7 @@ $view = $cart->render() . $view;
         <title>JustMenu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/lib/css/bootstrap.min.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,9 +65,9 @@ $view = $cart->render() . $view;
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="assets/lib/js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="assets/lib/js/bootstrap.min.js"></script>
 
         <script src="assets/js/helpers.js" type="text/javascript" charset="utf-8"></script>
         <script src="assets/js/storage.js" type="text/javascript" charset="utf-8"></script>

@@ -68,5 +68,13 @@ $view = $cart->render() . $view;
         <script src="https://code.jquery.com/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+        <script src="assets/js/helpers.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/storage.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/cart.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/template.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/view.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/controller.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>

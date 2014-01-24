@@ -9,14 +9,8 @@
         return this.storage.findAll();
     };
 
-    Cart.prototype.addItem = function(id, item, price) {
-        var newItem = {
-            id: id,
-            item: item,
-            price: price
-        };
-
-        this.storage.save(newItem);
+    Cart.prototype.addItem = function(item) {
+        this.storage.save(item);
     };
 
     Cart.prototype.removeItem = function(id) {

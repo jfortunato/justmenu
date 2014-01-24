@@ -8,7 +8,7 @@
         var $$ = document.querySelectorAll.bind(document);
 
         this.$cartContents = $('#cart-contents');
-        this.$selectBtns = $$('[data-justmenu] [data-select]');
+        this.$selectBtns = $$('[data-justmenu] [data-select-size]');
         this.$removeItem = $$('#cart-contents .glyphicon-remove');
     }
 
@@ -27,12 +27,14 @@
         if (event === 'addToCart') {
             this.$selectBtns.forEach(function (el) {
                 el.addEventListener('click', function (e) {
-                    var id = $closest(e.target, '[data-item]').dataset.item;
-                    var item = $closest(e.target, '[data-item]').querySelector('[data-title]').dataset.title;
-                    var price = $closest(e.target, '[data-price]').dataset.price;
+                    var item = {
+                        item_id: $closest(e.target, '[data-item]').dataset.item,
+                        title: $closest(e.target, '[data-item]').querySelector('[data-title]').dataset.title,
+                        size: e.target.dataset.selectSize,
+                        price: $closest(e.target, '[data-price]').dataset.price
+                    };
 
-
-                    handler(id, item, price);
+                    handler(item);
                 });
             }.bind(this));
         } else if (event === 'removeFromCart') {

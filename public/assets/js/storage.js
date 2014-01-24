@@ -21,6 +21,9 @@
         var data = JSON.parse(localStorage[this.dbName]);
         var cart = data.cart;
 
+        // give the item a unique id in the cart
+        updateData.id = new Date().getTime();
+
         cart.push(updateData);
         localStorage[this.dbName] = JSON.stringify(data);
     };

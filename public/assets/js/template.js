@@ -5,7 +5,7 @@
         this.defaultTemplate
         =   '<li>'
         +       '<span class="glyphicon glyphicon-remove" data-item-id="{{id}}"></span>'
-        +       '{{item}}'
+        +       '{{title}} ({{size}})'
         +       '<span class="pull-right">${{price}}</span>'
         +   '</li>'
     }
@@ -17,7 +17,8 @@
             var template = this.defaultTemplate;
 
             template = template.replace('{{id}}', data[i].id);
-            template = template.replace('{{item}}', data[i].item);
+            template = template.replace('{{title}}', data[i].title);
+            template = template.replace('{{size}}', data[i].size);
             template = template.replace('{{price}}', data[i].price);
 
             view = view + template;

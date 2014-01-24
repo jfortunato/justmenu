@@ -5,8 +5,8 @@
         this.cart = model;
         this.view = view;
 
-        this.view.bind('addToCart', function (id, item, price) {
-            this.addToCart(id, item, price);
+        this.view.bind('addToCart', function (item) {
+            this.addToCart(item);
         }.bind(this));
 
         this.view.bind('removeFromCart', function (item) {
@@ -19,8 +19,8 @@
         this.view.render('showCart', data);
     };
 
-    Controller.prototype.addToCart = function(id, item, price) {
-        this.cart.addItem(id, item, price);
+    Controller.prototype.addToCart = function(item) {
+        this.cart.addItem(item);
         this.showAll();
     };
 

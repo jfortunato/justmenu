@@ -43,7 +43,7 @@
             }.bind(this));
         } else if (event === 'removeFromCart') {
             $live('#cart-contents .glyphicon-remove', 'click', function (e) {
-                var id = e.target.dataset.itemId;
+                var id = $closest(e.target, '[data-cart-id]').dataset.cartId;
                 handler({id: id});
             }.bind(this));
         } else if (event === 'emptyCart') {
@@ -53,6 +53,16 @@
         } else if (event === 'undoEmptyCart') {
             $live('#undo-empty-cart', 'click', function (e) {
                 handler();
+            }.bind(this));
+        } else if (event === 'increaseQuantity') {
+            $live('#increase-quantity', 'click', function (e) {
+                var item_id = $closest(e.target, '[data-cart-id]').dataset.cartId;
+                handler(item_id);
+            }.bind(this));
+        } else if (event === 'decreaseQuantity') {
+            $live('#decrease-quantity', 'click', function (e) {
+                var item_id = $closest(e.target, '[data-cart-id]').dataset.cartId;
+                handler(item_id);
             }.bind(this));
         }
     };
@@ -77,6 +87,7 @@
     View.prototype.makeItemFromProperties = function(selectedBtn) {
         var item = {
             item_id: $closest(selectedBtn, '[data-item]').dataset.item,
+            quantity: 1,
             title: $closest(selectedBtn, '[data-item]').querySelector('[data-title]').dataset.title,
             size: selectedBtn.dataset.selectSize,
             price: $closest(selectedBtn, '[data-price]').dataset.price

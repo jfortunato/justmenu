@@ -17,14 +17,43 @@
         return JSON.parse(localStorage[this.dbName]).cart;
     };
 
+    Storage.prototype.find = function(query) {
+        //id = parseInt(id);
+        var items = this.findAll();
+
+        var itemsFound = items.filter(function (item) {
+            var match = true;
+            for (var q in query) {
+                if (query[q] !== item[q]) {
+                    match = false;
+                }
+            }
+            return match;
+        });
+
+        return itemsFound[0];
+    };
+
     Storage.prototype.save = function(updateData) {
         var data = JSON.parse(localStorage[this.dbName]);
         var cart = data.cart;
 
-        // give the item a unique id in the cart
-        updateData.id = new Date().getTime();
 
-        cart.push(updateData);
+        if (updateData.id) {
+            for (var i = 0; i < cart.length; i++) {
+                if (cart[i].id == updateData.id) {
+                    for (var x in updateData) {
+                        cart[i][x] = updateData[x];
+                    }
+                }
+            }
+        } else  {
+            // give the item a unique id in the cart
+            updateData.id = new Date().getTime()+cart.length;
+
+            cart.push(updateData);
+        }
+
         localStorage[this.dbName] = JSON.stringify(data);
     };
 

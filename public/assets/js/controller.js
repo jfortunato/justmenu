@@ -20,6 +20,14 @@
         this.view.bind('undoEmptyCart', function () {
             this.undoEmptyCart();
         }.bind(this));
+
+        this.view.bind('increaseQuantity', function (item) {
+            this.increaseQuantity(item);
+        }.bind(this));
+
+        this.view.bind('decreaseQuantity', function (item) {
+            this.decreaseQuantity(item);
+        }.bind(this));
     }
 
     Controller.prototype.showAll = function() {
@@ -46,6 +54,16 @@
 
     Controller.prototype.undoEmptyCart = function() {
         this.cart.undoEmpty();
+        this.showAll();
+    };
+
+    Controller.prototype.increaseQuantity = function(item_id) {
+        this.cart.increaseQuantity(parseInt(item_id));
+        this.showAll();
+    };
+
+    Controller.prototype.decreaseQuantity = function(item_id) {
+        this.cart.decreaseQuantity(parseInt(item_id));
         this.showAll();
     };
 

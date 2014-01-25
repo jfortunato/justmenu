@@ -3,9 +3,11 @@
 
     function Template() {
         this.contentsTemplate
-        =   '<li>'
-        +       '<span class="glyphicon glyphicon-remove" data-item-id="{{id}}"></span>'
-        +       '{{title}} ({{size}})'
+        =   '<li data-cart-id="{{id}}">'
+        +       '<span class="glyphicon glyphicon-remove"></span>'
+        +       ' <button id="decrease-quantity" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>'
+        +       ' <button id="increase-quantity" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button>'
+        +       ' {{quantity}} {{title}} ({{size}})'
         +       '<span class="pull-right">${{price}}</span>'
         +   '</li>';
 
@@ -23,9 +25,11 @@
             var template = this.contentsTemplate;
 
             template = template.replace('{{id}}', items[i].id);
+            template = template.replace('{{quantity}}', items[i].quantity);
             template = template.replace('{{title}}', items[i].title);
             template = template.replace('{{size}}', items[i].size);
             template = template.replace('{{price}}', items[i].price);
+            template += i === items.length-1 ? '':'<hr>';
 
             view = view + template;
         }

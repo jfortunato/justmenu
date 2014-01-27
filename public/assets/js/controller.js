@@ -9,10 +9,6 @@
             this.addToCart(item);
         }.bind(this));
 
-        this.view.bind('removeFromCart', function (item) {
-            this.removeFromCart(item.id);
-        }.bind(this));
-        
         this.view.bind('emptyCart', function () {
             this.emptyCart();
         }.bind(this));
@@ -37,11 +33,6 @@
 
     Controller.prototype.addToCart = function(item) {
         this.cart.addItem(item);
-        this.showAll();
-    };
-
-    Controller.prototype.removeFromCart = function(item_id) {
-        this.cart.removeItem(item_id);
         this.showAll();
     };
 

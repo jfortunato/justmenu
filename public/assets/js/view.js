@@ -9,7 +9,6 @@
 
         this.$cartContents = $('#cart-contents');
         this.$selectBtns = $$('[data-justmenu] [data-select-size]');
-        this.$removeItem = $$('#cart-contents .glyphicon-remove');
         this.$subTotal = $('[data-subtotal]');
         this.$tax = $('[data-tax]');
         this.$total = $('[data-total]');
@@ -40,11 +39,6 @@
                     var item = this.makeItemFromProperties(e.target);
                     handler(item);
                 }.bind(this));
-            }.bind(this));
-        } else if (event === 'removeFromCart') {
-            $live('#cart-contents .glyphicon-remove', 'click', function (e) {
-                var id = $closest(e.target, '[data-cart-id]').dataset.cartId;
-                handler({id: id});
             }.bind(this));
         } else if (event === 'emptyCart') {
             this.$emptyCart.addEventListener('click', function (e) {

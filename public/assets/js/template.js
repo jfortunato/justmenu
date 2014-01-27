@@ -4,7 +4,6 @@
     function Template() {
         this.contentsTemplate
         =   '<li data-cart-id="{{id}}">'
-        +       '<span class="glyphicon glyphicon-remove"></span>'
         +       ' <button id="decrease-quantity" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>'
         +       ' <button id="increase-quantity" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button>'
         +       ' {{quantity}} {{title}} ({{size}})'

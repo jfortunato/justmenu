@@ -159,4 +159,12 @@ class ItemTest extends TestCase
         $this->assertTrue($this->item->hasSpecialTime());
     }
 
+    public function testCanTransformToJson()
+    {
+        $this->item->id = '1';
+        $this->item->title = 'foo';
+        $this->item->description = 'bar';
+        $this->item->info = 'baz';
+        $this->assertJsonStringEqualsJsonString('{"id":"1","title":"foo","description":"bar","info":"baz"}', $this->item->toJson());
+    }
 }

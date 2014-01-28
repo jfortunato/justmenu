@@ -68,4 +68,14 @@ class Item extends MenuComponent
         return $presenter->renderItem();
     }
 
+    public function toJson()
+    {
+        return json_encode(array(
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'info' => $this->info,
+        ));
+    }
+
 }

@@ -70,6 +70,7 @@ $view = $cart->render() . $view;
         <script src="assets/lib/js/bootstrap.min.js"></script>
 
         <script src="assets/js/helpers.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/optionbox.js" type="text/javascript" charset="utf-8"></script>
         <script src="assets/js/storage.js" type="text/javascript" charset="utf-8"></script>
         <script src="assets/js/cart.js" type="text/javascript" charset="utf-8"></script>
         <script src="assets/js/template.js" type="text/javascript" charset="utf-8"></script>

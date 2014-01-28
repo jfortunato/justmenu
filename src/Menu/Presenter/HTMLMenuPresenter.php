@@ -53,6 +53,10 @@ class HTMLMenuPresenter extends MenuPresenter
             'isChoice'     => $component === $this->component ? false:true,
         );
 
+        if ($data['isChoice']) {
+            $data['choices'] = $component->getJsonChoices();
+        }
+
         return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/item.html', $data);
     }
 }

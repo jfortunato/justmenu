@@ -7,6 +7,7 @@
         var $ = document.querySelector.bind(document);
         var $$ = document.querySelectorAll.bind(document);
 
+        this.body = $('body');
         this.$cartContents = $('#cart-contents');
         this.$selectBtns = $$('[data-justmenu] [data-select-size]');
         this.$subTotal = $('[data-subtotal]');
@@ -34,11 +35,8 @@
 
     View.prototype.bind = function(event, handler) {
         if (event === 'addToCart') {
-            this.$selectBtns.forEach(function (el) {
-                el.addEventListener('click', function (e) {
-                    var item = this.makeItemFromProperties(e.target);
-                    handler(item);
-                }.bind(this));
+            $live('[data-select-size]', 'click', function (e) {
+                this.selectedItem(e.target, handler);
             }.bind(this));
         } else if (event === 'emptyCart') {
             this.$emptyCart.addEventListener('click', function (e) {
@@ -88,6 +86,40 @@
         };
 
         return item;
+    };
+
+    View.prototype.selectedItem = function(target, handler) {
+        var isChoice = $closest(target, '[data-choice]') !== undefined ? true:false;
+        if (isChoice) {
+            var options = $closest(target, '[data-choice]').querySelector('input[name="choices"]').value;
+            options = JSON.parse(options);
+            var size = target.dataset.selectSize;
+            var price = $closest(target, '[data-price]').dataset.price;
+            options.forEach(function (option) {
+                option.size = size;
+                option.price = price;
+            }.bind(this));
+            this.showOptionBox(options);
+        } else  {
+            var item = this.makeItemFromProperties(target);
+            handler(item);
+        }
+    };
+
+    View.prototype.showOptionBox = function(options) {
+        var container;
+
+        if (document.querySelector('div#justmenu-option-container')) {
+            container = document.querySelector('div#justmenu-option-container');
+        } else {
+            container = document.createElement('div');
+            container.id = 'justmenu-option-container';
+            this.body.appendChild(container);
+        }
+
+        var optionBox = new JustMenu.OptionBox();
+        container.innerHTML = optionBox.showBox(options);
+        jQuery('.modal').modal('show');
     };
 
     window.JustMenu = window.JustMenu || {};

@@ -36,7 +36,7 @@
 	}());
 
     window.$closest = function (element, selector) {
-        if (!element.parentNode) {
+        if (!element.parentNode || element.parentNode === document) {
             return;
         }
 
@@ -46,6 +46,14 @@
 
         return window.$closest(element.parentNode, selector);
     };
+
+    String.prototype.replaceAll = function(search, replace) {
+        if (replace === undefined) {
+            return this.toString();
+        }
+
+        return this.split(search).join(replace);
+    }
 
     Element.prototype.matches = Element.prototype.matches || 
         Element.prototype.matchesSelector       ||

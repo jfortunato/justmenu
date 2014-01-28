@@ -34,9 +34,10 @@
     };
 
     View.prototype.bind = function(event, handler) {
-        if (event === 'addToCart') {
+        if (event === 'selectedItem') {
             $live('[data-select-size]', 'click', function (e) {
-                this.selectedItem(e.target, handler);
+                var item = this.makeItemFromSelection(e.target);
+                handler(item);
             }.bind(this));
         } else if (event === 'emptyCart') {
             this.$emptyCart.addEventListener('click', function (e) {
@@ -76,34 +77,23 @@
         this.$total.innerHTML = '$'+total.toFixed(2);
     };
 
-    View.prototype.makeItemFromProperties = function(selectedBtn) {
+    View.prototype.makeItemFromSelection = function(selectedBtn) {
+        var isChoice = $closest(selectedBtn, '[data-choice]') !== undefined ? true:false;
+        var base = isChoice ? $closest(selectedBtn, '[data-choice]'):$closest(selectedBtn, '[data-item]');
+
         var item = {
-            item_id: $closest(selectedBtn, '[data-item]').dataset.item,
+            item_id: base.dataset.item,
             quantity: 1,
-            title: $closest(selectedBtn, '[data-item]').querySelector('[data-title]').dataset.title,
+            title: base.querySelector('[data-title]').dataset.title,
             size: selectedBtn.dataset.selectSize,
             price: $closest(selectedBtn, '[data-price]').dataset.price
         };
 
-        return item;
-    };
-
-    View.prototype.selectedItem = function(target, handler) {
-        var isChoice = $closest(target, '[data-choice]') !== undefined ? true:false;
         if (isChoice) {
-            var options = $closest(target, '[data-choice]').querySelector('input[name="choices"]').value;
-            options = JSON.parse(options);
-            var size = target.dataset.selectSize;
-            var price = $closest(target, '[data-price]').dataset.price;
-            options.forEach(function (option) {
-                option.size = size;
-                option.price = price;
-            }.bind(this));
-            this.showOptionBox(options);
-        } else  {
-            var item = this.makeItemFromProperties(target);
-            handler(item);
+            item.choices = base.querySelector('input[name="choices"]').value ;
         }
+
+        return item;
     };
 
     View.prototype.showOptionBox = function(options) {

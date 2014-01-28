@@ -5,8 +5,8 @@
         this.cart = model;
         this.view = view;
 
-        this.view.bind('addToCart', function (item) {
-            this.addToCart(item);
+        this.view.bind('selectedItem', function (item) {
+            this.selectedItem(item);
         }.bind(this));
 
         this.view.bind('emptyCart', function () {
@@ -31,9 +31,15 @@
         this.view.render('showCart', items);
     };
 
-    Controller.prototype.addToCart = function(item) {
-        this.cart.addItem(item);
-        this.showAll();
+    Controller.prototype.selectedItem = function(item) {
+        if (this._isChoice(item)) {
+            var choices = JSON.parse(item.choices);
+            this._addSizeAndPriceToChoices(choices, item.size, item.price);
+            this.view.showOptionBox(choices);
+        } else {
+            this.cart.addItem(item);
+            this.showAll();
+        }
     };
 
     Controller.prototype.emptyCart = function() {
@@ -56,6 +62,17 @@
     Controller.prototype.decreaseQuantity = function(item_id) {
         this.cart.decreaseQuantity(parseInt(item_id));
         this.showAll();
+    };
+
+    Controller.prototype._isChoice = function(item) {
+        return item.choices !== undefined ? true:false;
+    };
+
+    Controller.prototype._addSizeAndPriceToChoices = function(choices, size, price) {
+        choices.forEach(function (choice) {
+            choice.size = size;
+            choice.price = price;
+        });
     };
 
     window.JustMenu = window.JustMenu || {};

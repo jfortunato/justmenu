@@ -12,6 +12,7 @@ abstract class MenuComponent extends Entity implements MenuComponentInterface
 
     protected $sizes = array();
     protected $special_time;
+    protected $menuComponentOptions = array();
 
     public function addSize(Size $size)
     {

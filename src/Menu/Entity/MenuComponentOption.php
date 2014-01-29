@@ -1,10 +1,10 @@
 <?php namespace JustMenu\Menu\Entity;
 
-class CategoryOption extends Entity
+class MenuComponentOption extends Entity
 {
     protected $id;
     protected $required;
 
-    protected $category = array();
+    protected $menu_component = array();
     protected $option = array();
 }

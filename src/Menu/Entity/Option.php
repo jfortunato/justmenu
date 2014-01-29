@@ -11,6 +11,6 @@ class Option extends Entity
     protected $info;
     protected $choice_mode;
 
-    protected $categoryOptions = array();
+    protected $menuComponentOptions = array();
     protected $values = array();
 }

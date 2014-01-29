@@ -7,7 +7,6 @@ class Category extends MenuComponent
     protected $indexed_order;
 
     protected $items = array();
-    protected $categoryOptions = array();
 
     public function addItem(Item $item)
     {

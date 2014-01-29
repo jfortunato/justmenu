@@ -1,6 +1,6 @@
-JustMenu\Menu\Entity\CategoryOption:
+JustMenu\Menu\Entity\MenuComponentOption:
     type: entity
-    table: category_options
+    table: menu_component_options
     id:
         id:
             type: integer
@@ -10,9 +10,9 @@ JustMenu\Menu\Entity\CategoryOption:
         required:
             type: boolean
     manyToOne:
-        category:
-            targetEntity: JustMenu\Menu\Entity\Category
-            inversedBy: categoryOptions
+        menu_component:
+            targetEntity: JustMenu\Menu\Entity\MenuComponent
+            inversedBy: menuComponentOptions
         option:
             targetEntity: JustMenu\Menu\Entity\Option
-            inversedBy: categoryOptions
+            inversedBy: menuComponentOptions

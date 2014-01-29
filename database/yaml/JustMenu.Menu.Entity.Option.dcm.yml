@@ -16,8 +16,8 @@ JustMenu\Menu\Entity\Option:
         choice_mode:
             type: smallint
     oneToMany:
-        categoryOptions:
-            targetEntity: JustMenu\Menu\Entity\CategoryOption
+        menuComponentOptions:
+            targetEntity: JustMenu\Menu\Entity\MenuComponentOption
             mappedBy: option
         values:
             targetEntity: JustMenu\Menu\Entity\OptionValue

@@ -8,6 +8,3 @@ JustMenu\Menu\Entity\Category:
         items:
             targetEntity: JustMenu\Menu\Entity\Item
             mappedBy: category
-        categoryOptions:
-            targetEntity: JustMenu\Menu\Entity\CategoryOption
-            mappedBy: category

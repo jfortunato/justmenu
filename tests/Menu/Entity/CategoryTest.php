@@ -60,4 +60,14 @@ class CategoryTest extends TestCase
         $this->category->render($mockPresenter);
     }
 
+    public function testCanGetJsonOptionIds()
+    {
+        $this->category->menuComponentOptions = array($mockMCO1 = m::mock('JustMenu\Menu\Entity\MenuComponentOption'), $mockMCO2 = m::mock('JustMenu\Menu\Entity\MenuComponentOption'));
+        $mockMCO1->option = m::mock('JustMenu\Menu\Entity\Option');
+        $mockMCO1->option->id = 1;
+        $mockMCO2->option = m::mock('JustMenu\Menu\Entity\Option');
+        $mockMCO2->option->id = 3;
+
+        $this->assertJsonStringEqualsJsonString('[1, 3]', $this->category->getJsonOptionIds());
+    }
 }

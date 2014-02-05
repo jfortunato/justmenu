@@ -24,6 +24,10 @@
         this.view.bind('decreaseQuantity', function (item) {
             this.decreaseQuantity(item);
         }.bind(this));
+
+        this.view.bind('finishedWithOptions', function (item) {
+            this.selectedItem(item);
+        }.bind(this));
     }
 
     Controller.prototype.showAll = function() {
@@ -35,7 +39,10 @@
         if (this._isChoice(item)) {
             var choices = JSON.parse(item.choices);
             this._addSizeAndPriceToChoices(choices, item.size, item.price);
-            this.view.showOptionBox(choices);
+            this.view.showChoiceBox(choices);
+        } else if (this._hasOptions(item)) {
+            var availableOptions = item.available_options;
+            this.view.showOptionBox(item, availableOptions);
         } else {
             this.cart.addItem(item);
             this.showAll();
@@ -73,6 +80,10 @@
             choice.size = size;
             choice.price = price;
         });
+    };
+
+    Controller.prototype._hasOptions = function(item) {
+        return item.available_options.length !== 0 ? true:false;
     };
 
     window.JustMenu = window.JustMenu || {};

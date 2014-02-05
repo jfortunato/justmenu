@@ -6,7 +6,7 @@
         =   '<li data-cart-id="{{id}}">'
         +       ' <button id="decrease-quantity" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>'
         +       ' <button id="increase-quantity" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button>'
-        +       ' {{quantity}} {{title}} ({{size}})'
+        +       ' {{quantity}} {{title}} ({{size}}) <ul data-options>{{selected_options}}</ul>'
         +       '<span class="pull-right">${{price}}</span>'
         +   '</li>';
 
@@ -28,6 +28,11 @@
             template = template.replace('{{title}}', items[i].title);
             template = template.replace('{{size}}', items[i].size);
             template = template.replace('{{price}}', items[i].price);
+            var selected_options = [];
+            items[i].selected_options.forEach(function (option) {
+                selected_options.push('<li>'+option+'</li>');
+            });
+            template = template.replace('{{selected_options}}', selected_options.join(''));
             template += i === items.length-1 ? '':'<hr>';
 
             view = view + template;

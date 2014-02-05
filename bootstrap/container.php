@@ -33,7 +33,7 @@ $container['view_finder'] = function ($c) {
 };
 
 $container['presenter'] = function ($c) {
-    return new Presenter($c['view_finder']);
+    return new Presenter($c['view_finder'], $c['manager']);
 };
 
 $container['menu_builder'] = function ($c) {

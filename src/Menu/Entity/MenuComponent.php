@@ -23,4 +23,15 @@ abstract class MenuComponent extends Entity implements MenuComponentInterface
     {
         return $this->special_time ? true:false;
     }
+
+    public function getJsonOptionIds()
+    {
+        $optionIds = array();
+
+        foreach ($this->menuComponentOptions as $menuComponentOption) {
+            $optionIds[] = $menuComponentOption->option->id;
+        }
+
+        return json_encode($optionIds);
+    }
 }

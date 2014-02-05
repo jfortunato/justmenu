@@ -57,6 +57,18 @@
                 var item_id = $closest(e.target, '[data-cart-id]').dataset.cartId;
                 handler(item_id);
             }.bind(this));
+        } else if (event === 'finishedWithOptions') {
+            $live('.modal-footer button', 'click', function (e) {
+                var selected = document.querySelectorAll('.modal input[type="radio"]:checked');
+                var selected_options = [];
+                selected.forEach(function (option) {
+                    selected_options.push(option.value);
+                });
+                var item = this.optionBox.getItem();
+                item.available_options = [];
+                item.selected_options = selected_options;
+                handler(item);
+            }.bind(this));
         }
     };
 
@@ -86,7 +98,9 @@
             quantity: 1,
             title: base.querySelector('[data-title]').dataset.title,
             size: selectedBtn.dataset.selectSize,
-            price: $closest(selectedBtn, '[data-price]').dataset.price
+            price: $closest(selectedBtn, '[data-price]').dataset.price,
+            available_options: this.getItemOptions(base),
+            selected_options: [],
         };
 
         if (isChoice) {
@@ -96,19 +110,55 @@
         return item;
     };
 
-    View.prototype.showOptionBox = function(options) {
-        var container;
-
-        if (document.querySelector('div#justmenu-option-container')) {
-            container = document.querySelector('div#justmenu-option-container');
-        } else {
-            container = document.createElement('div');
-            container.id = 'justmenu-option-container';
-            this.body.appendChild(container);
+    View.prototype.getItemOptions = function(item_base) {
+        var category_options_ids = $closest(item_base, '[data-category]');
+        // might be a choice which doesnt have a category
+        if (category_options_ids === undefined) {
+            return [];
         }
 
-        var optionBox = new JustMenu.OptionBox();
-        container.innerHTML = optionBox.showBox(options);
+        var option_ids = $closest(item_base, '[data-category]').querySelector('input[name="options"]').value;
+        option_ids = JSON.parse(option_ids);
+
+        var options = document.querySelector('[data-justmenu]>input[name="options"]').value;
+        options = JSON.parse(options);
+
+        var results = [];
+        option_ids.forEach(function (option_id) {
+            options.forEach(function (option) {
+                if (option.id === option_id) {
+                    results.push(option);
+                }
+            }.bind(this));
+        }.bind(this));
+
+        return results;
+    };
+
+    View.prototype.createModalContainerIfNotExists = function() {
+        this.optionBox = new JustMenu.OptionBox();
+
+        if (document.querySelector('div#justmenu-option-container')) {
+            this.container = document.querySelector('div#justmenu-option-container');
+        } else {
+            this.container = document.createElement('div');
+            this.container.id = 'justmenu-option-container';
+            this.body.appendChild(this.container);
+        }
+    };
+
+    View.prototype.showChoiceBox = function(options) {
+        this.createModalContainerIfNotExists();
+
+        this.container.innerHTML = this.optionBox.showBox(options);
+        jQuery('.modal').modal('show');
+    };
+
+    View.prototype.showOptionBox = function(item, availableOptions) {
+        this.createModalContainerIfNotExists();
+
+        this.optionBox.setItem(item);
+        this.container.innerHTML = this.optionBox.showOptionValues(availableOptions[0]);
         jQuery('.modal').modal('show');
     };
 

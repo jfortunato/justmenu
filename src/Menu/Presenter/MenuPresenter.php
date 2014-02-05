@@ -2,6 +2,7 @@
 
 use JustMenu\Menu\MenuComponentInterface;
 use JustMenu\View\ViewFinder;
+use JustMenu\Menu\ManagerInterface;
 
 abstract class MenuPresenter
 {
@@ -9,10 +10,13 @@ abstract class MenuPresenter
 
     protected $viewFinder;
 
-    public function __construct(ViewFinder $viewFinder, MenuComponentInterface $component = null)
+    protected $entityManager;
+
+    public function __construct(ViewFinder $viewFinder, ManagerInterface $entityManager, MenuComponentInterface $component = null)
     {
         $this->viewFinder = $viewFinder;
         $this->component = $component;
+        $this->entityManager = $entityManager;
     }
 
     public function render()

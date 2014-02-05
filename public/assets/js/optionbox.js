@@ -14,6 +14,7 @@
         +                   '{{view}}'
         +               '</div>'
         +               '<div class="modal-footer">'
+        +                   '<button type="button" class="btn btn-success" data-dismiss="modal">Done</button>'
         +               '</div>'
         +           '</div>'
         +       '</div>'
@@ -24,6 +25,11 @@
         +       '<div data-price="{{price}}">'
         +           '<p data-title="{{title}}">{{title}} <a href="#" class="btn btn-default" data-dismiss="modal" data-select-size="{{size}}">Select</a></p>';
         +       '</div>'
+        +   '</div>';
+
+        this.optionTemplate
+        =   '<div data-option-id="{{id}}">'
+            +       '<p data-title="{{title}}">{{title}} (+${{price}}) <input type="radio" name="radio" value="{{title}}" /></p>';
         +   '</div>';
     }
 
@@ -42,6 +48,32 @@
         }
 
         return this.box.replace('{{view}}', view);
+    };
+
+    OptionBox.prototype.showOptionValues = function(option) {
+        var view = '';
+
+        var values = option.values;
+
+        for (var i = 0, l = values.length; i < l; i ++) {
+            var template = this.optionTemplate;
+
+            template = template.replaceAll('{{id}}', values[i].id);
+            template = template.replaceAll('{{title}}', values[i].title);
+            template = template.replaceAll('{{price}}', values[i].default_price);
+
+            view = view + template;
+        }
+
+        return this.box.replace('{{view}}', view);
+    };
+
+    OptionBox.prototype.getItem = function() {
+        return this.item;
+    };
+
+    OptionBox.prototype.setItem = function(item) {
+        this.item = item;
     };
 
     window.JustMenu = window.JustMenu || {};

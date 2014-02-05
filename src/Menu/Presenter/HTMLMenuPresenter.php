@@ -9,9 +9,12 @@ class HTMLMenuPresenter extends MenuPresenter
 
     public function renderMenu()
     {
-        $categories = $this->renderChildren();
+        $data = array(
+            'options' => $this->entityManager->getOptionsAsJson(),
+            'categories' => $this->renderChildren(),
+        );
 
-        return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/menu.html', compact('categories'));
+        return $this->viewFinder->fetch(PROJECT_ROOT.'views/html/menu.html', $data);
     }
 
     public function renderCategory()
@@ -23,6 +26,7 @@ class HTMLMenuPresenter extends MenuPresenter
             'special_times' => $this->component->hasSpecialTime() ? TimeHelper::convertSpecialTimes($this->component->special_time):'',
             'info'          => $this->component->info,
             'sizes'         => $this->component->getAllShortSizes(),
+            'options'       => $this->component->getJsonOptionIds(),
             'items'         => $this->renderChildren(),
         );
 

@@ -18,6 +18,18 @@ class DoctrineManager implements ManagerInterface
          return $categoryRepository->findBy(array(), array('indexed_order' => 'ASC'));
     }
 
+    public function getOptionsAsJson()
+    {
+        $qp = $this->entityManager->createQueryBuilder();
+        $result = $qp->select(array('o', 'v'))
+            ->from('JustMenu\Menu\Entity\Option', 'o')
+            ->leftJoin('o.values', 'v')
+            ->getQuery()->getArrayResult();
+
+
+        return json_encode($result);
+    }
+
     /**
      * Gets the value of $entityManager
      *

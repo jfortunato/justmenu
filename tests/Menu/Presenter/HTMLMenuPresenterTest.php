@@ -12,7 +12,7 @@ class HTMLMenuPresenterTest extends TestCase
 
         $this->mockItem = m::mock('JustMenu\Menu\Entity\Item', array('hasChoice' => false, 'getAllPrices' => 'foo'));
 
-        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category', array('hasSpecialTime' => false, 'getAllShortSizes' => 'foo', 'getChildrenComponents' => array()));
+        $this->mockCategory = m::mock('JustMenu\Menu\Entity\Category', array('hasSpecialTime' => false, 'getAllShortSizes' => 'foo', 'getChildrenComponents' => array(), 'getJsonOptionIds' => '[]'));
 
         $this->mockMenu = m::mock('JustMenu\Menu\Menu', array('getChildrenComponents' => array()));
     }
@@ -51,6 +51,7 @@ class HTMLMenuPresenterTest extends TestCase
             'info' => null,
             'sizes' => 'foo',
             'items' => '',
+            'options' => '[]',
         );
 
         $this->presenter->getViewFinder()->shouldReceive('fetch')

@@ -59,13 +59,8 @@
             }.bind(this));
         } else if (event === 'finishedWithOptions') {
             $live('.modal-footer button', 'click', function (e) {
-                var selected = document.querySelectorAll('.modal input[type="radio"]:checked');
-                var selected_options = [];
-                selected.forEach(function (option) {
-                    selected_options.push(option.value);
-                });
+                var selected_options = this.getSelectedOptions();
                 var item = this.optionBox.getItem();
-                item.available_options = [];
                 item.selected_options = selected_options;
                 handler(item);
             }.bind(this));
@@ -133,6 +128,15 @@
         }.bind(this));
 
         return results;
+    };
+
+    View.prototype.getSelectedOptions = function() {
+        var selected_options = [];
+        [].map.call(document.querySelectorAll('.modal input:checked'), function (obj) {
+            selected_options.push(obj.value);
+        });
+
+        return selected_options;
     };
 
     View.prototype.createModalContainerIfNotExists = function() {

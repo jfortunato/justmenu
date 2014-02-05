@@ -27,9 +27,14 @@
         +       '</div>'
         +   '</div>';
 
-        this.optionTemplate
+        this.singleOptionTemplate
         =   '<div data-option-id="{{id}}">'
-            +       '<p data-title="{{title}}">{{title}} (+${{price}}) <input type="radio" name="radio" value="{{title}}" /></p>';
+        +       '<p data-title="{{title}}">{{title}} (+${{price}}) <input type="radio" name="radio" value="{{title}}" /></p>';
+        +   '</div>';
+
+        this.multipleOptionTemplate
+        =   '<div data-option-id="{{id}}">'
+        +       '<p data-title="{{title}}">{{title}} (+${{price}}) <input type="checkbox" name="checkbox" value="{{title}}" /></p>'
         +   '</div>';
     }
 
@@ -56,7 +61,7 @@
         var values = option.values;
 
         for (var i = 0, l = values.length; i < l; i ++) {
-            var template = this.optionTemplate;
+            var template = option.choice_mode === 0 ? this.singleOptionTemplate:this.multipleOptionTemplate;
 
             template = template.replaceAll('{{id}}', values[i].id);
             template = template.replaceAll('{{title}}', values[i].title);

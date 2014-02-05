@@ -26,7 +26,7 @@
         }.bind(this));
 
         this.view.bind('finishedWithOptions', function (item) {
-            this.selectedItem(item);
+            this.finishedWithOptions(item);
         }.bind(this));
     }
 
@@ -47,6 +47,11 @@
             this.cart.addItem(item);
             this.showAll();
         }
+    };
+
+    Controller.prototype.finishedWithOptions = function(item) {
+        this.cart.addItem(item);
+        this.showAll();
     };
 
     Controller.prototype.emptyCart = function() {

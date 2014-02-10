@@ -13,12 +13,21 @@ class SeedMenuComponentOptions extends AbstractFixture implements DependentFixtu
         $menuComponentOption->menu_component = $this->getReference('lo mein');
         $menuComponentOption->option = $this->getReference('rice');
         $menuComponentOption->required = false;
+        $menuComponentOption->size = 'any';
         $manager->persist($menuComponentOption);
 
         $menuComponentOption = new MenuComponentOption;
         $menuComponentOption->menu_component = $this->getReference('lo mein');
         $menuComponentOption->option = $this->getReference('vegetables');
         $menuComponentOption->required = false;
+        $menuComponentOption->size = 'any';
+        $manager->persist($menuComponentOption);
+
+        $menuComponentOption = new MenuComponentOption;
+        $menuComponentOption->menu_component = $this->getReference('veggie lo mein');
+        $menuComponentOption->option = $this->getReference('taste');
+        $menuComponentOption->required = true;
+        $menuComponentOption->size = 'quart';
         $manager->persist($menuComponentOption);
 
         // uncomment to run
@@ -27,6 +36,6 @@ class SeedMenuComponentOptions extends AbstractFixture implements DependentFixtu
 
     public function getDependencies()
     {
-        return array('SeedOptions', 'SeedCategories');
+        return array('SeedOptions', 'SeedCategories', 'SeedItems');
     }
 }

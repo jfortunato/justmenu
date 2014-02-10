@@ -103,9 +103,9 @@
             title: base.querySelector('[data-title]').dataset.title,
             size: selectedBtn.dataset.selectSize,
             price: $closest(selectedBtn, '[data-price]').dataset.price,
-            available_options: this.getItemOptions(base),
             selected_options: [],
         };
+        item.available_options = this.getItemOptions(base, item.size);
 
         if (isChoice) {
             item.choices = base.querySelector('input[name="choices"]').value ;
@@ -114,15 +114,21 @@
         return item;
     };
 
-    View.prototype.getItemOptions = function(item_base) {
-        var category_options_ids = $closest(item_base, '[data-category]');
+    View.prototype.getItemOptions = function(item_base, size) {
+        var item_options_ids = item_base.querySelector('input[name="item-options"]').value;
+        item_options_ids = JSON.parse(item_options_ids);
+
+        var category_base = $closest(item_base, '[data-category]');
         // might be a choice which doesnt have a category
-        if (category_options_ids === undefined) {
+        if (category_base === undefined) {
             return [];
         }
 
-        var option_ids = $closest(item_base, '[data-category]').querySelector('input[name="options"]').value;
-        option_ids = JSON.parse(option_ids);
+        var category_option_ids = $closest(item_base, '[data-category]').querySelector('input[name="category-options"]').value;
+        category_option_ids = JSON.parse(category_option_ids);
+
+        // now combine the item/category option ids
+        var option_ids = item_options_ids.concat(category_option_ids);
 
         var options = document.querySelector('[data-justmenu]>input[name="options"]').value;
         options = JSON.parse(options);
@@ -130,7 +136,7 @@
         var results = [];
         option_ids.forEach(function (option_id) {
             options.forEach(function (option) {
-                if (option.id === option_id.id) {
+                if (option.id === option_id.id && (option_id.size === size || option_id.size === 'any')) {
                     // push the required attribute to the option
                     option.required = option_id.required;
                     results.push(option);

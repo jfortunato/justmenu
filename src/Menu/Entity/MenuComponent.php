@@ -29,7 +29,7 @@ abstract class MenuComponent extends Entity implements MenuComponentInterface
         $optionIds = array();
 
         foreach ($this->menuComponentOptions as $menuComponentOption) {
-            $optionIds[] = array('id' => $menuComponentOption->option->id, 'required' => $menuComponentOption->required);
+            $optionIds[] = array('id' => $menuComponentOption->option->id, 'required' => $menuComponentOption->required, 'size' => $menuComponentOption->size);
         }
 
         return json_encode($optionIds);

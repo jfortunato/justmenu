@@ -29,12 +29,12 @@
 
         this.singleOptionTemplate
         =   '<div data-option-id="{{id}}">'
-        +       '<p data-title="{{title}}">{{title}} (+${{price}}) <input data-price="{{price}}" type="radio" name="radio" value="{{title}}" {{required}} /></p>';
+        +       '<p data-title="{{title}}">{{title}} (+${{price}}) <input data-price="{{price}}" type="radio" name="{{option}}" value="{{title}}" {{required}} /></p>';
         +   '</div>';
 
         this.multipleOptionTemplate
         =   '<div data-option-id="{{id}}">'
-        +       '<p data-title="{{title}}">{{title}} (+${{price}}) No <input data-price="0" type="checkbox" name="checkbox" value="no {{title}}" /> Add <input data-price="{{price}}" type="checkbox" name="checkbox" value="add {{title}}" /></p>'
+        +       '<p data-title="{{title}}">{{title}} (+${{price}}) No <input data-price="0" type="checkbox" name="{{option}}" value="no {{title}}" /> Add <input data-price="{{price}}" type="checkbox" name="{{option}}" value="add {{title}}" /></p>'
         +   '</div>';
     }
 
@@ -71,6 +71,7 @@
                 template = template.replaceAll('{{id}}', value.id);
                 template = template.replaceAll('{{title}}', value.title);
                 template = template.replaceAll('{{price}}', value.default_price);
+                template = template.replaceAll('{{option}}', option.title);
             }.bind(this));
             var required = option.required ? 'required':'';
             template = template.replaceAll('{{required}}', required);

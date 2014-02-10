@@ -43,8 +43,10 @@ class HTMLMenuPresenter extends MenuPresenter
             }
 
             $this->renderedChoiceIds[] = $component->id;
+            $options = '';
         } else {
             $component = $this->component;
+            $options = $component->getJsonOptionIds();
         }
 
         $data = array(
@@ -55,6 +57,7 @@ class HTMLMenuPresenter extends MenuPresenter
             'availability' => 'available',
             'prices'       => $component->getAllPrices(),
             'isChoice'     => $component === $this->component ? false:true,
+            'options'      => $options,
         );
 
         if ($data['isChoice']) {

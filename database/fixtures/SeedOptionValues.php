@@ -39,6 +39,18 @@ class SeedOptionValues extends AbstractFixture implements DependentFixtureInterf
         $value->default_price = 0.00;
         $manager->persist($value);
 
+        $value = new OptionValue;
+        $value->option = $this->getReference('taste');
+        $value->title = 'hot';
+        $value->default_price = 0.00;
+        $manager->persist($value);
+
+        $value = new OptionValue;
+        $value->option = $this->getReference('taste');
+        $value->title = 'mild';
+        $value->default_price = 0.00;
+        $manager->persist($value);
+
         // uncomment to run
         $manager->flush();
     }

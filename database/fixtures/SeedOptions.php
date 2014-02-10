@@ -24,6 +24,14 @@ class SeedOptions extends AbstractFixture
         $manager->persist($option);
         $this->addReference('vegetables', $option);
 
+        $option = new Option;
+        $option->title = 'Taste';
+        $option->description = '';
+        $option->info = '';
+        $option->choice_mode = 0;
+        $manager->persist($option);
+        $this->addReference('taste', $option);
+
         // uncomment to run
         $manager->flush();
     }

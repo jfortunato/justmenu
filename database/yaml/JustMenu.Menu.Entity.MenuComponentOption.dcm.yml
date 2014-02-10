@@ -9,6 +9,8 @@ JustMenu\Menu\Entity\MenuComponentOption:
     fields:
         required:
             type: boolean
+        size:
+            type: string
     manyToOne:
         menu_component:
             targetEntity: JustMenu\Menu\Entity\MenuComponent

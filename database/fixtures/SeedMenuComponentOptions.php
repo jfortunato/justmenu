@@ -15,6 +15,12 @@ class SeedMenuComponentOptions extends AbstractFixture implements DependentFixtu
         $menuComponentOption->required = false;
         $manager->persist($menuComponentOption);
 
+        $menuComponentOption = new MenuComponentOption;
+        $menuComponentOption->menu_component = $this->getReference('lo mein');
+        $menuComponentOption->option = $this->getReference('vegetables');
+        $menuComponentOption->required = false;
+        $manager->persist($menuComponentOption);
+
         // uncomment to run
         $manager->flush();
     }

@@ -30,7 +30,7 @@
             template = template.replace('{{price}}', items[i].price);
             var selected_options = [];
             items[i].selected_options.forEach(function (option) {
-                selected_options.push('<li>'+option+'</li>');
+                selected_options.push('<li>'+option.title+' <span class="pull-right">+$'+parseFloat(option.price).toFixed(2)+'</span></li>');
             });
             template = template.replace('{{selected_options}}', selected_options.join(''));
             template += i === items.length-1 ? '':'<hr>';

@@ -59,6 +59,10 @@
             }.bind(this));
         } else if (event === 'finishedWithOptions') {
             $live('.modal-footer button', 'click', function (e) {
+                if (!this.checkAllRequiredOptions()) {
+                    return;
+                }
+                jQuery('.modal').modal('hide');
                 var selected_options = this.getSelectedOptions();
                 var item = this.optionBox.getItem();
                 item.selected_options = selected_options;
@@ -73,6 +77,11 @@
         if (items && items.length >= 1) {
             items.forEach(function (item) {
                 subtotal += parseFloat(item.price);
+                // add any selected options
+                item.selected_options.forEach(function (option) {
+                    subtotal += parseFloat(option.price);
+                });
+                subtotal *= item.quantity;
             });
         }
 
@@ -121,7 +130,9 @@
         var results = [];
         option_ids.forEach(function (option_id) {
             options.forEach(function (option) {
-                if (option.id === option_id) {
+                if (option.id === option_id.id) {
+                    // push the required attribute to the option
+                    option.required = option_id.required;
                     results.push(option);
                 }
             }.bind(this));
@@ -133,10 +144,28 @@
     View.prototype.getSelectedOptions = function() {
         var selected_options = [];
         [].map.call(document.querySelectorAll('.modal input:checked'), function (obj) {
-            selected_options.push(obj.value);
+            selected_options.push({title:obj.value, price:obj.dataset.price});
         });
 
         return selected_options;
+    };
+
+    View.prototype.checkAllRequiredOptions = function() {
+        var valid = true;
+        var allRequiredInputs = document.querySelectorAll('.modal input[required]');
+        allRequiredInputs.forEach(function (input) {
+            if (valid && !input.validity.valid) {
+                valid = false;
+                // place an error message just before the option section
+                var errorMsg = document.createElement('p');
+                errorMsg.className = 'text-danger';
+                errorMsg.textContent = input.validationMessage;
+                var section = $closest(input, '[data-option-id]');
+                document.querySelector('.modal-body').insertBefore(errorMsg, section);
+            }
+        });
+
+        return valid;
     };
 
     View.prototype.createModalContainerIfNotExists = function() {
@@ -162,7 +191,7 @@
         this.createModalContainerIfNotExists();
 
         this.optionBox.setItem(item);
-        this.container.innerHTML = this.optionBox.showOptionValues(availableOptions[0]);
+        this.container.innerHTML = this.optionBox.showOptionValues(availableOptions);
         jQuery('.modal').modal('show');
     };
 

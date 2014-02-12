@@ -118,13 +118,9 @@
         var item_options_ids = item_base.querySelector('input[name="item-options"]').value;
         item_options_ids = JSON.parse(item_options_ids);
 
-        var category_base = $closest(item_base, '[data-category]');
         // might be a choice which doesnt have a category
-        if (category_base === undefined) {
-            return [];
-        }
-
-        var category_option_ids = $closest(item_base, '[data-category]').querySelector('input[name="category-options"]').value;
+        var category_base = $closest(item_base, '[data-category]');
+        var category_option_ids = category_base === undefined ? '[]':category_base.querySelector('input[name="category-options"]').value;
         category_option_ids = JSON.parse(category_option_ids);
 
         // now combine the item/category option ids
@@ -139,6 +135,7 @@
                 if (option.id === option_id.id && (option_id.size === size || option_id.size === 'any')) {
                     // push the required attribute to the option
                     option.required = option_id.required;
+                    option.size = size;
                     results.push(option);
                 }
             }.bind(this));

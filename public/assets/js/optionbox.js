@@ -23,13 +23,14 @@
         this.choiceTemplate
         =   '<div data-item="{{id}}">'
         +       '<div data-price="{{price}}">'
-        +           '<p data-title="{{title}}">{{title}} <a href="#" class="btn btn-default" data-dismiss="modal" data-select-size="{{size}}">Select</a></p>';
+        +           '<p data-title="{{title}}">{{title}} <a href="#" class="btn btn-default" data-dismiss="modal" data-select-size="{{size}}">Select</a></p>'
         +       '</div>'
+        +       '<input type="hidden" name="item-options" value="{{options}}" />'
         +   '</div>';
 
         this.singleOptionTemplate
         =   '<div data-option-id="{{id}}">'
-        +       '<p data-title="{{title}}">{{title}} (+${{price}}) <input data-price="{{price}}" type="radio" name="{{option}}" value="{{title}}" {{required}} /></p>';
+        +       '<p data-title="{{title}}">{{title}} (+${{price}}) <input data-price="{{price}}" type="radio" name="{{option}}" value="{{title}}" {{required}} /></p>'
         +   '</div>';
 
         this.multipleOptionTemplate
@@ -39,7 +40,7 @@
     }
 
     OptionBox.prototype.showBox = function(options) {
-        var view = '';
+        var view = this.view;
 
         for (var i = 0, l = options.length; i < l; i ++) {
             var template = this.choiceTemplate;
@@ -48,11 +49,18 @@
             template = template.replaceAll('{{price}}', options[i].price);
             template = template.replaceAll('{{title}}', options[i].title);
             template = template.replaceAll('{{size}}', options[i].size);
+            var availableOptionIds = [];
+            options[i].available_options.forEach(function (option) {
+                availableOptionIds.push({id:option.id, required:option.required, size: option.size});
+            });
+            availableOptionIds = this.escapeHtml(JSON.stringify(availableOptionIds));
+            template = template.replaceAll('{{options}}', availableOptionIds);
 
             view = view + template;
         }
 
-        this.box = this.box.replace('{{heading}}', 'Choose One');
+        view = view.replace('{{heading}}', 'Choose One');
+        view = view.replace('{{template}}', '');
 
         return this.box.replace('{{view}}', view);
     };
@@ -87,6 +95,15 @@
 
     OptionBox.prototype.setItem = function(item) {
         this.item = item;
+    };
+
+    OptionBox.prototype.escapeHtml = function(text) {
+        return text
+            .replaceAll(/&/g, "&amp;")
+            .replaceAll(/</g, "&lt;")
+            .replaceAll(/>/g, "&gt;")
+            .replaceAll(/"/g, "&quot;")
+            .replaceAll(/'/g, "&#039;");
     };
 
     window.JustMenu = window.JustMenu || {};

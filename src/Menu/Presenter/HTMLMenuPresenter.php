@@ -43,7 +43,7 @@ class HTMLMenuPresenter extends MenuPresenter
             }
 
             $this->renderedChoiceIds[] = $component->id;
-            $options = '';
+            $options = '[]';
         } else {
             $component = $this->component;
             $options = $component->getJsonOptionIds();

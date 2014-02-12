@@ -38,7 +38,7 @@
     Controller.prototype.selectedItem = function(item) {
         if (this._isChoice(item)) {
             var choices = JSON.parse(item.choices);
-            this._addSizeAndPriceToChoices(choices, item.size, item.price);
+            this._addPropertiesToChoices(choices, item);
             this.view.showChoiceBox(choices);
         } else if (this._hasOptions(item)) {
             var availableOptions = item.available_options;
@@ -80,10 +80,11 @@
         return item.choices !== undefined ? true:false;
     };
 
-    Controller.prototype._addSizeAndPriceToChoices = function(choices, size, price) {
+    Controller.prototype._addPropertiesToChoices = function(choices, origChoice) {
         choices.forEach(function (choice) {
-            choice.size = size;
-            choice.price = price;
+            choice.size = origChoice.size;
+            choice.price = origChoice.price;
+            choice.available_options = origChoice.available_options;
         });
     };
 

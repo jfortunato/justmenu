@@ -2,3 +2,6 @@
 db.sqlite
 tags
 public/assets/lib/
+.sass-cache
+node_modules
+public/assets/compiled/

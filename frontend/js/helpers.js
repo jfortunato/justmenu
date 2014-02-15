@@ -53,7 +53,7 @@
         }
 
         return this.split(search).join(replace);
-    }
+    };
 
     Element.prototype.matches = Element.prototype.matches || 
         Element.prototype.matchesSelector       ||

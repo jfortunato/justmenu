@@ -45,11 +45,7 @@
             template = template.replaceAll('{{price}}', options[i].price);
             template = template.replaceAll('{{title}}', options[i].title);
             template = template.replaceAll('{{size}}', options[i].size);
-            var availableOptionIds = [];
-            options[i].available_options.forEach(function (option) {
-                availableOptionIds.push({id:option.id, required:option.required, size: option.size});
-            });
-            availableOptionIds = this.escapeHtml(JSON.stringify(availableOptionIds));
+            var availableOptionIds = this.getAvailableOptionIds(options[i].available_options);
             template = template.replaceAll('{{options}}', availableOptionIds);
 
             view = view + template;
@@ -59,6 +55,16 @@
         view = view.replace('{{template}}', '');
 
         return this.box.replace('{{view}}', view);
+    };
+
+    OptionBox.prototype.getAvailableOptionIds = function(availableOptions) {
+        var availableOptionIds = [];
+
+        availableOptions.forEach(function (option) {
+            availableOptionIds.push({id:option.id, required:option.required, size: option.size});
+        });
+
+        return this.escapeHtml(JSON.stringify(availableOptionIds));
     };
 
     OptionBox.prototype.showOptionValues = function(options) {

@@ -26,6 +26,9 @@ module.exports = function(grunt) {
 		}
 	},
 	jshint: {
+        options: {
+            laxbreak: true,
+        },
 		beforeconcat: ['frontend/js/**/*.js'],
 	},
 	watch: {

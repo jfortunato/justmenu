@@ -28,17 +28,22 @@
             template = template.replace('{{title}}', items[i].title);
             template = template.replace('{{size}}', items[i].size);
             template = template.replace('{{price}}', items[i].price);
-            var selected_options = [];
-            items[i].selected_options.forEach(function (option) {
-                selected_options.push('<li>'+option.title+' <span>+$'+parseFloat(option.price).toFixed(2)+'</span></li>');
-            });
-            template = template.replace('{{selected_options}}', selected_options.join(''));
+            template = template.replace('{{selected_options}}', this.renderSelectedOptions(items[i].selected_options));
             template += i === items.length-1 ? '':'<hr>';
 
             view = view + template;
         }
 
         return view || '<li>Nothing in cart.</li>';
+    };
+
+    Template.prototype.renderSelectedOptions = function(selectedOptions) {
+        var selected_options = [];
+        selectedOptions.forEach(function (option) {
+            selected_options.push('<li>'+option.title+' <span>+$'+parseFloat(option.price).toFixed(2)+'</span></li>');
+        });
+
+        return selected_options.join('');
     };
 
     Template.prototype.showUndoEmpty = function() {

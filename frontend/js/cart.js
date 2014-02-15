@@ -3,7 +3,7 @@
 
     function Cart(storage) {
         this.storage = storage;
-    };
+    }
 
     Cart.prototype.read = function() {
         return this.storage.findAll();

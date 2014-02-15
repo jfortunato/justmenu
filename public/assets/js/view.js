@@ -62,7 +62,8 @@
                 if (!this.checkAllRequiredOptions()) {
                     return;
                 }
-                jQuery('.modal').modal('hide');
+                var modal = this.container.firstChild;
+                modal.style.cssText = 'display: none; opacity: 0;';
                 var selected_options = this.getSelectedOptions();
                 var item = this.optionBox.getItem();
                 item.selected_options = selected_options;
@@ -187,7 +188,8 @@
         this.createModalContainerIfNotExists();
 
         this.container.innerHTML = this.optionBox.showBox(options);
-        jQuery('.modal').modal('show');
+        var modal = this.container.firstChild;
+        modal.style.cssText = 'display: block; opacity: 1;';
     };
 
     View.prototype.showOptionBox = function(item, availableOptions) {
@@ -195,7 +197,8 @@
 
         this.optionBox.setItem(item);
         this.container.innerHTML = this.optionBox.showOptionValues(availableOptions);
-        jQuery('.modal').modal('show');
+        var modal = this.container.firstChild;
+        modal.style.cssText = 'display: block; opacity: 1;';
     };
 
     window.JustMenu = window.JustMenu || {};

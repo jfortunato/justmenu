@@ -4,16 +4,16 @@
     function Template() {
         this.contentsTemplate
         =   '<li data-cart-id="{{id}}">'
-        +       ' <button id="decrease-quantity" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>'
-        +       ' <button id="increase-quantity" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button>'
+        +       ' <button id="decrease-quantity" type="button"><span></span></button>'
+        +       ' <button id="increase-quantity" type="button"><span></span></button>'
         +       ' {{quantity}} {{title}} ({{size}}) <ul data-options>{{selected_options}}</ul>'
-        +       '<span class="pull-right">${{price}}</span>'
+        +       '<span>${{price}}</span>'
         +   '</li>';
 
 
         this.undoEmptyTemplate
-        =   '<div class="alert alert-info">'
-        +       '<p><span class="glyphicon glyphicon-exclamation-sign"></span> You just emptied your cart. Would you like to <span id="undo-empty-cart" class="btn btn-primary">undo?</span></p>'
+        =   '<div>'
+        +       '<p><span></span> You just emptied your cart. Would you like to <span id="undo-empty-cart">undo?</span></p>'
         +   '</div>';
     }
 
@@ -30,7 +30,7 @@
             template = template.replace('{{price}}', items[i].price);
             var selected_options = [];
             items[i].selected_options.forEach(function (option) {
-                selected_options.push('<li>'+option.title+' <span class="pull-right">+$'+parseFloat(option.price).toFixed(2)+'</span></li>');
+                selected_options.push('<li>'+option.title+' <span>+$'+parseFloat(option.price).toFixed(2)+'</span></li>');
             });
             template = template.replace('{{selected_options}}', selected_options.join(''));
             template += i === items.length-1 ? '':'<hr>';

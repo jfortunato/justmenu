@@ -3,16 +3,12 @@
 
     function OptionBox() {
         this.box
-        =   '<div class="modal fade" data-show="true">'
-        +       '<div class="modal-dialog">'
-        +           '<div class="modal-content">'
-        +               '<div class="modal-body">'
-        +                   '{{view}}'
-        +               '</div>'
-        +               '<div class="modal-footer">'
-        +                   '<button type="button" class="btn btn-success">Done</button>'
-        +               '</div>'
-        +           '</div>'
+        =   '<div class="modal">'
+        +       '<div class="modal-body">'
+        +           '{{view}}'
+        +       '</div>'
+        +       '<div class="modal-footer">'
+        +           '<button type="button">Done</button>'
         +       '</div>'
         +   '</div>';
 
@@ -23,7 +19,7 @@
         this.choiceTemplate
         =   '<div data-item="{{id}}">'
         +       '<div data-price="{{price}}">'
-        +           '<p data-title="{{title}}">{{title}} <a href="#" class="btn btn-default" data-dismiss="modal" data-select-size="{{size}}">Select</a></p>'
+        +           '<p data-title="{{title}}">{{title}} <a href="#" data-select-size="{{size}}">Select</a></p>'
         +       '</div>'
         +       '<input type="hidden" name="item-options" value="{{options}}" />'
         +   '</div>';

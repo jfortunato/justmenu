@@ -19,7 +19,7 @@
         this.choiceTemplate
         =   '<div data-item="{{id}}">'
         +       '<div data-price="{{price}}">'
-        +           '<p data-title="{{title}}">{{title}} <a href="#" data-select-size="{{size}}">Select</a></p>'
+        +           '<p data-title="{{title}}">{{title}} <button type="button" class="jm-btn" data-select-size="{{size}}">Select</button></p>'
         +       '</div>'
         +       '<input type="hidden" name="item-options" value="{{options}}" />'
         +   '</div>';

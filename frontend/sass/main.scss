@@ -1,0 +1,71 @@
+@import
+    "vendor/fontello",
+    "partials/base";
+
+#justmenu-container {
+
+    div[data-justmenu-cart] {
+        background: $main;
+        border: 1px solid $accent;
+        padding: 10px;
+        h2 {
+            line-height: 50px;
+        }
+        ul {
+            list-style-type: none;
+            li {
+                overflow: hidden;
+            }
+        }
+        span {
+            float: right;
+        }
+    }
+
+    div[data-category] {
+        background: $main;
+        border: 1px solid $accent;
+        overflow: hidden;
+        margin: 20px 0;
+        .category-heading {
+            text-align: center;
+        }
+        .category-body {
+            table {
+                width: 100%;
+                th, td {
+                    text-align: right;
+                }
+                tr td:first-child {
+                    text-align: left;
+                }
+            }
+        }
+    }
+
+}
+
+#justmenu-option-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1020;
+    .modal {
+        background: #fff;
+        padding: 20px;
+        margin: 40px;
+    }
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    opacity: .5;
+    z-index: 1010;
+}

@@ -62,8 +62,9 @@
                 if (!this.checkAllRequiredOptions()) {
                     return;
                 }
-                var modal = this.container.firstChild;
-                modal.style.cssText = 'display: none; opacity: 0;';
+                //var modal = this.container.firstChild;
+                //modal.style.cssText = 'display: none; opacity: 0;';
+                this.hideModal();
                 var selected_options = this.getSelectedOptions();
                 var item = this.optionBox.getItem();
                 item.selected_options = selected_options;
@@ -181,6 +182,10 @@
             this.container = document.createElement('div');
             this.container.id = 'justmenu-option-container';
             this.body.appendChild(this.container);
+            // also append overlay
+            var overlay = document.createElement('div');
+            overlay.id = 'overlay';
+            this.body.appendChild(overlay);
         }
     };
 
@@ -188,8 +193,7 @@
         this.createModalContainerIfNotExists();
 
         this.container.innerHTML = this.optionBox.showBox(options);
-        var modal = this.container.firstChild;
-        modal.style.cssText = 'display: block; opacity: 1;';
+        this.showModal();
     };
 
     View.prototype.showOptionBox = function(item, availableOptions) {
@@ -197,8 +201,21 @@
 
         this.optionBox.setItem(item);
         this.container.innerHTML = this.optionBox.showOptionValues(availableOptions);
-        var modal = this.container.firstChild;
+        this.showModal();
+    };
+
+    View.prototype.showModal = function() {
+        var modal = document.querySelector('#justmenu-option-container');
+        var overlay = document.querySelector('#overlay');
         modal.style.cssText = 'display: block; opacity: 1;';
+        overlay.style.display = 'block';
+    };
+
+    View.prototype.hideModal = function() {
+        var modal = document.querySelector('#justmenu-option-container');
+        var overlay = document.querySelector('#overlay');
+        modal.style.cssText = 'display: none; opacity: 0;';
+        overlay.style.display = 'none';
     };
 
     window.JustMenu = window.JustMenu || {};

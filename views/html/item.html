@@ -7,7 +7,7 @@
     <?php foreach($prices as $size => $price): ?>
     <td data-price="<?= $price; ?>">
         <p><?= $price; ?></p>
-        <p><a href="#" data-select-size="<?= $size; ?>">Select</a></p>
+        <p><button type="button" class="jm-btn" data-select-size="<?= $size; ?>">Select</button></p>
     </td>
     <?php endforeach; ?>
 

@@ -4,8 +4,8 @@
     function Template() {
         this.contentsTemplate
         =   '<li data-cart-id="{{id}}">'
-        +       ' <button id="decrease-quantity" type="button"><span></span></button>'
-        +       ' <button id="increase-quantity" type="button"><span></span></button>'
+        +       ' <button id="decrease-quantity" class="icon-down-open" type="button"><span></span></button>'
+        +       ' <button id="increase-quantity" class="icon-up-open" type="button"><span></span></button>'
         +       ' {{quantity}} {{title}} ({{size}}) <ul data-options>{{selected_options}}</ul>'
         +       '<span>${{price}}</span>'
         +   '</li>';

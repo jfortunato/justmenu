@@ -28,6 +28,10 @@
         this.view.bind('finishedWithOptions', function (item) {
             this.finishedWithOptions(item);
         }.bind(this));
+
+        this.view.bind('closeModal', function () {
+            this.view.hideModal();
+        }.bind(this));
     }
 
     Controller.prototype.showAll = function() {

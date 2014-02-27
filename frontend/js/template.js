@@ -13,7 +13,7 @@
 
         this.undoEmptyTemplate
         =   '<div>'
-        +       '<p><span></span> You just emptied your cart. Would you like to <span id="undo-empty-cart">undo?</span></p>'
+        +       '<p><span></span> You just emptied your cart. Would you like to <button type="button" id="undo-empty-cart" class="jm-btn">undo?</button></p>'
         +   '</div>';
     }
 

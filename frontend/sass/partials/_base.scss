@@ -2,11 +2,16 @@ $main: #f8f8f8;
 $accent: darken($main, 5%);
 $white: #fff;
 
+body.show-modal {
+    overflow: hidden;
+}
+
 [class^="icon"] {
     font-size: 30px;
     background: $accent;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .jm-btn {
@@ -14,6 +19,7 @@ $white: #fff;
     padding: 10px;
     border: 1px solid $accent;
     border-radius: 4px;
+    cursor: pointer;
     &:hover {
         background: $accent;
         border-color: darken($accent, 10%);

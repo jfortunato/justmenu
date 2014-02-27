@@ -4,6 +4,9 @@
     function OptionBox() {
         this.box
         =   '<div class="modal">'
+        +       '<div class="modal-heading">'
+        +           '<span id="close-modal">&times;</span>'
+        +       '</div>'
         +       '<div class="modal-body">'
         +           '{{view}}'
         +       '</div>'

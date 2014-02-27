@@ -62,13 +62,15 @@
                 if (!this.checkAllRequiredOptions()) {
                     return;
                 }
-                //var modal = this.container.firstChild;
-                //modal.style.cssText = 'display: none; opacity: 0;';
                 this.hideModal();
                 var selected_options = this.getSelectedOptions();
                 var item = this.optionBox.getItem();
                 item.selected_options = selected_options;
                 handler(item);
+            }.bind(this));
+        } else if (event === 'closeModal') {
+            $live('#close-modal', 'click', function (e) {
+                handler();
             }.bind(this));
         }
     };
@@ -78,12 +80,13 @@
 
         if (items && items.length >= 1) {
             items.forEach(function (item) {
-                subtotal += parseFloat(item.price);
+                var price = parseFloat(item.price);
                 // add any selected options
                 item.selected_options.forEach(function (option) {
-                    subtotal += parseFloat(option.price);
+                    price += parseFloat(option.price);
                 });
-                subtotal *= item.quantity;
+                price *= item.quantity;
+                subtotal += price;
             });
         }
 
@@ -209,6 +212,8 @@
         var overlay = document.querySelector('#overlay');
         modal.style.cssText = 'display: block; opacity: 1;';
         overlay.style.display = 'block';
+        var body = document.querySelector('body');
+        body.classList.add('show-modal');
     };
 
     View.prototype.hideModal = function() {
@@ -216,6 +221,8 @@
         var overlay = document.querySelector('#overlay');
         modal.style.cssText = 'display: none; opacity: 0;';
         overlay.style.display = 'none';
+        var body = document.querySelector('body');
+        body.classList.remove('show-modal');
     };
 
     window.JustMenu = window.JustMenu || {};

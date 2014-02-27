@@ -7,9 +7,12 @@
     div[data-justmenu-cart] {
         background: $main;
         border: 1px solid $accent;
-        padding: 10px;
+        &>div {
+            padding: 10px;
+        }
         h2 {
             line-height: 50px;
+            text-align: center;
         }
         ul {
             list-style-type: none;
@@ -20,6 +23,13 @@
         span {
             float: right;
         }
+        #empty-cart {
+            float: right;
+        }
+        .cart-footer {
+            background-color: darken($accent, 20%);
+            overflow: hidden;
+        }
     }
 
     div[data-category] {
@@ -29,6 +39,8 @@
         margin: 20px 0;
         .category-heading {
             text-align: center;
+            background-color: darken($accent, 20%);
+            overflow: hidden;
         }
         .category-body {
             table {
@@ -39,6 +51,9 @@
                 tr td:first-child {
                     text-align: left;
                 }
+                thead, tr:nth-child(even) {
+                    background-color: $accent;
+                }
             }
         }
     }
@@ -46,16 +61,23 @@
 }
 
 #justmenu-option-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     z-index: 1020;
+    overflow: auto;
+    overflow-y: scroll;
     .modal {
+        #close-modal {
+            float: right;
+            cursor: pointer;
+        }
         background: #fff;
         padding: 20px;
         margin: 40px;
+        position: relative;
     }
 }
 

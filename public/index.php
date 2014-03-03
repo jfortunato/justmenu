@@ -22,12 +22,8 @@ $view = $view . $cart->render();
     </head>
     <body>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12" id="justmenu-container">
-                    <?= $view; ?>
-                </div>
-            </div>
+        <div id="justmenu-container">
+            <?= $view; ?>
         </div>
 
         <script src="assets/compiled/justmenu.min.js" type="text/javascript" charset="utf-8"></script>

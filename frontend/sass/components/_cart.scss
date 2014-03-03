@@ -3,6 +3,9 @@ div[data-justmenu-cart] {
     border: 1px solid $lighter;
     float: left;
     width: 30%;
+    @media (max-width: $break-large) {
+        display: none;
+    }
     &>div {
         padding: 10px;
     }

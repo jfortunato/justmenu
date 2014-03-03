@@ -46,6 +46,132 @@ class SeedCategories extends AbstractFixture
         $manager->persist($category);
 
         $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
         $category->title = 'Last';
         $category->description = 'soft noodle';
         $category->info = 'Comes with a soda.';

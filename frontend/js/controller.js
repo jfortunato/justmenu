@@ -36,6 +36,10 @@
         this.view.bind('toggleCategory', function (category_id) {
             this.view.toggleCategory(category_id);
         }.bind(this));
+
+        this.view.bind('slideOut', function () {
+            this.view.toggleSlide();
+        }.bind(this));
     }
 
     Controller.prototype.showAll = function() {

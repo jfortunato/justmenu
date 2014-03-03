@@ -1,0 +1,39 @@
+div[data-justmenu-cart] {
+    background: $white;
+    border: 1px solid $lighter;
+    float: left;
+    width: 30%;
+    &>div {
+        padding: 10px;
+    }
+    h2 {
+        line-height: 50px;
+        text-align: center;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        li {
+            overflow: hidden;
+        }
+    }
+    span {
+        float: right;
+    }
+    #empty-cart {
+        float: right;
+    }
+    .quantity {
+        font-size: 34px;
+        float: none;
+    }
+    .cart-heading {
+        overflow: hidden;
+        background-color: $lighter;
+    }
+    .cart-footer {
+        background-color: $main;
+        overflow: hidden;
+        color: $lighter;
+    }
+}

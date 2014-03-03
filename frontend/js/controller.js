@@ -32,6 +32,10 @@
         this.view.bind('closeModal', function () {
             this.view.hideModal();
         }.bind(this));
+
+        this.view.bind('toggleCategory', function (category_id) {
+            this.view.toggleCategory(category_id);
+        }.bind(this));
     }
 
     Controller.prototype.showAll = function() {

@@ -1,0 +1,22 @@
+[class^="icon"] {
+    font-size: 20px;
+    border: 1px solid $lighter;
+    cursor: pointer;
+    background-color: $subtle;
+    &:hover {
+        background: $lighter;
+    }
+}
+
+.jm-btn {
+    background: $white;
+    padding: 10px;
+    border: 1px solid $lighter;
+    @include border-radius(4px);
+    cursor: pointer;
+    &:hover {
+        background: $accent;
+        border-color: $main;
+        color: $lighter;
+    }
+}

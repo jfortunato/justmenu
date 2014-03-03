@@ -8,7 +8,7 @@ $menu = $builder->build();
 $view = $menu->render();
 
 $cart = $container['cart'];
-$view = $cart->render() . $view;
+$view = $view . $cart->render();
 
 ?>
 <!DOCTYPE html>

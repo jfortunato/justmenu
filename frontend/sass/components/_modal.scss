@@ -1,0 +1,30 @@
+#justmenu-option-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1020;
+    overflow: auto;
+    overflow-y: scroll;
+    .modal {
+        #close-modal {
+            float: right;
+            cursor: pointer;
+        }
+        background: $white;
+        padding: 20px;
+        margin: 40px;
+        position: relative;
+    }
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 1010;
+}

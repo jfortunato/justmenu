@@ -1,0 +1,14 @@
+body.show-modal {
+    overflow: hidden;
+}
+#justmenu-container {
+    * {
+        box-sizing: border-box;
+    }
+}
+[data-justmenu] {
+    position: relative;
+    width: 70%;
+    float: left;
+    background: $subtle;
+}

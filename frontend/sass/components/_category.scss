@@ -1,0 +1,66 @@
+#justmenu-container {
+    div[data-category] {
+        border-top: 1px solid $accent;
+        border-bottom: 1px solid $darkAccent;
+        margin: 0px 0;
+        width: 200px;
+        .category-heading {
+            text-align: center;
+            background-color: $main;
+            border-right: 20px solid $accent;
+            cursor: pointer;
+            color: $lighter;
+            position: relative;
+            &.active {
+                background-color: $accent;
+            }
+            h3 {
+                margin-top: 0px;
+                margin-bottom: 0px;
+                line-height: 40px;
+                font-size: 17px;
+            }
+        }
+        .category-body {
+            opacity: 0;
+            position: absolute;
+            left: 200px;
+            top: 300px;
+            color: $main;
+            margin: 0 10px;
+            background-color: $white;
+            border: 1px solid $lighter;
+            @include transition(all, 0.5s, ease);
+            &.active {
+                opacity: 1;
+                top: 0;
+            }
+            h3, h4 {
+                background-color: $main;
+                margin: 0;
+                text-align: center;
+                color: $lighter;
+                padding: 10px 0;
+            }
+            table {
+                width: 100%;
+                thead {
+                    line-height: 40px;
+                    background-color: $accent;
+                    color: $lighter;
+                }
+                th, td {
+                    text-align: right;
+                    padding: 0 10px;
+                }
+                tr td:first-child {
+                    text-align: left;
+                }
+                tr:nth-child(even) {
+                    background-color: $accent;
+                    background-color: $subtle;
+                }
+            }
+        }
+    }
+}

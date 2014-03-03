@@ -15,6 +15,7 @@
         this.$total = $('[data-total]');
         this.$emptyCart = $('#empty-cart');
         this.$undoEmptyCart = $('#undo-empty-cart');
+        this.$categories = $$('[data-justmenu] .category-heading');
     }
 
     View.prototype.render = function(command, parameter) {
@@ -71,6 +72,13 @@
         } else if (event === 'closeModal') {
             $live('#close-modal', 'click', function (e) {
                 handler();
+            }.bind(this));
+        } else if (event === 'toggleCategory') {
+            this.$categories.forEach(function (category) {
+                category.addEventListener('click', function (e) {
+                    var category_id = $closest(e.target, '[data-category]').dataset.category;
+                    handler(category_id);
+                }.bind(this));
             }.bind(this));
         }
     };
@@ -223,6 +231,38 @@
         overlay.style.display = 'none';
         var body = document.querySelector('body');
         body.classList.remove('show-modal');
+    };
+
+    View.prototype.toggleCategory = function(category_id) {
+        var category = document.querySelector('[data-category="'+category_id+'"]');
+        var categoryHead = category.querySelector('.category-heading');
+        var categoryBody = category.querySelector('.category-body');
+
+        // turn off any showing categories
+        this.$categories.forEach(function (category) {
+            var categoryHeadPrev = category.parentNode.querySelector('.category-heading');
+            var categoryBodyPrev = category.parentNode.querySelector('.category-body');
+            if (categoryBodyPrev !== categoryBody) {
+                categoryHeadPrev.classList.remove('active');
+                categoryBodyPrev.classList.remove('active');
+            }
+        });
+
+        // set the width
+        var menuWidth = document.querySelector('[data-justmenu]').offsetWidth;
+        var categoryWidth = category.offsetWidth;
+        var bodyStyle = window.getComputedStyle(categoryBody);
+        var marginTotal = parseInt(bodyStyle.marginLeft) + parseInt(bodyStyle.marginRight);
+        categoryBody.style.width = menuWidth - categoryWidth - marginTotal + 'px';
+
+        // toggle the current category
+        if (!categoryBody.classList.contains('active')) {
+            categoryHead.classList.add('active');
+            categoryBody.classList.add('active');
+        } else {
+            categoryHead.classList.remove('active');
+            categoryBody.classList.remove('active');
+        }
     };
 
     window.JustMenu = window.JustMenu || {};

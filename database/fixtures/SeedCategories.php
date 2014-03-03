@@ -24,6 +24,34 @@ class SeedCategories extends AbstractFixture
         $manager->persist($category);
         $this->addReference('lo mein', $category);
 
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 2;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 3;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Lo Mein';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 4;
+        $manager->persist($category);
+
+        $category = new Category;
+        $category->title = 'Last';
+        $category->description = 'soft noodle';
+        $category->info = 'Comes with a soda.';
+        $category->indexed_order = 5;
+        $manager->persist($category);
+
         // uncomment to run
         $manager->flush();
     }

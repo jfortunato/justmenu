@@ -1,13 +1,14 @@
 <div data-category="<?= $id; ?>">
     <div class="category-heading">
-        <h3 data-title="<?= $title; ?>"><?= $title; ?> <span data-description="<?= $description; ?>">(<?= $description; ?>)</span></h3>
-        <h4 data-info="<?= $info; ?>"><?= $info; ?></h4>
+        <h3 data-title="<?= $title; ?>"><?= $title; ?></h3>
         <?php if(!empty($special_times)): ?>
         <p data-special-times="true"><?= $special_times; ?></p>
         <?php endif ?>
     </div>
     <div class="category-body">
-        <table>
+        <h3 data-title="<?= $title; ?>"><?= $title; ?> <span data-description="<?= $description; ?>">(<?= $description; ?>)</span></h3>
+        <h4 data-info="<?= $info; ?>"><?= $info; ?></h4>
+        <table cellspacing="0">
             <thead>
                 <tr>
                     <th></th>

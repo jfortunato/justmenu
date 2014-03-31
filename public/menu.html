@@ -1,0 +1,42 @@
+<div data-justmenu="justmenu">
+    <div id="menu-bar"><button type="button" class="icon-menu"></button></div>
+    <div data-category="{{ category.id }}" ng-repeat="category in categories">
+        <div class="category-heading" ng-class="{ 'active': $index == selectedIndex }" ng-click="toggleCategory($index)">
+            <h3 data-title="{{ category.title }}">{{ category.title }}</h3>
+            <?php if(!empty($special_times)): ?>
+            <p data-special-times="true"><?= $special_times; ?></p>
+            <?php endif ?>
+        </div>
+        <div class="category-body" ng-class="{ 'active': $index == selectedIndex }" ng-click="toggleCategory($index)">
+            <h3 data-title="{{ category.title }}">{{ category.title }} <span data-description="{{ category.description }}">({{ category.description }})</span></h3>
+            <h4 data-info="{{ category.info }}">{{ category.info }}</h4>
+            <table cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th ng-repeat="size in sizes" data-size="{{ size.size }}">{{ size.size }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in category.items" data-item="{{ item.id }}" data-availability="{{ item.availability }}">
+                        <td>
+                            <strong data-title="{{ item.title }}">{{ item.title }}</strong>
+                            <p data-description="{{ item.description }}">{{ item.description }}</p>
+                            <p data-info="{{ item.info }}">{{ item.info }}</p>
+                        </td>
+                        <td ng-repeat="size in item.sizes" data-price="{{ size.price }}">
+                            <p>{{ size.price }}</p>
+                            <p><button type="button" class="jm-btn" data-select-size="{{ size.size }}">Select</button></p>
+                        </td>
+
+                        <input ng-if="item.isChoice" type="hidden" name="choices" value="<?= htmlspecialchars(''); ?>" /> <!-- $choices -->
+
+                        <input type="hidden" name="item-options" value="<?= htmlspecialchars($options); ?>" />
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <input type="hidden" name="category-options" value="<?= htmlspecialchars($options); ?>" />
+    </div>
+    <input type="hidden" name="options" value="<?= htmlspecialchars($options); ?>" />
+</div>

@@ -3,16 +3,11 @@
 // bootstrap the application
 require_once '../bootstrap/bootstrap.php';
 
-$builder = $container['menu_builder'];
-$menu = $builder->build();
-$view = $menu->render();
-
 $cart = $container['cart'];
-$view = $view . $cart->render();
 
 ?>
 <!DOCTYPE html>
-<html>
+<html ng-app="justmenuApp">
     <head>
         <title>JustMenu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,10 +17,16 @@ $view = $view . $cart->render();
     </head>
     <body>
 
-        <div id="justmenu-container">
-            <?= $view; ?>
+        <div id="justmenu-container" ng-controller="JustMenuController">
+            <div ng-view></div>
+            <?= $cart->render() ?>
         </div>
 
-        <script src="assets/compiled/justmenu.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+        <script src="assets/angular/angular-route.min.js"></script>
+        <script src="assets/angular/app.js"></script>
+        <script src="assets/angular/controllers.js"></script>
+        <!--<script src="assets/angular/services.js"></script>-->
+        <!--<script src="assets/compiled/justmenu.min.js" type="text/javascript" charset="utf-8"></script>-->
     </body>
 </html>

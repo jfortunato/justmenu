@@ -26,7 +26,7 @@
                         </td>
                         <td ng-repeat="size in item.sizes" data-price="{{ size.price }}">
                             <p>{{ size.price }}</p>
-                            <p><button type="button" class="jm-btn" data-select-size="{{ size.size }}">Select</button></p>
+                            <p><button type="button" class="jm-btn" data-select-size="{{ size.size }}" ng-click="selectedItem(item, size)">Select</button></p>
                         </td>
 
                         <input ng-if="item.isChoice" type="hidden" name="choices" value="<?= htmlspecialchars(''); ?>" /> <!-- $choices -->
@@ -39,4 +39,32 @@
         <input type="hidden" name="category-options" value="<?= htmlspecialchars($options); ?>" />
     </div>
     <input type="hidden" name="options" value="<?= htmlspecialchars($options); ?>" />
+</div>
+
+<div data-justmenu-cart>
+    <div class="cart-heading">
+        <button ng-click="emptyCart()" id="empty-cart" class="icon-trash" type="button"></button>
+    </div>
+    <div class="cart-body">
+        <ul id="cart-contents">
+            <li ng-show="!cart.length && !lastItems.length">Nothing in cart.</li>
+            <li ng-repeat="item in cart">
+                <button type="button" ng-click="decreaseQuantity(item.id)" class="icon-down-open"><span></span></button>
+                <button type="button" ng-click="increaseQuantity(item.id)" class="icon-up-open"><span></span></button>
+                <span class="quantity">{{ item.quantity }}</span> {{ item.title }} ({{ item.size }}) <ul data-options><li ng-repeat="option in item.selected_options">{{ option.title }} <span>${{ option.price }}</span></li></ul>
+                <span>${{ item.price }}</span>
+            </li>
+            <div ng-show="lastItems.length">
+                <p><span></span> You just emptied your cart. Would you like to <button type="button" ng-click="undoEmptyCart()" id="undo-empty-cart" class="jm-btn">undo?</button></p>
+            </div>
+        </ul>
+    </div>
+    <div class="cart-footer">
+        <ul id="cart-totals">
+            <li>Sub-Total <span data-subtotal>$15.00</span></li>
+            <li>Tax <span data-tax>$0.00</span></li>
+            <hr>
+            <li>Total <span data-total>$15.00</span></li>
+        </ul>
+    </div>
 </div>

@@ -4,7 +4,7 @@ justmenuApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/order-online', {
-        templateUrl: 'menu.html',
+        templateUrl: 'assets/angular/views/menu.html',
         controller: 'JustMenuController'
       }).
       otherwise({

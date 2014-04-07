@@ -6,3 +6,7 @@ justmenuServices.factory('Menu', ['$resource',
                 query: {method: 'GET', isArray: false}
             });
         }]);
+
+justmenuServices.factory('Storage', [function () {
+    return new JustMenu.Storage('test-cart');
+}]);

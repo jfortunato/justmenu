@@ -14,19 +14,19 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th ng-repeat="size in sizes" data-size="{{ size.size }}">{{ size.size }}</th>
+                        <th ng-repeat="size in sizes">{{ size.size }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in category.items" data-item="{{ item.id }}" data-availability="{{ item.availability }}">
+                    <tr ng-repeat="item in category.items" data-availability="{{ item.availability }}">
                         <td>
-                            <strong data-title="{{ item.title }}">{{ item.title }}</strong>
-                            <p data-description="{{ item.description }}">{{ item.description }}</p>
-                            <p data-info="{{ item.info }}">{{ item.info }}</p>
+                            <strong>{{ item.title }}</strong>
+                            <p>{{ item.description }}</p>
+                            <p>{{ item.info }}</p>
                         </td>
-                        <td ng-repeat="size in item.sizes" data-price="{{ size.price }}">
+                        <td ng-repeat="size in item.sizes">
                             <p>{{ size.price }}</p>
-                            <p><button type="button" class="jm-btn" data-select-size="{{ size.size }}" ng-click="selectedItem(item, size)">Select</button></p>
+                            <p><button type="button" class="jm-btn" ng-click="selectedItem(item, size)">Select</button></p>
                         </td>
 
                         <input ng-if="item.isChoice" type="hidden" name="choices" value="<?= htmlspecialchars(''); ?>" /> <!-- $choices -->
@@ -67,4 +67,24 @@
             <li>Total <span data-total>$15.00</span></li>
         </ul>
     </div>
+</div>
+
+<div ng-show="showModal">
+    <div id="justmenu-option-container">
+        <div class="modal">
+            <div class="modal-heading">
+                <span id="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>Choose One</h3>
+                <div ng-repeat="item in choices">
+                    <p>{{ item.title }} <button type="button" class="jm-btn" ng-click="selectedItem(item, item.chosenSize)">Select</button></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button">Done</button>
+            </div>
+        </div>
+    </div>
+    <div id="overlay"></div>
 </div>

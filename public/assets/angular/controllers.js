@@ -36,6 +36,9 @@ justmenuControllers.controller('JustMenuController', ['$scope', 'Menu', 'Storage
                         items.push(item);
                     }
                 } else {
+                    // add any category options to the item
+                    item.menu_component_options = item.menu_component_options.concat(category.menu_component_options);
+
                     items.push(item);
                 }
             });
@@ -77,6 +80,22 @@ justmenuControllers.controller('JustMenuController', ['$scope', 'Menu', 'Storage
             });
             return;
         }
+
+        // check if the item has options available and not already selected
+        if (item.menu_component_options.length && !item.selected_options) {
+            $scope.showModal = true;
+
+            $scope.item = item;
+            $scope.size = size;
+            $scope.options = [];
+            item.menu_component_options.forEach(function (option) {
+                if (option.size = size.size || option.size === 'any') {
+                    $scope.options.push(option);
+                }
+            });
+
+            return; 
+        }
         $scope.showModal = false;
 
         var newItem = {
@@ -85,11 +104,21 @@ justmenuControllers.controller('JustMenuController', ['$scope', 'Menu', 'Storage
             title: item.title,
             size: size.size,
             price: size.price,
-            selected_options: [],
+            selected_options: item.selected_options || [],
         };
 
         Storage.save(newItem);
         $scope.cart = Storage.findAll();
+    }
+
+    $scope.finishedWithOptions = function (item, size) {
+        var selected_options = [];
+        [].map.call(document.querySelectorAll('.modal input:checked'), function (obj) {
+            selected_options.push({title:obj.value, price:obj.dataset.price});
+        });
+
+        item.selected_options = selected_options;
+        $scope.selectedItem(item, size);
     }
 
     $scope.increaseQuantity = function (id) {

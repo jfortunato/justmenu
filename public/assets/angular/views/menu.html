@@ -51,7 +51,7 @@
             <li ng-repeat="item in cart">
                 <button type="button" ng-click="decreaseQuantity(item.id)" class="icon-down-open"><span></span></button>
                 <button type="button" ng-click="increaseQuantity(item.id)" class="icon-up-open"><span></span></button>
-                <span class="quantity">{{ item.quantity }}</span> {{ item.title }} ({{ item.size }}) <ul data-options><li ng-repeat="option in item.selected_options">{{ option.title }} <span>${{ option.price }}</span></li></ul>
+                <span class="quantity">{{ item.quantity }}</span> {{ item.title }} ({{ item.size }}) <ul data-options><li ng-repeat="option in item.selected_options">{{ option.title }} <span>+{{ option.price | currency }}</span></li></ul>
                 <span>${{ item.price }}</span>
             </li>
             <div ng-show="lastItems.length">
@@ -80,9 +80,26 @@
                 <div ng-repeat="item in choices">
                     <p>{{ item.title }} <button type="button" class="jm-btn" ng-click="selectedItem(item, item.chosenSize)">Select</button></p>
                 </div>
+
+                <div ng-repeat="option in options">
+                    <h3>{{ option.option.title }}</h3>
+                    <p ng-if="option.option.choice_mode === 0" ng-repeat="value in option.option.values">
+                        {{ value.title }} (+${{ value.default_price }})
+
+                        <input type="radio" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="{{ value.title }}" {{ option.required ? 'required':'' }} />
+                    </p>
+                    <p ng-if="option.option.choice_mode === 1" ng-repeat="value in option.option.values">
+                        {{ value.title }} (+${{ value.default_price }})
+
+                        No <input type="checkbox" data-price="0" name="{{ option.option.title }}" value="no {{ value.title }}" />
+                        Add <input type="checkbox" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="add {{ value.title }}" />
+                    </p>
+                </div>
+
+
             </div>
             <div class="modal-footer">
-                <button type="button">Done</button>
+                <button type="button" ng-click="finishedWithOptions(item, size)">Done</button>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <div id="menu-bar"><button class="icon-menu"></button></div>
     <div class="category" ng-class="{ 'active': $index === selectedIndex }" ng-repeat="category in menu.categories">
         <div class="category-heading" ng-click="toggleCategory($index)">
-            <h3>{{ category.title }}</h3>
+            <h3 jm-editable>{{ category.title }}</h3>
         </div>
         <div class="category-body">
             <h3>{{ category.title }} <span>({{ category.description }})</span></h3>
@@ -23,15 +23,10 @@
                         </td>
                         <td ng-repeat="size in item.sizes">
                             <p>{{ size.price }}</p>
-                            <p><button type="button" class="jm-btn" item="item" size="size" jm-select-item>Select</button></p>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-
-<div ng-controller="CartController">
-    <jm-cart></jm-cart>
 </div>

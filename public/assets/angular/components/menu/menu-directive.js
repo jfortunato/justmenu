@@ -1,12 +1,5 @@
 angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
 
-.directive('jmMenu', [function () {
-    return {
-        restrict: 'E',
-        templateUrl: '/assets/angular/components/menu/menu.html',
-    };
-}])
-
 .directive('jmSelectItem', ['Cart', '$rootScope', function (Cart, $rootScope) {
     return {
         restrict: 'A',

@@ -5,11 +5,11 @@ angular.module('justmenu.modal.directives', [])
         restrict: 'E',
         transclude: true,
         templateUrl: '/assets/angular/components/modal/modal.html',
-        controller: function ($scope) {
-            $scope.showModal = function () {
-                $scope.modalShowing = true;
-            };
-
+        scope: {
+            modalShowing: '=show',
+            positiveAction: '&'
+        },
+        link: function ($scope) {
             $scope.hideModal = function () {
                 $scope.modalShowing = false;
             };

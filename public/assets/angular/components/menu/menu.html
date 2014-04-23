@@ -11,7 +11,7 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th ng-repeat="size in sizes">{{ size.size }}</th>
+                        <th ng-repeat="size in category.sizes">{{ size.size_short }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +23,7 @@
                         </td>
                         <td ng-repeat="size in item.sizes">
                             <p>{{ size.price }}</p>
-                            <p><button type="button" class="jm-btn" ng-click="selectedItem(item, size)">Select</button></p>
+                            <p><button type="button" class="jm-btn" item="item" size="size" jm-select-item>Select</button></p>
                         </td>
                     </tr>
                 </tbody>

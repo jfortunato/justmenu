@@ -1,0 +1,7 @@
+# we get errors/long execution without this, I am
+# assuming it has something it has to do with recursion
+# in the JMS Serializer
+JustMenu\Menu\Entity\MenuComponentOption:
+    properties:
+        menu_component:
+            exclude: true

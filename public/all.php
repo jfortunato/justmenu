@@ -10,6 +10,7 @@ $menu = $builder->getMenu();
 //echo '<pre>'; var_dump($menu); echo '</pre>'; die();
 
 $serializer = JMS\Serializer\SerializerBuilder::create()
+    ->addMetadataDir(PROJECT_ROOT . '/database/yaml/serializer')
     ->addDefaultHandlers()
     ->configureHandlers(function(JMS\Serializer\Handler\HandlerRegistry $registry) {
         $registry->registerSubscribingHandler(new JustMenu\Handler\ItemSizeHandler());

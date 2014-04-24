@@ -1,0 +1,17 @@
+<div ng-show="modalShowing" class="modal-container">
+    <div class="modal-wrap">
+        <div class="modal">
+            <div class="modal-heading">
+                <span id="hide-modal" ng-click="hideModal()">&times;</span>
+                <h3>{{ heading || 'JustMenu' }}</h3>
+            </div>
+            <div class="modal-body" ng-transclude>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="positiveAction()">Positive</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+</div>

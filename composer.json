@@ -15,7 +15,8 @@
         "symfony/yaml": "2.*",
         "pimple/pimple": "*",
         "fzaninotto/faker": "*",
-        "nesbot/carbon": "*"
+        "nesbot/carbon": "*",
+        "jms/serializer": "*"
     },
 	"autoload": {
 		"classmap": [

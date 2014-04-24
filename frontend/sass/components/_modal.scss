@@ -1,4 +1,4 @@
-#justmenu-option-container {
+.modal-wrap {
     position: fixed;
     top: 0;
     right: 0;
@@ -8,7 +8,7 @@
     overflow: auto;
     overflow-y: scroll;
     .modal {
-        #close-modal {
+        #hide-modal {
             float: right;
             cursor: pointer;
         }

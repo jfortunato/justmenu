@@ -2,3 +2,4 @@ vendor/
 db.sqlite
 node_modules
 public/assets/compiled/
+.vagrant/

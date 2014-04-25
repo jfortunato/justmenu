@@ -1,7 +1,6 @@
 angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.modal', 'justmenu.cart', 'justmenu.admin'])
 
 .controller('MainController', function () {
-    
 })
 
 .config(['$routeProvider', function ($routeProvider) {
@@ -14,4 +13,10 @@ angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.modal', 'justm
         controller: 'AdminController'
     })
     .otherwise({redirectTo: '/order-online'});
-}]);
+}])
+
+.filter('parens', function () {
+    return function (input) {
+        return input ? '(' + input + ')' : '';
+    };
+});

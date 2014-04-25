@@ -5,13 +5,13 @@
             <h3 jm-editable>{{ category.title }}</h3>
         </div>
         <div class="category-body">
-            <h3>{{ category.title }} <span>({{ category.description }})</span></h3>
+            <h3>{{ category.title }} <span>{{ category.description | parens }}</span></h3>
             <h4>{{ category.info }}</h4>
             <table cellspacing="0">
                 <thead>
                     <tr>
                         <th></th>
-                        <th ng-repeat="size in category.sizes">{{ size.size_short }}</th>
+                        <th ng-repeat="size in category.sizes">{{ size.size }}</th>
                     </tr>
                 </thead>
                 <tbody>

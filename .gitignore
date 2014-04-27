@@ -3,3 +3,4 @@ db.sqlite
 node_modules
 public/assets/compiled/
 .vagrant/
+tiny-lr.pid

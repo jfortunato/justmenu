@@ -2,41 +2,61 @@ SHELL := /bin/bash
 
 NODE_BIN=node_modules/.bin
 
+COMPILED_DIR=public/assets/compiled
+
 SASS=$(NODE_BIN)/node-sass
 SASSFLAGS=--output-style compressed --source-comments map
 SASS_DIR=frontend/sass
+SASS_FILES=$(shell find $(SASS_DIR) -name '*.scss')
+SASS_COMPILED=$(COMPILED_DIR)/justmenu.min.css
+SASS_MAIN=$(SASS_DIR)/main.scss
 
 UGLIFYJS=$(NODE_BIN)/uglifyjs
 UGLIFYJSFLAGS=
+JS_DIR=public/assets/angular
+JS_FILES=$(shell find $(JS_DIR) -name '*.js')
+JS_COMPILED=$(COMPILED_DIR)/justmenu.min.js
 
 JSHINT=$(NODE_BIN)/jshint
-JSHINTFLAGS=
+JSHINTFLAGS=--exclude public/assets/angular/**/*.min.js
 
-COMPILED_DIR=public/assets/compiled
 
-all: sass uglifyjs reload
+.PHONY: all
+all: sass uglifyjs
 
-sass: $(SASS_DIR)/main.scss
-	$(SASS) $(SASSFLAGS) $? $(COMPILED_DIR)/justmenu.min.css
+# alias
+.PHONY: sass
+sass: $(SASS_COMPILED)
 
-js_files=$(shell find public/assets/angular -name '*.js')
-uglifyjs: $(js_files)
-	$(UGLIFYJS) $(UGLIFYJSFLAGS) $? > public/assets/compiled/justmenu.min.js
+$(SASS_COMPILED): $(SASS_FILES)
+	$(SASS) $(SASSFLAGS) $(SASS_MAIN) $@
+	:
+# alias
+.PHONY: uglifyjs
+uglifyjs: $(JS_COMPILED)
 
-jshint: $(js_files)
+$(JS_COMPILED): $(JS_FILES)
+	$(UGLIFYJS) $(UGLIFYJSFLAGS) $(JS_FILES) > $@
+
+.PHONY: jshint
+jshint: $(JS_DIR)
 	$(JSHINT) $(JSHINTFLAGS) $?
 
 # include the livereload targets
 include node_modules/tiny-lr/tasks/*.mk
 
-$(COMPILED_DIR): $(shell find $(SASS_DIR) -name '*.scss') $(js_files)
+$(COMPILED_DIR): $(SASS_COMPILED) $(JS_COMPILED)
 	@echo CSS files changed: $?
 	@touch $@
 	curl -X POST http://localhost:35729/changed -d '{ "files": "$?" }'
 
+.PHONY: reload
 reload: livereload $(COMPILED_DIR)
 
-watch: all
-	watch -n 0.5 make
+.PHONY: watch
+watch:
+	while true; do make -s reload; sleep 0.5; done 
 
-.PHONY: reload sass uglifyjs jshint watch
+.PHONY: clean
+clean:
+	rm -rf $(SASS_COMPILED) $(JS_COMPILED)

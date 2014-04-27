@@ -11,7 +11,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
             // TODO this obviously needs to be refactored
 
             var item = scope.item;
-            var size = scope.size
+            var size = scope.size;
 
             function process() {
                 if (item.choice) {
@@ -22,7 +22,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
                     $rootScope.modalShowing = false;
                     addItem();
                 }
-            };
+            }
 
             function showChoices() {
                 $rootScope.modalShowing = true;
@@ -40,7 +40,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
                 $rootScope.choices.forEach(function (choice) {
                     choice.chosenSize = size;
                 });
-            };
+            }
 
             function showOptions() {
                 $rootScope.modalShowing = true;
@@ -49,7 +49,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
                 $rootScope.size = size;
                 $rootScope.options = [];
                 item.menu_component_options.forEach(function (option) {
-                    if (option.size = size.size || option.size === 'any') {
+                    if (option.size === size.size || option.size === 'any') {
                         $rootScope.options.push(option);
                     }
                 });
@@ -76,7 +76,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
 
                     Cart.addItem(newItem);
                 };
-            };
+            }
 
             function addItem() {
                 var newItem = {
@@ -90,7 +90,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
 
                 Cart.addItem(newItem);
 
-            };
+            }
 
             element.bind('click', function () {
                 process();

@@ -57,7 +57,7 @@ angular.module('justmenu.cart.services', ['LocalStorageModule'])
 
             return total;
         },
-    }
+    };
 
     return service;
 }]);

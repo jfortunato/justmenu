@@ -8,10 +8,28 @@ README will be updated accordingly.
 #### Developer First
 
 > **S.O.L.I.D.**  
-  **Test Driven Development**
+> **Test Driven Development**
 
 This project is meant to be a **distributed** system for individual developers to quickly create
 online ordering systems for small business restaurants. There is no central "HUB" where all the orders are processed. Instead, any developer (freelancer and corporation alike) can use this project and get started creating a website for local restaurants. **All the control belongs to the developer.**
+
+#### Quickstart Demo
+> **requirements**  
+>
+> * Vagrant [download](http://www.vagrantup.com/downloads.html)
+> * Virtualbox [download](http://www.virtualbox.org/wiki/Downloads)
+
+1. Clone down this repo
+2. From the project root change into the _vagrant_ directory
+
+        cd vagrant
+
+3. Start vagrant
+
+        vagrant up
+
+4. After vagrant has completed, browse to **localhost:8080** in your web browser of choice to
+   view the project.
 
 #### Some of the goals/features of this project
 

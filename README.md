@@ -20,6 +20,10 @@ well for quite some time. JustMenu aims to improve both user and developer exper
 This project is meant to be a **distributed** system for individual developers to quickly create
 online ordering systems for small business restaurants. There is no central "HUB" where all the orders are processed. Instead, any developer (freelancer and corporation alike) can use this project and get started creating a website for local restaurants. **All the control belongs to the developer.**
 
+#### DEMO
+
+Somewhat working [demo available here](http://jfortunato.github.io/JustMenu). This is by no means a finished product.
+
 #### Quickstart
 > **requirements**  
 >

@@ -6,4 +6,8 @@ angular.module('justmenu.menu.controllers', [])
     $scope.toggleCategory = function ($index) {
         $scope.selectedIndex = $index;
     };
+
+    $scope.toggleSlide = function () {
+        $scope.slide = !$scope.slide;
+    };
 }]);

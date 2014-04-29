@@ -1,5 +1,5 @@
-<div data-justmenu="justmenu">
-    <div id="menu-bar"><button class="icon-menu"></button></div>
+<div data-justmenu="justmenu" ng-class="{ 'slide': slide }">
+    <div id="menu-bar"><button class="icon-menu" ng-click="toggleSlide()"></button></div>
     <div class="category" ng-class="{ 'active': $index === selectedIndex }" ng-repeat="category in menu.categories">
         <div class="category-heading" ng-click="toggleCategory($index)">
             <h3>{{ category.title }}</h3>

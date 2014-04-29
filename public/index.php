@@ -19,28 +19,28 @@ $cart = $container['cart'];
             <div ng-controller="MainController">
                 <div ng-view></div>
 
-                <jm-modal show="modalShowing" positive-action="modalPositiveAction()">
+                <!--<jm-modal show="modalShowing" positive-action="modalPositiveAction()">-->
 
-                    <div ng-repeat="item in choices">
-                        <p>{{ item.title }} <button type="button" class="jm-btn" item="item" size="item.chosenSize" jm-select-item>Select</button></p>
-                    </div>
+                    <!--<div ng-repeat="item in choices">-->
+                        <!--<p>{{ item.title }} <button type="button" class="jm-btn" item="item" size="item.chosenSize" jm-select-item>Select</button></p>-->
+                    <!--</div>-->
 
-                    <div ng-repeat="option in options">
-                        <h3>{{ option.option.title }}</h3>
-                        <p ng-if="option.option.choice_mode === 0" ng-repeat="value in option.option.values">
-                            {{ value.title }} (+${{ value.default_price }})
+                    <!--<div ng-repeat="option in options">-->
+                        <!--<h3>{{ option.option.title }}</h3>-->
+                        <!--<p ng-if="option.option.choice_mode === 0" ng-repeat="value in option.option.values">-->
+                            <!--{{ value.title }} (+${{ value.default_price }})-->
 
-                            <input type="radio" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="{{ value.title }}" {{ option.required ? 'required':'' }} />
-                        </p>
-                        <p ng-if="option.option.choice_mode === 1" ng-repeat="value in option.option.values">
-                            {{ value.title }} (+${{ value.default_price }})
+                            <!--<input type="radio" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="{{ value.title }}" {{ option.required ? 'required':'' }} />-->
+                        <!--</p>-->
+                        <!--<p ng-if="option.option.choice_mode === 1" ng-repeat="value in option.option.values">-->
+                            <!--{{ value.title }} (+${{ value.default_price }})-->
 
-                            No <input type="checkbox" data-price="0" name="{{ option.option.title }}" value="no {{ value.title }}" />
-                            Add <input type="checkbox" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="add {{ value.title }}" />
-                        </p>
-                    </div>
+                            <!--No <input type="checkbox" data-price="0" name="{{ option.option.title }}" value="no {{ value.title }}" />-->
+                            <!--Add <input type="checkbox" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="add {{ value.title }}" />-->
+                        <!--</p>-->
+                    <!--</div>-->
 
-                </jm-modal>
+                <!--</jm-modal>-->
             </div>
 
         </div>

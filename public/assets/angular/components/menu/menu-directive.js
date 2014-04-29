@@ -1,6 +1,6 @@
 angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
 
-.directive('jmSelectItem', ['Cart', '$rootScope', function (Cart, $rootScope) {
+.directive('jmSelectItem', ['Cart', '$rootScope', '$modal', function (Cart, $rootScope, $modal) {
     return {
         restrict: 'A',
         scope: {
@@ -8,74 +8,75 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
             size: '=',
         },
         link: function (scope, element, attrs) {
-            // TODO this obviously needs to be refactored
-
             var item = scope.item;
             var size = scope.size;
 
             function process() {
-                if (item.choice) {
+                if (item.items) {
                     showChoices();
-                } else if (item.menu_component_options) {
+                } else if (item.menu_component_options.length) {
                     showOptions();
                 } else {
-                    $rootScope.modalShowing = false;
                     addItem();
                 }
             }
 
             function showChoices() {
-                $rootScope.modalShowing = true;
+                $modal.open({
+                    templateUrl: 'template/modal/choices.html',
+                    resolve: {
+                        choices: function () {
+                            return item.items;
+                        },
+                        size: function () {
+                            return size;
+                        },
+                    },
+                    controller: function ($scope, $modalInstance, choices, size) {
+                        $scope.choices = choices;
+                        $scope.size = size;
 
-                var count = 0;
-                for (var prop in item.choice) {
-                    if (!isNaN(prop)) {
-                        count++;
-                    }
-                }
-                item.choice.length = count;
-                // convert to array
-                $rootScope.choices = [].slice.call(item.choice);
-                // add in the currently selected size to choices
-                $rootScope.choices.forEach(function (choice) {
-                    choice.chosenSize = size;
+                        $scope.selected = function () {
+                            $modalInstance.close();
+                        };
+                    },
                 });
+
             }
 
             function showOptions() {
-                $rootScope.modalShowing = true;
+                $modal.open({
+                    templateUrl: 'template/modal/options.html',
+                    resolve: {
+                        options: function () {
+                            var options = [];
 
-                $rootScope.item = item;
-                $rootScope.size = size;
-                $rootScope.options = [];
-                item.menu_component_options.forEach(function (option) {
-                    if (option.size === size.size || option.size === 'any') {
-                        $rootScope.options.push(option);
-                    }
+                            item.menu_component_options.forEach(function (option) {
+                                if (option.size === size.size || option.size === 'any') {
+                                    options.push(option);
+                                }
+                            });
+
+                            return options;
+                        }
+                    },
+                    controller: function ($scope, $modalInstance, options) {
+                        $scope.options = options;
+
+                        $scope.selected = function () {
+                            var selected_options = [];
+                            [].map.call(document.querySelectorAll('.modal input:checked'), function (obj) {
+                                selected_options.push({title:obj.value, price:obj.dataset.price});
+                            });
+
+                            item.selected_options = selected_options;
+                            addItem();
+
+                            $modalInstance.close();
+                        };
+
+                    },
                 });
-
-                $rootScope.modalPositiveAction = function () {
-                    var selected_options = [];
-                    [].map.call(document.querySelectorAll('.modal input:checked'), function (obj) {
-                        selected_options.push({title:obj.value, price:obj.dataset.price});
-                    });
-
-                    $rootScope.item.selected_options = selected_options;
-
-                    $rootScope.modalShowing = false;
-
-                    var item = $rootScope.item;
-                    var newItem = {
-                        item_id: item.id,
-                        quantity: 1,
-                        title: item.title,
-                        size: size.size,
-                        price: size.price,
-                        selected_options: item.selected_options || [],
-                    };
-
-                    Cart.addItem(newItem);
-                };
             }
 
             function addItem() {

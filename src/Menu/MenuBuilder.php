@@ -95,4 +95,26 @@ class MenuBuilder
     {
         return $this->menu;
     }
+
+    public function combineChoiceItems()
+    {
+        $combined_ids = array();
+
+        foreach ($this->menu->getCategories() as $category) {
+            for ($i = 0; $i < $category->items->count(); $i++) {
+                if ($category->items[$i]->hasChoice()) {
+                    // avoid duplicates...when serialized the choice will contain all items
+                    if (in_array($category->items[$i]->choice->id, $combined_ids)) {
+                        unset($category->items[$i]);
+                        continue;
+                    }
+                    $combined_ids[] = $category->items[$i]->choice->id;
+                    $choice = $category->items[$i]->choice;
+                    $choice->setSizes();
+                    $category->items[$i] = $choice;
+                }
+            }
+            $category->items = $category->items->getValues();
+        }
+    }
 }

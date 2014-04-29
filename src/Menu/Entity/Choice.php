@@ -9,6 +9,8 @@ class Choice extends Entity
 
     protected $items = array();
 
+    protected $sizes;
+
     public function getAllPrices()
     {
         return $this->items[0]->getAllPrices();
@@ -23,5 +25,15 @@ class Choice extends Entity
         }
 
         return '[' . implode(',', $json) . ']';
+    }
+
+    public function getSizes()
+    {
+        return $this->items[0]->getSizes();
+    }
+
+    public function setSizes()
+    {
+        $this->sizes = $this->getSizes();
     }
 }

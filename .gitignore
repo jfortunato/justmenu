@@ -1,0 +1,5 @@
+database/
+node_modules/
+public/
+vagrant/
+vendor/

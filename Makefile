@@ -13,12 +13,12 @@ SASS_MAIN=$(SASS_DIR)/main.scss
 
 UGLIFYJS=$(NODE_BIN)/uglifyjs
 UGLIFYJSFLAGS=
-JS_DIR=public/assets/angular
+JS_DIR=frontend/angular
 JS_FILES=$(shell find $(JS_DIR) -name '*.js')
 JS_COMPILED=$(COMPILED_DIR)/justmenu.min.js
 
 JSHINT=$(NODE_BIN)/jshint
-JSHINTFLAGS=--exclude public/assets/angular/**/*.min.js
+JSHINTFLAGS=--exclude $(JS_DIR)/**/*.min.js
 
 
 .PHONY: all

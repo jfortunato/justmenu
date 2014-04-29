@@ -5,11 +5,11 @@ angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.modal', 'justm
 
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/order-online', {
-        templateUrl: 'assets/angular/components/menu/view.html',
+        templateUrl: 'template/menu/view.html',
         controller: 'MenuController'
     })
     .when('/admin', {
-        templateUrl: 'assets/angular/components/admin/view.html',
+        templateUrl: 'template/admin/view.html',
         controller: 'AdminController'
     })
     .otherwise({redirectTo: '/order-online'});

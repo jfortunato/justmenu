@@ -14,6 +14,11 @@ class devtools {
         require => Package['nodejs'],
     }
 
+    file { '/vagrant/public/assets/compiled':
+      ensure => 'directory',
+      before => Exec['make'],
+    }
+
     exec { 'make':
       command => "make",
       cwd     => "/vagrant",

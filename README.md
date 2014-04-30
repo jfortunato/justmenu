@@ -22,7 +22,7 @@ online ordering systems for small business restaurants. There is no central "HUB
 
 #### DEMO
 
-Somewhat working [demo available here](http://jfortunato.github.io/JustMenu). This is by no means a finished product.
+Somewhat working [demo available here](http://jfortunato.github.io/justmenu). This is by no means a finished product.
 
 #### Quickstart
 > **requirements**  
@@ -49,7 +49,7 @@ Somewhat working [demo available here](http://jfortunato.github.io/JustMenu). Th
 
 * **Menu simplification**  
   On very large menus, items can be combined into a single "or" choice. This helps
-  make the menu much easier to navigate as the result will be less items showing up.
+  make the menu much easier to navigate as there will be less items showing up.
 
 * **Easy to create menus**  
   A robust admin section should allow for rapidly building online menus.

@@ -10,4 +10,8 @@ angular.module('justmenu.menu.controllers', [])
     $scope.toggleSlide = function () {
         $scope.slide = !$scope.slide;
     };
+
+    $scope.clearSearch = function () {
+        $scope.searchMenu = null;
+    };
 }]);

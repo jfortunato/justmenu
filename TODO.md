@@ -9,6 +9,7 @@
 * item special times
 * cart on mobile
 * styling
+* move templates out of public (into angular template cache?)
 
 ### Admin
 * reusable drag & drop item options

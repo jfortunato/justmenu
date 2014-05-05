@@ -1,5 +1,28 @@
 <div data-justmenu="justmenu" ng-class="{ 'slide': slide }">
-    <div id="menu-bar"><button class="icon-menu" ng-click="toggleSlide()"></button></div>
+    <div id="menu-bar">
+        <button class="icon-menu"></button>
+        <button class="icon-menu" ng-click="toggleSlide()"></button>
+        <div>
+            <input type="text" ng-model="searchMenu.title" placeholder="search menu" />
+            <button type="button" ng-show="searchMenu" ng-click="clearSearch()">Close</button>
+            <ul class="search-results" ng-show="searchMenu">
+                <div ng-repeat="category in menu.categories">
+                    <li  ng-repeat="item in category.items | filter:searchMenu">
+                        <p><strong>{{ item.title }}</strong></p>
+                        <p>Can be found under <span>{{ category.title }}<span></p>
+                        <div>
+                            <div ng-repeat="size in item.sizes">
+                                <p>{{ size.size }}</p>
+                                <p>{{ size.price | currency }}</p>
+                                <p><button type="button" class="jm-btn" ng-click="clearSearch()" item="item" size="size" jm-select-item>Select</button></p>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+            <div class="overlay" ng-show="searchMenu"></div>
+        </div>
+    </div>
     <div class="category" ng-class="{ 'active': $index === selectedIndex }" ng-repeat="category in menu.categories">
         <div class="category-heading" ng-click="toggleCategory($index)">
             <h3>{{ category.title }}</h3>

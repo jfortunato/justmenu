@@ -51,8 +51,76 @@ body {
             background-color: $main;
             color: $lighter;
             outline: none;
+            width: 60px;
+            float: left;
+            &:first-child {
+                float: right;
+            }
             @media (min-width: $break-large) {
                 display: none;
+            }
+        }
+        & > div {
+            margin: 0 60px;
+            @media (min-width: $break-large) {
+                margin: 0 10px 0 200px;
+            }
+            & > button {
+                position: absolute;
+                top: 0;
+                right: 10px;
+                z-index: 1030;
+                width: 60px;
+                height: 40px;
+                margin: 10px 0 0 0;
+                border: 0;
+                padding: 0;
+                @media (max-width: $break-large) {
+                    right: 60px;
+                }
+            }
+            input {
+                width: 100%;
+                line-height: 40px;
+                margin: 10px 0 0 0;
+                padding: 0 10px;
+                border: 0;
+                font-size: 18px;
+                z-index: 1020;
+                position: relative;
+            }
+        }
+        ul.search-results {
+            list-style-type: none;
+            background: $white;
+            z-index: 1020;
+            position: relative;
+            padding-top: 10px;
+            margin-top: 10px;
+            li {
+                overflow: hidden;
+                & > p {
+                    float: left;
+                    &:first-child {
+                        background: $subtle;
+                        margin: 0;
+                        float: none;
+                    }
+                    span {
+                        color: blue;
+                    }
+                }
+                & > div {
+                    background: darken($subtle, 2%);
+                    text-align: right;
+                    float: right;
+                    padding-right: 10px;
+                    div {
+                        float: left;
+                        width: 100px;
+                        p { margin: 5px 0; }
+                    }
+                }
             }
         }
     }

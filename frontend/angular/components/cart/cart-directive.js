@@ -1,8 +1,8 @@
 angular.module('justmenu.cart.directives', [])
 
-.directive('jmCart', function () {
+.directive('jmCart', ['$templateCache', function ($templateCache) {
     return {
         restrict: 'E',
-        templateUrl: 'template/cart/cart.html',
+        template: $templateCache.get('cart.html'),
     };
-});
+}]);

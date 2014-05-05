@@ -36,6 +36,14 @@ body {
             width: 100%;
         }
     }
+    &.slide-cart {
+        left: -350px;
+        & + div {
+            div[data-justmenu-cart] {
+                right: 0 !important;
+            }
+        }
+    }
     @media (max-width: $break-large) {
         width: 100%;
     }
@@ -43,7 +51,7 @@ body {
         height: 60px;
         background-color: $main;
         border-bottom: 1px solid $accent;
-        .icon-menu {
+        .icon-menu, .icon-basket {
             padding: 0;
             margin: 0;
             border: none;
@@ -58,6 +66,24 @@ body {
             }
             @media (min-width: $break-large) {
                 display: none;
+            }
+        }
+        .icon-basket {
+            position: relative;
+            span {
+                background: $red;
+                width: 20px;
+                line-height: 20px;
+                border-radius: 20px;
+                display: block;
+                font-size: 15px;
+                color: #fff;
+                position: absolute;
+                top: 8px;
+                right: 5px;
+            }
+            &.ready {
+                color: $green;
             }
         }
         & > div {

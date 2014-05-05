@@ -4,10 +4,8 @@
 
 ### Menu
 * tabs for item options
-* search
 * write-in customization
 * item special times
-* cart on mobile
 * styling
 * move templates out of public (into angular template cache?)
 

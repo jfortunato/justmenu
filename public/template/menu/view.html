@@ -1,6 +1,6 @@
-<div data-justmenu="justmenu" ng-class="{ 'slide': slide }">
+<div data-justmenu="justmenu" ng-class="{ 'slide': slide, 'slide-cart': slideCart }">
     <div id="menu-bar">
-        <button class="icon-menu"></button>
+        <button class="icon-basket" ng-class="{ 'ready':cart.cart.length  }" ng-click="toggleCart()"><span ng-show="cart.cart.length">{{ cart.cart.length }}</span></button>
         <button class="icon-menu" ng-click="toggleSlide()"></button>
         <div>
             <input type="text" ng-model="searchMenu.title" placeholder="search menu" />

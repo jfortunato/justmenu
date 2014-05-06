@@ -66,6 +66,15 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
                         $scope.title = item.title;
 
                         $scope.selected = function () {
+                            var requiredOptions = document.querySelectorAll('.modal input[required]');
+                            for (var i = 0, l = requiredOptions.length; i < l; i ++) {
+                                var option = requiredOptions[i];
+                                if (!option.validity.valid) {
+                                    alert(option.name + " is required.");
+                                    return; 
+                                }
+                            }
+
                             var selected_options = [];
                             [].map.call(document.querySelectorAll('.modal input:checked'), function (obj) {
                                 selected_options.push({title:obj.value, price:obj.dataset.price});

@@ -1,24 +1,26 @@
 <div class="options">
     <h2 class="modal-title">{{ title }}</h2>
 
-    <div ng-repeat="option in options">
-        <h3>{{ option.option.title }}</h3>
-        <ul ng-if="option.option.choice_mode === 0">
-            <li ng-repeat="value in option.option.values">
-                <span><em>{{ value.title }}</em> (+{{ value.default_price | currency }})</span>
+    <form name="optionForm">
+        <div ng-repeat="option in options">
+            <h3>{{ option.option.title }}</h3>
+            <ul ng-if="option.option.choice_mode === 0">
+                <li ng-repeat="value in option.option.values">
+                    <span><em>{{ value.title }}</em> (+{{ value.default_price | currency }})</span>
 
-                <input type="radio" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="{{ value.title }}" {{ option.required ? 'required':'' }} />
-            </li>
-        </ul>
-        <ul ng-if="option.option.choice_mode === 1">
-            <li ng-repeat="value in option.option.values">
-                <span><em>{{ value.title }}</em> (+{{ value.default_price | currency }})</span>
+                    <input type="radio" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="{{ value.title }}" ng-required="option.required" />
+                </li>
+            </ul>
+            <ul ng-if="option.option.choice_mode === 1">
+                <li ng-repeat="value in option.option.values">
+                    <span><em>{{ value.title }}</em> (+{{ value.default_price | currency }})</span>
 
-                No <input type="checkbox" data-price="0" name="{{ option.option.title }}" value="no {{ value.title }}" />
-                Add <input type="checkbox" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="add {{ value.title }}" />
-            </li>
-        </ul>
-    </div>
+                    No <input type="checkbox" data-price="0" name="{{ option.option.title }}" value="no {{ value.title }}" />
+                    Add <input type="checkbox" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="add {{ value.title }}" />
+                </li>
+            </ul>
+        </div>
 
-    <button type="button" ng-click="selected()" class="jm-btn">Done</button>
+        <button type="button" ng-click="selected()" class="jm-btn">Done</button>
+    </form>
 </div>

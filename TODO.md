@@ -8,6 +8,7 @@
 * item special times
 * styling
 * move templates out of public (into angular template cache?)
+* better form validation for options
 
 ### Admin
 * reusable drag & drop item options

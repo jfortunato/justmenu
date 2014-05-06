@@ -1,60 +1,62 @@
-<div data-justmenu="justmenu" ng-class="{ 'slide': slide, 'slide-cart': slideCart }">
-    <div id="menu-bar">
-        <button class="icon-basket" ng-class="{ 'ready':cart.cart.length  }" ng-click="toggleCart()"><span ng-show="cart.cart.length">{{ cart.cart.length }}</span></button>
-        <button class="icon-menu" ng-click="toggleSlide()"></button>
-        <div>
-            <input type="text" ng-class="{ 'searching':searchMenu }" ng-model="searchMenu.title" placeholder="search menu" />
-            <button type="button" ng-show="searchMenu" ng-click="clearSearch()">Close</button>
-            <ul class="search-results" ng-show="searchMenu">
-                <div ng-repeat="category in menu.categories">
-                    <li  ng-repeat="item in category.items | filter:searchMenu">
-                        <p><strong>{{ item.title }}</strong></p>
-                        <p>Can be found under <span>{{ category.title }}<span></p>
-                        <div>
-                            <div ng-repeat="size in item.sizes">
-                                <p>{{ size.size }}</p>
-                                <p>{{ size.price | currency }}</p>
-                                <p><button type="button" class="jm-btn" ng-click="clearSearch()" item="item" size="size" jm-select-item>Select</button></p>
+<div id="justmenu-container" ng-class="{ 'slide': slide, 'slide-cart': slideCart }">
+    <div data-justmenu="justmenu">
+        <div id="menu-bar">
+            <button class="icon-basket" ng-class="{ 'ready':cart.cart.length  }" ng-click="toggleCart()"><span ng-show="cart.cart.length">{{ cart.cart.length }}</span></button>
+            <button class="icon-menu" ng-click="toggleSlide()"></button>
+            <div>
+                <input type="text" ng-class="{ 'searching':searchMenu }" ng-model="searchMenu.title" placeholder="search menu" />
+                <button type="button" ng-show="searchMenu" ng-click="clearSearch()">Close</button>
+                <ul class="search-results" ng-show="searchMenu">
+                    <div ng-repeat="category in menu.categories">
+                        <li  ng-repeat="item in category.items | filter:searchMenu">
+                            <p><strong>{{ item.title }}</strong></p>
+                            <p>Can be found under <span>{{ category.title }}<span></p>
+                            <div>
+                                <div ng-repeat="size in item.sizes">
+                                    <p>{{ size.size }}</p>
+                                    <p>{{ size.price | currency }}</p>
+                                    <p><button type="button" class="jm-btn" ng-click="clearSearch()" item="item" size="size" jm-select-item>Select</button></p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </div>
-            </ul>
-            <div class="overlay" ng-show="searchMenu"></div>
+                        </li>
+                    </div>
+                </ul>
+                <div class="overlay" ng-show="searchMenu"></div>
+            </div>
+        </div>
+        <div class="category" ng-class="{ 'active': $index === selectedIndex }" ng-repeat="category in menu.categories">
+            <div class="category-heading" ng-click="toggleCategory($index)">
+                <h3>{{ category.title }}</h3>
+            </div>
+            <div class="category-body">
+                <h3>{{ category.title }} <span>{{ category.description | parens }}</span></h3>
+                <h4>{{ category.info }}</h4>
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ng-repeat="size in category.sizes">{{ size.size }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in category.items">
+                            <td>
+                                <strong>{{ item.title }}</strong>
+                                <p>{{ item.description }}</p>
+                                <p>{{ item.info }}</p>
+                            </td>
+                            <td ng-repeat="size in item.sizes">
+                                <p>{{ size.price }}</p>
+                                <p><button type="button" class="jm-btn" item="item" size="size" jm-select-item>Select</button></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="category" ng-class="{ 'active': $index === selectedIndex }" ng-repeat="category in menu.categories">
-        <div class="category-heading" ng-click="toggleCategory($index)">
-            <h3>{{ category.title }}</h3>
-        </div>
-        <div class="category-body">
-            <h3>{{ category.title }} <span>{{ category.description | parens }}</span></h3>
-            <h4>{{ category.info }}</h4>
-            <table cellspacing="0">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th ng-repeat="size in category.sizes">{{ size.size }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in category.items">
-                        <td>
-                            <strong>{{ item.title }}</strong>
-                            <p>{{ item.description }}</p>
-                            <p>{{ item.info }}</p>
-                        </td>
-                        <td ng-repeat="size in item.sizes">
-                            <p>{{ size.price }}</p>
-                            <p><button type="button" class="jm-btn" item="item" size="size" jm-select-item>Select</button></p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 
-<div ng-controller="CartController">
-    <jm-cart></jm-cart>
+    <div ng-controller="CartController">
+        <jm-cart></jm-cart>
+    </div>
 </div>

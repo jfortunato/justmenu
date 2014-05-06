@@ -5,10 +5,12 @@ div[data-justmenu-cart] {
     width: 30%;
     position: relative;
     @media (max-width: $break-large) {
-        width: 350px;
+        opacity: 0;
+        width: 300px;
         position: absolute;
-        right: -350px;
+        right: 0;
         @include transition(all, 1s, ease);
+        -webkit-transform: translate3d(100%, 0, 0);
     }
     &>div {
         padding: 10px;

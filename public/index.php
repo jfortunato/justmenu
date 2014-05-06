@@ -15,10 +15,8 @@ $cart = $container['cart'];
     </head>
     <body>
 
-        <div id="justmenu-container">
-            <div ng-controller="MainController">
-                <div ng-view></div>
-            </div>
+        <div ng-controller="MainController">
+            <div ng-view></div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>

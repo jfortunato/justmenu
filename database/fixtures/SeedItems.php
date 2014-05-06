@@ -15,6 +15,7 @@ class SeedItems extends AbstractFixture implements DependentFixtureInterface
         $item->description = '';
         $item->info = '';
         $manager->persist($item);
+        $this->addReference('egg roll', $item);
 
         $item = new Item;
         $item->category = $this->getReference('appetizer');
@@ -1164,8 +1165,8 @@ class SeedItems extends AbstractFixture implements DependentFixtureInterface
 
         $item = new Item;
         $item->category = $this->getReference('chefs special');
-        $item->title = 'Seafood Delight: ( Lobster, Scallop,Shrimp & Sea Stick w mixed Vegetable in chefs special white sauce.)';
-        $item->description = '';
+        $item->title = 'Seafood Delight';
+        $item->description = 'Lobster, Scallop, Shrimp, & Sea Stick w/ mixed Vegetable in chefs special white sauce.';
         $item->info = '';
         $manager->persist($item);
 

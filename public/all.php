@@ -13,9 +13,9 @@ $menu = $builder->getMenu();
 $serializer = JMS\Serializer\SerializerBuilder::create()
     ->addMetadataDir(PROJECT_ROOT . '/database/yaml/serializer')
     ->addDefaultHandlers()
-    ->configureHandlers(function(JMS\Serializer\Handler\HandlerRegistry $registry) {
-        $registry->registerSubscribingHandler(new JustMenu\Handler\ItemSizeHandler());
-    })
+    //->configureHandlers(function(JMS\Serializer\Handler\HandlerRegistry $registry) {
+        //$registry->registerSubscribingHandler(new JustMenu\Handler\ItemSizeHandler());
+    //})
     ->build();
 $menu = $serializer->serialize($menu, 'json');
 

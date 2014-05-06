@@ -12,10 +12,12 @@
                             <p><strong>{{ item.title }}</strong></p>
                             <p>Can be found under <span>{{ category.title }}<span></p>
                             <div>
-                                <div ng-repeat="size in item.sizes">
-                                    <p>{{ size.size }}</p>
-                                    <p>{{ size.price | currency }}</p>
-                                    <p><button type="button" class="jm-btn" ng-click="clearSearch()" item="item" size="size" jm-select-item>Select</button></p>
+                                <div ng-repeat="size in category.sizes | trueSize:item">
+                                    <div ng-if="size.price">
+                                        <p>{{ size.size }}</p>
+                                        <p>{{ size.price | currency }}</p>
+                                        <p><button type="button" class="jm-btn" ng-click="clearSearch()" item="item" size="size" jm-select-item>Select</button></p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -45,9 +47,11 @@
                                 <p>{{ item.description }}</p>
                                 <p>{{ item.info }}</p>
                             </td>
-                            <td ng-repeat="size in item.sizes">
-                                <p>{{ size.price }}</p>
-                                <p><button type="button" class="jm-btn" item="item" size="size" jm-select-item>Select</button></p>
+                            <td ng-repeat="size in category.sizes | trueSize:item">
+                                <div ng-if="size.price">
+                                    <p>{{ size.price | currency  }}</p>
+                                    <p><button type="button" class="jm-btn" item="item" size="size" jm-select-item>Select</button></p>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

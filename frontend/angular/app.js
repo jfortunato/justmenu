@@ -19,4 +19,24 @@ angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.cart', 'justme
     return function (input) {
         return input ? '(' + input + ')' : '';
     };
+})
+
+.filter('trueSize', function () {
+    return function (sizes, item) {
+        var trueSizes = [];
+
+        // override the category size if item has it's own size
+        for (var i = 0, l = sizes.length; i < l; i ++) {
+            trueSizes[i] = sizes[i];
+            if (item.sizes.length) {
+                item.sizes.forEach(function (size) {
+                    if (size.size === sizes[i].size) {
+                        trueSizes[i] = size;
+                    }
+                });
+            }
+        }
+
+        return trueSizes;
+    };
 });

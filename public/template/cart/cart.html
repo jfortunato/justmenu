@@ -8,7 +8,7 @@
             <li ng-repeat="item in cart.cart">
                 <button type="button" ng-click="cart.decreaseQuantity(item)" class="icon-down-open"><span></span></button>
                 <button type="button" ng-click="cart.increaseQuantity(item)" class="icon-up-open"><span></span></button>
-                <span class="quantity">{{ item.quantity }}</span> {{ item.title }} ({{ item.size }}) <ul data-options><li ng-repeat="option in item.selected_options">{{ option.title }} <span>+{{ option.price | currency }}</span></li></ul>
+                <span class="quantity">{{ item.quantity }}</span> {{ item.title }} ({{ item.size }}) <ul data-options><li ng-repeat="option in item.selected_options">{{ option.title }} <span>+{{ option.price | currency }}</span></li><li ng-show="item.instructions"><em>{{ item.instructions }}</em></li></ul>
                 <span>${{ item.price }}</span>
             </li>
             <div ng-show="cart.lastCart.length">

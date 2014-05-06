@@ -4,7 +4,6 @@
 
 ### Menu
 * tabs for item options
-* write-in customization
 * item special times
 * styling
 * move templates out of public (into angular template cache?)

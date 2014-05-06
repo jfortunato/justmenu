@@ -14,10 +14,8 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
             function process() {
                 if (item.items) {
                     showChoices();
-                } else if (item.menu_component_options.length) {
-                    showOptions();
                 } else {
-                    addItem();
+                    showOptions();
                 }
             }
 
@@ -64,6 +62,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
                         $scope.options = options;
 
                         $scope.title = item.title;
+                        $scope.size = size.size;
 
                         $scope.selected = function () {
                             var requiredOptions = document.querySelectorAll('.modal input[required]');
@@ -81,6 +80,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
                             });
 
                             item.selected_options = selected_options;
+                            item.instructions = document.querySelector('.modal #instructions').value;
                             addItem();
 
                             $modalInstance.close();
@@ -98,6 +98,7 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
                     size: size.size,
                     price: size.price,
                     selected_options: item.selected_options || [],
+                    instructions: item.instructions || '',
                 };
 
                 Cart.addItem(newItem);

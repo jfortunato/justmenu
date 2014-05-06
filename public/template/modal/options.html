@@ -1,7 +1,8 @@
 <div class="options">
-    <h2 class="modal-title">{{ title }}</h2>
+    <h2 class="modal-title">{{ title }} ({{ size }})</h2>
 
     <form name="optionForm">
+
         <div ng-repeat="option in options">
             <h3>{{ option.option.title }}</h3>
             <ul ng-if="option.option.choice_mode === 0">
@@ -19,6 +20,11 @@
                     Add <input type="checkbox" data-price="{{ value.default_price }}" name="{{ option.option.title }}" value="add {{ value.title }}" />
                 </li>
             </ul>
+        </div>
+
+        <div id="instructions-wrapper">
+            <label for="instructions">Special Instructions</label>
+            <textarea name="instructions" id="instructions" placeholder="optional instructions"></textarea>
         </div>
 
         <button type="button" ng-click="selected()" class="jm-btn">Done</button>

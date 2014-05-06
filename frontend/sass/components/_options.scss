@@ -1,0 +1,42 @@
+.options {
+    overflow: hidden;
+    h3 { clear: both; }
+    ul {
+        list-style-type: none;
+        li {
+            width: 50%;
+            float: left;
+            text-align: right;
+            line-height: 25px;
+            box-sizing: border-box;
+            padding: 0 10px;
+            span {
+                display: block;
+                float: left;
+                text-align: left;
+            }
+            &:nth-child(4n+0), &:nth-child(4n+1)  {
+                background-color: $subtle;
+                border-right: 1px solid $lighter;
+            }
+            &:hover {
+                background-color: $lighter;
+            }
+        }
+    }
+    button {
+        float: right;
+        margin-top: 20px;
+        background-color: $green;
+        border: 1px solid darken($green, 10%);
+        &:hover {
+            background-color: darken($green, 10%);
+        }
+    }
+}
+
+.choices {
+    table {
+        margin: 0 auto;
+    }
+}

@@ -1,4 +1,4 @@
-angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.modal', 'justmenu.cart', 'justmenu.admin', 'ui.bootstrap'])
+angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.cart', 'justmenu.admin', 'ui.bootstrap'])
 
 .controller('MainController', function () {
 })

@@ -63,6 +63,8 @@ angular.module('justmenu.menu.directives', ['justmenu.cart.services'])
                     controller: function ($scope, $modalInstance, options) {
                         $scope.options = options;
 
+                        $scope.title = item.title;
+
                         $scope.selected = function () {
                             var selected_options = [];
                             [].map.call(document.querySelectorAll('.modal input:checked'), function (obj) {

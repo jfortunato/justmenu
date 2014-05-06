@@ -1,3 +1,8 @@
-<div ng-repeat="item in choices">
-    <p>{{ item.title }} <button type="button" class="jm-btn" item="item" size="size" jm-select-item ng-click="selected()">Select</button></p>
+<div class="choices">
+    <table>
+        <tr ng-repeat="item in choices">
+            <td>{{ item.title }}</td>
+            <td><button type="button" class="jm-btn" item="item" size="size" jm-select-item ng-click="selected()">Select</button></td>
+        </tr>
+    </table>
 </div>

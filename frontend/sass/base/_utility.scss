@@ -112,8 +112,10 @@ body {
                 padding: 0 10px;
                 border: 0;
                 font-size: 18px;
-                z-index: 1020;
                 position: relative;
+                &.searching {
+                    z-index: 1020;
+                }
             }
         }
         ul.search-results {

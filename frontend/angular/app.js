@@ -39,4 +39,49 @@ angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.cart', 'justme
 
         return trueSizes;
     };
+})
+
+.filter('available', function () {
+    return function (input, category, item) {
+
+        var days = [];
+        var times = '';
+
+        if (item.special_time) {
+            days = JSON.parse(item.special_time.days);
+            times = item.special_time.times.split('-');
+        } else if (category.special_time) {
+            days = JSON.parse(category.special_time.days);
+            times = category.special_time.times.split('-');
+        }
+
+        item.available = true;
+
+        if (days.length) {
+            if (checkDay(days)) {
+                item.available = checkTime(times);
+            } else {
+                item.available = false;
+            }
+        } else if (times.length) {
+            item.available = checkTime(times);
+        }
+
+        function checkDay(days) {
+            return days.indexOf(new Date().getDay()) !== -1 ? true:false;
+        }
+
+        function checkTime(times) {
+            var start = times.length === 2 ? times[0]:null;
+            var end = times.length === 2 ? times[1]:times[0];
+            var now = new Date().getHours()+""+new Date().getMinutes();
+            if (start) {
+                return now >= start && now <= end ? true:false;
+            }
+
+            return now <= end || times[0] === '' ? true:false;
+        }
+
+        return input;
+    };
 });

@@ -12,11 +12,11 @@
                             <p><strong>{{ item.title }}</strong></p>
                             <p>Can be found under <span>{{ category.title }}<span></p>
                             <div>
-                                <div ng-repeat="size in category.sizes | trueSize:item">
+                                <div ng-repeat="size in category.sizes | trueSize:item | available:category:item">
                                     <div ng-if="size.price">
                                         <p>{{ size.size }}</p>
                                         <p>{{ size.price | currency }}</p>
-                                        <p><button type="button" class="jm-btn" ng-click="clearSearch()" item="item" size="size" jm-select-item>Select</button></p>
+                                        <p ng-if="item.available"><button type="button" class="jm-btn" ng-click="clearSearch()" item="item" size="size" jm-select-item>Select</button></p>
                                     </div>
                                 </div>
                             </div>
@@ -47,10 +47,10 @@
                                 <p>{{ item.description }}</p>
                                 <p>{{ item.info }}</p>
                             </td>
-                            <td ng-repeat="size in category.sizes | trueSize:item">
+                            <td ng-repeat="size in category.sizes | trueSize:item | available:category:item">
                                 <div ng-if="size.price">
                                     <p>{{ size.price | currency  }}</p>
-                                    <p><button type="button" class="jm-btn" item="item" size="size" jm-select-item>Select</button></p>
+                                    <p ng-if="item.available"><button type="button" class="jm-btn" item="item" size="size" jm-select-item>Select</button></p>
                                 </div>
                             </td>
                         </tr>

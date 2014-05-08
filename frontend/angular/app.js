@@ -1,4 +1,4 @@
-angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.cart', 'justmenu.admin', 'ui.bootstrap'])
+angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.cart', 'justmenu.admin', 'justmenu.checkout', 'ui.bootstrap'])
 
 .controller('MainController', function () {
 })
@@ -11,6 +11,10 @@ angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.cart', 'justme
     .when('/admin', {
         templateUrl: 'template/admin/view.html',
         controller: 'AdminController'
+    })
+    .when('/checkout', {
+        templateUrl: 'template/checkout/view.html',
+        controller: 'CheckoutController'
     })
     .otherwise({redirectTo: '/order-online'});
 }])

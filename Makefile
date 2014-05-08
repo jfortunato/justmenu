@@ -59,4 +59,4 @@ watch:
 
 .PHONY: clean
 clean:
-	rm -rf $(SASS_COMPILED) $(JS_COMPILED)
+	rm -rf $(SASS_COMPILED) $(JS_COMPILED) tiny-lr.pid

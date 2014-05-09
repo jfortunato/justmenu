@@ -9,6 +9,7 @@
 * move templates out of public (into angular template cache?)
 * better form validation for options
 * cache the generated menu (store it as a json file)
+* images
 
 ### Admin
 * reusable drag & drop item options

@@ -7,69 +7,73 @@
         <div id="checkout-page">
 
             <h2>Pickup Or Delivery?</h2>
-            <button type="button" class="icon-male" ng-class="{ 'pressed':orderMethod==='pickup' }" ng-click="orderMethod = 'pickup'">Pickup</button>
-            <button type="button" class="icon-truck" ng-class="{ 'pressed':orderMethod==='delivery' }" ng-click="orderMethod = 'delivery'">Delivery</button>
+            <button type="button" class="icon-male" ng-class="{ 'pressed':info.method==='pickup' }" ng-click="info.method = 'pickup'">Pickup</button>
+            <button type="button" class="icon-truck" ng-class="{ 'pressed':info.method==='delivery' }" ng-click="info.method = 'delivery'">Delivery</button>
 
-            <div ng-show="orderMethod">
+            <form name="infoForm" ng-show="info.method">
+                <input type="hidden" name="method" id="method" ng-model="info.method" ng-required="true" />
+                <input type="hidden" name="paymentmethod" id="paymentmethod" ng-model="info.paymentmethod" ng-required="true" />
+
                 <section>
                     <h2>Information</h2>
 
-                    <form name="infoForm">
-                        <div>
-                            <label for="phone">Phone Number</label>
-                            <input type="text" name="phone" id="phone" placeholder="phone" ng-required="true" />
-                        </div>
+                    <div>
+                        <label for="phone">Phone Number</label>
+                        <input type="text" name="phone" id="phone" placeholder="phone" ng-model="info.name" ng-required="true" />
+                    </div>
 
-                        <div>
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email" placeholder="email" ng-required="true" />
-                        </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" placeholder="email" ng-model="info.email" ng-required="true" />
+                    </div>
 
-                        <div ng-if="orderMethod === 'delivery'">
-                            <label for="address">Address</label>
-                            <input type="text" name="address" id="address" placeholder="street address" ng-required="true" />
-                        </div>
+                    <div ng-if="info.method === 'delivery'">
+                        <label for="address">Address</label>
+                        <input type="text" name="address" id="address" placeholder="street address" ng-model="info.address" ng-required="true" />
+                    </div>
 
-                        <div ng-if="orderMethod === 'delivery'">
-                            <label for="city">City</label>
-                            <input type="text" name="city" id="city" placeholder="city" ng-required="true" />
-                        </div>
+                    <div ng-if="info.method === 'delivery'">
+                        <label for="city">City</label>
+                        <input type="text" name="city" id="city" placeholder="city" ng-model="info.city" ng-required="true" />
+                    </div>
 
-                        <div>
-                            <label for="instructions">Special Instructions<span ng-if="orderMethod === 'delivery'"> for order and delivery driver</span></label>
-                            <textarea name="instructions" id="instructions" placeholder="special instructions" ng-required="true" ></textarea>
-                        </div>
-                    </form>
+                    <div>
+                        <label for="instructions">Special Instructions<span ng-if="info.method === 'delivery'"> for order and delivery driver</span></label>
+                        <textarea name="instructions" id="instructions" placeholder="special instructions" ng-model="info.instructions" ng-required="true" ></textarea>
+                    </div>
                 </section>
 
                 <section>
                     <h2>Payment</h2>
-                    <button type="button" class="icon-money" ng-class="{ 'pressed':paymentMethod==='cash' }" ng-click="paymentMethod = 'cash'">Cash</button>
-                    <button type="button" class="icon-credit-card" ng-class="{ 'pressed':paymentMethod==='credit card' }" ng-click="paymentMethod = 'credit card'">Credit Card</button>
+
+                    <button type="button" class="icon-money" ng-class="{ 'pressed':info.paymentmethod==='cash' }" ng-click="info.paymentmethod = 'cash'">Cash</button>
+                    <button type="button" class="icon-credit-card" ng-class="{ 'pressed':info.paymentmethod==='credit card' }" ng-click="info.paymentmethod = 'credit card'">Credit Card</button>
                     <button type="button" class="icon-dollar">Other</button>
 
-                    <form name="paymentForm">
-                        <div ng-if="paymentMethod === 'credit card'">
-                            <label for="cardnumber">Card Number</label>
-                            <input type="text" name="cardnumber" id="cardnumber" placeholder="card number" />
-                        </div>
-                    </form>
+                    <div ng-if="info.paymentmethod === 'credit card'">
+                        <label for="cardnumber">Card Number</label>
+                        <input type="text" name="cardnumber" id="cardnumber" placeholder="card number" ng-model="payment.cardnumber" ng-required="true" />
+                    </div>
                 </section>
 
                 <section>
                     <h2>Tip</h2>
+
                     <button type="button" class="icon-gift"></button>
                 </section>
 
-                <section ng-show="paymentMethod === 'credit card'">
+                <section ng-show="info.paymentmethod === 'credit card'">
                     <h2>Round Up</h2>
+
                     <button type="button" class="icon-smile"></button>
                     <button type="button" class="icon-frown"></button>
                 </section>
 
                 <h1>{{ total | currency }}</h1>
                 <button type="button" class="jm-btn" ng-click="placeOrder()">Place Order</button>
-            </div>
+                <h1>Form Valid?: {{ infoForm.$valid }}</h1>
+
+            </form>
         </div>
     </div>
     <div ng-controller="CartController">

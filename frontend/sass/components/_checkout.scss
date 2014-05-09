@@ -1,6 +1,6 @@
 #checkout-page {
     padding: 0 20px;
-    form[name="pickupForm"], form[name="deliveryForm"] {
+    form {
         div {
             input, textarea {
                 display: block;
@@ -10,4 +10,12 @@
             }
         }
     }
+}
+
+#menu-bar .icon-left-circled2 {
+    border: none;
+    line-height: 60px;
+    background-color: $main;
+    color: $lighter;
+    text-decoration: none;
 }

@@ -16,6 +16,10 @@ angular.module('justmenu', ['ngRoute', 'justmenu.menu', 'justmenu.cart', 'justme
         templateUrl: 'template/checkout/view.html',
         controller: 'CheckoutController'
     })
+    .when('/complete', {
+        templateUrl: 'template/checkout/complete.html',
+        controller: 'CompleteController'
+    })
     .otherwise({redirectTo: '/order-online'});
 }])
 

@@ -6,6 +6,9 @@
     &:hover {
         background: $lighter;
     }
+    &.pressed {
+        background-color: darken($lighter, 10%);
+    }
 }
 
 .jm-btn {

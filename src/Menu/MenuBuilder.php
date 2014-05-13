@@ -1,5 +1,7 @@
 <?php namespace JustMenu\Menu;
 
+use JMS\Serializer\Serializer;
+
 class MenuBuilder
 {
     /**
@@ -16,16 +18,19 @@ class MenuBuilder
      */
     protected $menu;
 
+    protected $serializer;
+
     /**
      * Construct a new MenuBuilder with required ManagerInterface
      *
      * @param  ManagerInterface $entityManager
      * @return void
      */
-    public function __construct(ManagerInterface $entityManager, Menu $menu)
+    public function __construct(ManagerInterface $entityManager, Menu $menu, Serializer $serializer)
     {
         $this->entityManager = $entityManager;
         $this->menu = $menu;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -38,6 +43,8 @@ class MenuBuilder
         $this->buildMenu();
 
         $this->combineChoiceItems();
+
+        $this->serializeMenu();
     }
 
     protected function buildMenu()
@@ -46,6 +53,11 @@ class MenuBuilder
         foreach ($categories as $category) {
             $this->menu->addCategory($category);
         }
+    }
+
+    protected function serializeMenu()
+    {
+        $this->menu = $this->serializer->serialize($this->menu, 'json');
     }
 
     /**
@@ -66,6 +78,16 @@ class MenuBuilder
     public function getMenu()
     {
         return $this->menu;
+    }
+
+    public function setMenu($menu)
+    {
+        $this->menu = $menu;
+    }
+
+    public function getSerializer()
+    {
+        return $this->serializer;
     }
 
     public function combineChoiceItems()

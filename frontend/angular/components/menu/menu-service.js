@@ -25,7 +25,7 @@ angular.module('justmenu.menu.services', ['ngResource'])
         },
 
         resource: function () {
-            return $resource('/all.php');
+            return $resource('/justmenu/menu');
         },
     };
 }]);

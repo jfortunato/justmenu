@@ -16,7 +16,10 @@
         "pimple/pimple": "*",
         "fzaninotto/faker": "*",
         "nesbot/carbon": "*",
-        "jms/serializer": "*"
+        "jms/serializer": "*",
+        "symfony/http-foundation": "*",
+        "symfony/routing": "*",
+        "symfony/config": "*"
     },
 	"autoload": {
 		"classmap": [

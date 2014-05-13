@@ -5,6 +5,10 @@ use Doctrine\ORM\EntityManager;
 use JustMenu\Menu\MenuBuilder as Builder;
 use JustMenu\Menu\DoctrineManager as Manager;
 use JustMenu\Menu\Menu;
+use JustMenu\Controller\Controller;
+use JMS\Serializer\SerializerBuilder;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 $container = new Pimple();
 
@@ -32,5 +36,28 @@ $container['menu'] = function ($c)
 };
 
 $container['menu_builder'] = function ($c) {
-    return new Builder($c['manager'], $c['menu']);
+    return new Builder($c['manager'], $c['menu'], $c['serializer']);
+};
+
+$container['controller'] = function ($c)
+{
+    return new Controller($c['request'], $c['response'], $c['menu_builder']);
+};
+
+$container['request'] = function ($c)
+{
+    return Request::createFromGlobals();
+};
+
+$container['response'] = function ($c)
+{
+    return new Response;
+};
+
+$container['serializer'] = function ($c)
+{
+    return SerializerBuilder::create()
+        ->addMetadataDir(PROJECT_ROOT . '/database/yaml/serializer')
+        ->addDefaultHandlers()
+        ->build();
 };

@@ -15,13 +15,4 @@ class ChoiceTest extends TestCase
 
         $this->assertSame(array('small' => 3.99, 'large' => 5.99), $choice->getAllPrices());
     }
-
-    public function testCanGetJsonChoices()
-    {
-        $choice = new Choice;
-        $choice->items = array($mockItem1 = m::mock('JustMenu\Menu\Entity\Item'), $mockItem2 = m::mock('JustMenu\Menu\Entity\Item', array('toJson' => '{}')));
-        $mockItem1->shouldReceive('toJson')->once()->andReturn('{"title":"foo","description":"bar"}');
-
-        $this->assertJsonStringEqualsJsonString('[{"title":"foo","description":"bar"},{}]', $choice->getJsonChoices());
-    }
 }

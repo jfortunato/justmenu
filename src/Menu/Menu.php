@@ -1,20 +1,14 @@
 <?php namespace JustMenu\Menu;
 
 use JustMenu\Menu\Entity\Category;
-use JustMenu\Menu\Presenter\MenuPresenter;
 
-class Menu implements MenuComponentInterface
+class Menu
 {
     protected $categories = array();
 
     public function addCategory(Category $category)
     {
         $this->categories[] = $category;
-    }
-
-    public function getChildrenComponents()
-    {
-        return $this->categories;
     }
 
     /**
@@ -25,10 +19,5 @@ class Menu implements MenuComponentInterface
     public function getCategories()
     {
         return $this->categories;
-    }
-
-    public function render(MenuPresenter $presenter)
-    {
-        return $presenter->renderMenu();
     }
 }

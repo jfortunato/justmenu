@@ -1,11 +1,3 @@
-<?php
-
-// bootstrap the application
-require_once '../bootstrap/bootstrap.php';
-
-$cart = $container['cart'];
-
-?>
 <!DOCTYPE html>
 <html ng-app="justmenu">
     <head>

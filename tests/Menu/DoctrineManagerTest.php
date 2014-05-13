@@ -21,7 +21,7 @@ class DoctrineManagerTest extends TestCase
 
         $repository->shouldReceive('findBy')->with(array(), array('indexed_order' => 'ASC'))->andReturn(array('category'));
 
-        $this->assertSame(array('category'), $this->manager->assembleCategoriesByIndex());
+        $this->assertSame(array('category'), $this->manager->assembleOrderedCategories());
     }
 
 }

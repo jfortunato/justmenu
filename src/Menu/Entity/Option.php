@@ -2,15 +2,11 @@
 
 class Option extends Entity
 {
-    const CHOICE_MODE_SINGLE = 0;
-    const CHOICE_MODE_MULTIPLE = 1;
-
     protected $id;
     protected $title;
     protected $description;
     protected $info;
     protected $choice_mode;
-
     protected $menuComponentOptions = array();
     protected $values = array();
 }

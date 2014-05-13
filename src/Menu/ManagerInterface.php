@@ -2,5 +2,5 @@
 
 interface ManagerInterface
 {
-    public function assembleCategoriesByIndex();
+    public function assembleOrderedCategories();
 }

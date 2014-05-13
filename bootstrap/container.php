@@ -2,11 +2,9 @@
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use JustMenu\Menu\Presenter\HTMLMenuPresenter as Presenter;
 use JustMenu\Menu\MenuBuilder as Builder;
 use JustMenu\Menu\DoctrineManager as Manager;
-use JustMenu\View\ViewFinder;
-use JustMenu\Cart\Cart;
+use JustMenu\Menu\Menu;
 
 $container = new Pimple();
 
@@ -28,18 +26,11 @@ $container['manager'] = function ($c) {
     return new Manager($c['doctrine']);
 };
 
-$container['view_finder'] = function ($c) {
-    return new ViewFinder;
-};
-
-$container['presenter'] = function ($c) {
-    return new Presenter($c['view_finder'], $c['manager']);
+$container['menu'] = function ($c)
+{
+    return new Menu;
 };
 
 $container['menu_builder'] = function ($c) {
-    return new Builder($c['manager'], $c['presenter']);
-};
-
-$container['cart'] = function ($c) {
-    return new Cart($c['view_finder']);
+    return new Builder($c['manager'], $c['menu']);
 };

@@ -11,23 +11,11 @@ class DoctrineManager implements ManagerInterface
         $this->entityManager = $entityManager;
     }
 
-    public function assembleCategoriesByIndex()
+    public function assembleOrderedCategories()
     {
         $categoryRepository = $this->entityManager->getRepository('JustMenu\Menu\Entity\Category');
 
          return $categoryRepository->findBy(array(), array('indexed_order' => 'ASC'));
-    }
-
-    public function getOptionsAsJson()
-    {
-        $qp = $this->entityManager->createQueryBuilder();
-        $result = $qp->select(array('o', 'v'))
-            ->from('JustMenu\Menu\Entity\Option', 'o')
-            ->leftJoin('o.values', 'v')
-            ->getQuery()->getArrayResult();
-
-
-        return json_encode($result);
     }
 
     /**

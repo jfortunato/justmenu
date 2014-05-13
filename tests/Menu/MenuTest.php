@@ -19,19 +19,4 @@ class MenuTest extends TestCase
 
         $this->assertCount(1, $this->menu->getCategories());
     }
-
-    public function testCanGetChildrenComponents()
-    {
-        $this->assertSame($this->menu->getCategories(), $this->menu->getChildrenComponents());
-    }
-
-    public function testCanRenderMenu()
-    {
-        $mockPresenter = m::mock('JustMenu\Menu\Presenter\MenuPresenter');
-        $mockPresenter->shouldReceive('renderMenu')->once();
-
-        $this->menu->render($mockPresenter);
-    }
-
-
 }

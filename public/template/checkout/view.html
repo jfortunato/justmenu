@@ -18,8 +18,13 @@
                     <h2>Information</h2>
 
                     <div>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" placeholder="name" ng-model="info.name" ng-required="true" />
+                    </div>
+
+                    <div>
                         <label for="phone">Phone Number</label>
-                        <input type="text" name="phone" id="phone" placeholder="phone" ng-model="info.name" ng-required="true" />
+                        <input type="text" name="phone" id="phone" placeholder="phone" ng-model="info.phone" ng-required="true" />
                     </div>
 
                     <div>
@@ -70,7 +75,7 @@
                 </section>
 
                 <h1>{{ total | currency }}</h1>
-                <button type="button" class="jm-btn" ng-click="placeOrder()">Place Order</button>
+                <button type="button" class="jm-btn" ng-click="placeOrder(info)">Place Order</button>
                 <h1>Form Valid?: {{ infoForm.$valid }}</h1>
 
             </form>

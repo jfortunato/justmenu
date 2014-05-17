@@ -41,5 +41,4 @@ class OrderControllerTest extends TestCase
     public function testPlaceOrderValidatesOrder()
     {
     }
-
 }

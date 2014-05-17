@@ -9,4 +9,8 @@ class Order extends Entity
     protected $phone_number;
     protected $email;
     protected $special_instructions;
+    protected $method;
+    protected $payment_method;
+    protected $address;
+    protected $city;
 }

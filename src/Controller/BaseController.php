@@ -34,4 +34,12 @@ abstract class BaseController
         $this->response = $response;
         return $this;
     }
+
+    protected function sendJsonResponse($content)
+    {
+        $this->response->headers->set('Content-Type', 'application/json');
+        $this->response->setContent($content);
+        $this->response->prepare($this->request);
+        $this->response->send();
+    }
 }

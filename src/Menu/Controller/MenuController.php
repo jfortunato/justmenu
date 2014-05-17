@@ -16,9 +16,6 @@ class MenuController extends BaseController
     {
         $this->builder->build();
 
-        $this->response->headers->set('Content-Type', 'application/json');
-        $this->response->setContent($this->builder->getMenu());
-        $this->response->prepare($this->request);
-        $this->response->send();
+        $this->sendJsonResponse($this->builder->getMenu());
     }
 }

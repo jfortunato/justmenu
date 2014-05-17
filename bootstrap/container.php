@@ -11,7 +11,7 @@ use JustMenu\Repository\Category\DoctrineCategoryRepository;
 use JustMenu\Repository\Order\DoctrineOrderRepository;
 use JustMenu\Menu\Controller\MenuController;
 use JustMenu\Order\Controller\OrderController;
-use JustMenu\Mailer\Mailer;
+use JustMenu\Mailer\SimpleMailer;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 $container = new Pimple();
@@ -79,7 +79,7 @@ $container['response'] = function ($c)
 
 $container['mailer'] = function ($c)
 {
-    return new Mailer;
+    return new SimpleMailer;
 };
 
 $container['serializer'] = function ($c)

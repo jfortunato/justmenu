@@ -19,7 +19,8 @@
         "jms/serializer": "*",
         "symfony/http-foundation": "*",
         "symfony/routing": "*",
-        "symfony/config": "*"
+        "symfony/config": "*",
+        "swiftmailer/swiftmailer": "*"
     },
 	"autoload": {
 		"classmap": [

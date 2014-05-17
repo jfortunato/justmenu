@@ -13,5 +13,9 @@ JustMenu\Order\Entity\Order:
             type: string
         email:
             type: string
+        address:
+            type: string
+        city:
+            type: string
         special_instructions:
             type: string

@@ -23,6 +23,5 @@ $matcher = new UrlMatcher($routes, $context);
 
 $parameters = $matcher->match($request->getRequestUri());
 
-$controller = $container['controller'];
-//$controller = new $parameters['_controller'];
+$controller = $container[$parameters['_controller']];
 $controller->$parameters['_route']();

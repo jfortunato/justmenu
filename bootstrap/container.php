@@ -2,13 +2,17 @@
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use JustMenu\Menu\MenuBuilder as Builder;
-use JustMenu\Menu\DoctrineManager as Manager;
-use JustMenu\Menu\Menu;
-use JustMenu\Controller\Controller;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use JustMenu\Menu\Menu;
+use JustMenu\Menu\Builder\MenuBuilder;
+use JustMenu\Repository\Category\DoctrineCategoryRepository;
+use JustMenu\Repository\Order\DoctrineOrderRepository;
+use JustMenu\Menu\Controller\MenuController;
+use JustMenu\Order\Controller\OrderController;
+use JustMenu\Mailer\Mailer;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 $container = new Pimple();
 
@@ -26,22 +30,41 @@ $container['doctrine'] = function ($c) {
     return EntityManager::create($conn, $config);
 };
 
-$container['manager'] = function ($c) {
-    return new Manager($c['doctrine']);
-};
-
 $container['menu'] = function ($c)
 {
     return new Menu;
 };
 
 $container['menu_builder'] = function ($c) {
-    return new Builder($c['manager'], $c['menu'], $c['serializer']);
+    return new MenuBuilder($c['category_repository'], $c['menu'], $c['serializer']);
 };
 
-$container['controller'] = function ($c)
+$container['category_repository'] = function ($c)
 {
-    return new Controller($c['request'], $c['response'], $c['menu_builder']);
+    $meta = new ClassMetadata('JustMenu\Menu\Entity\Category');
+
+    return new DoctrineCategoryRepository($c['doctrine'], $meta);
+};
+
+$container['order_repository'] = function ($c)
+{
+    $meta = new ClassMetadata('JustMenu\Order\Entity\Order');
+
+    return new DoctrineOrderRepository($c['doctrine'], $meta);
+};
+
+$container['menu_controller'] = function ($c)
+{
+    $controller = new MenuController($c['menu_builder']);
+
+    return $controller->setRequest($c['request'])->setResponse($c['response']);
+};
+
+$container['order_controller'] = function ($c)
+{
+    $controller = new OrderController($c['mailer'], $c['order_repository']);
+
+    return $controller->setRequest($c['request'])->setResponse($c['response']);
 };
 
 $container['request'] = function ($c)
@@ -52,6 +75,11 @@ $container['request'] = function ($c)
 $container['response'] = function ($c)
 {
     return new Response;
+};
+
+$container['mailer'] = function ($c)
+{
+    return new Mailer;
 };
 
 $container['serializer'] = function ($c)

@@ -2,13 +2,17 @@
 
 use JustMenu\Tests\TestCase;
 use Mockery as m;
-use JustMenu\Menu\MenuBuilder;
+use JustMenu\Menu\Builder\MenuBuilder;
 
 class MenuBuilderTest extends TestCase
 {
     public function setUp()
     {
-        $this->builder = new MenuBuilder(m::mock('JustMenu\Menu\ManagerInterface'), m::mock('JustMenu\Menu\Menu'), m::mock('JMS\Serializer\Serializer'));
+        $this->repository = m::mock('JustMenu\Repository\Category\CategoryRepositoryInterface');
+        $this->menu = m::mock('JustMenu\Menu\Menu');
+        $this->serializer = m::mock('JMS\Serializer\Serializer');
+
+        $this->builder = new MenuBuilder($this->repository, $this->menu, $this->serializer);
     }
 
     public function testBuildReturnsMenuWrappedWithPresenter()
@@ -49,20 +53,20 @@ class MenuBuilderTest extends TestCase
 
     public function testBuildSerializesMenu()
     {
-        $this->builder->getManager()
-            ->shouldReceive('assembleOrderedCategories')
+        $this->repository->shouldReceive('getCategoriesByOrder')
+            ->once()
             ->andReturn(array());
 
-        $this->builder->getMenu()
+        $this->menu
             ->shouldReceive('getCategories')
             ->andReturn(array());
 
-        $this->builder->getSerializer()->shouldReceive('serialize')
+        $this->serializer
+            ->shouldReceive('serialize')
             ->once()
-            ->with($this->builder->getMenu(), 'json')
+            ->with($this->menu, 'json')
             ->andReturn('["menu"]');
 
         $this->builder->build();
-        $this->assertJsonStringEqualsJsonString('["menu"]', $this->builder->getMenu());
     }
 }

@@ -1,15 +1,12 @@
-<?php namespace JustMenu\Menu;
+<?php namespace JustMenu\Menu\Builder;
 
+use JustMenu\Repository\Category\CategoryRepositoryInterface;
+use JustMenu\Menu\Menu;
 use JMS\Serializer\Serializer;
 
-class MenuBuilder
+class MenuBuilder implements MenuBuilderInterface
 {
-    /**
-     * Manager responsible for fetching/creating entities.
-     *
-     * @var JustMenu\Menu\ManagerInterface
-     */
-    protected $entityManager;
+    protected $repository;
 
     /**
      * The Menu that is being built.
@@ -21,14 +18,13 @@ class MenuBuilder
     protected $serializer;
 
     /**
-     * Construct a new MenuBuilder with required ManagerInterface
+     * Construct a new MenuBuilder
      *
-     * @param  ManagerInterface $entityManager
      * @return void
      */
-    public function __construct(ManagerInterface $entityManager, Menu $menu, Serializer $serializer)
+    public function __construct(CategoryRepositoryInterface $repository, Menu $menu, Serializer $serializer)
     {
-        $this->entityManager = $entityManager;
+        $this->repository = $repository;
         $this->menu = $menu;
         $this->serializer = $serializer;
     }
@@ -49,7 +45,7 @@ class MenuBuilder
 
     protected function buildMenu()
     {
-        $categories = $this->entityManager->assembleOrderedCategories();
+        $categories = $this->repository->getCategoriesByOrder();
         foreach ($categories as $category) {
             $this->menu->addCategory($category);
         }
@@ -58,16 +54,6 @@ class MenuBuilder
     protected function serializeMenu()
     {
         $this->menu = $this->serializer->serialize($this->menu, 'json');
-    }
-
-    /**
-     * Gets the value of $entityManager
-     *
-     * @return JustMenu\Menu\ManagerInterface
-     */
-    public function getManager()
-    {
-        return $this->entityManager;
     }
 
     /**

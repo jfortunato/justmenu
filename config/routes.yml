@@ -1,3 +1,9 @@
 menu:
     path: /justmenu/menu
-    defaults: { _controller: 'JustMenu\Controller\Controller', _route: 'menu' }
+    defaults: { _controller: 'menu_controller', _route: 'menu' }
+    methods: [GET]
+
+placeOrder:
+    path: /justmenu/place-order
+    defaults: { _controller: 'order_controller', _route: 'placeOrder' }
+    methods: [POST]

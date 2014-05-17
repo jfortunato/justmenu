@@ -1,0 +1,17 @@
+JustMenu\Order\Entity\Order:
+    type: entity
+    table: orders
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        phone_number:
+            type: string
+        email:
+            type: string
+        special_instructions:
+            type: string

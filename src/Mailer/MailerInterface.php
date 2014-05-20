@@ -2,5 +2,5 @@
 
 interface MailerInterface
 {
-    public function send($to, $subject, $message);
+    public function send($to, $from, $subject, $message);
 }

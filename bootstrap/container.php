@@ -11,8 +11,10 @@ use JustMenu\Repository\Category\DoctrineCategoryRepository;
 use JustMenu\Repository\Order\DoctrineOrderRepository;
 use JustMenu\Menu\Controller\MenuController;
 use JustMenu\Order\Controller\OrderController;
-use JustMenu\Mailer\SimpleMailer;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use JustMenu\View\ViewFinder;
+use JustMenu\Order\Presenter\OrderPresenter;
+use JustMenu\Mailer\SwiftMailer;
 
 $container = new Pimple();
 
@@ -62,7 +64,7 @@ $container['menu_controller'] = function ($c)
 
 $container['order_controller'] = function ($c)
 {
-    $controller = new OrderController($c['mailer'], $c['order_repository']);
+    $controller = new OrderController($c['mailer'], $c['order_repository'], $c['order_presenter']);
 
     return $controller->setRequest($c['request'])->setResponse($c['response']);
 };
@@ -79,7 +81,7 @@ $container['response'] = function ($c)
 
 $container['mailer'] = function ($c)
 {
-    return new SimpleMailer;
+    return new SwiftMailer;
 };
 
 $container['serializer'] = function ($c)
@@ -88,4 +90,14 @@ $container['serializer'] = function ($c)
         ->addMetadataDir(PROJECT_ROOT . '/database/yaml/serializer')
         ->addDefaultHandlers()
         ->build();
+};
+
+$container['order_presenter'] = function ($c)
+{
+    return new OrderPresenter($c['view_finder']);
+};
+
+$container['view_finder'] = function ($c)
+{
+    return new ViewFinder();
 };

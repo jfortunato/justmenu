@@ -81,20 +81,21 @@ class MenuBuilder implements MenuBuilderInterface
         $combined_ids = array();
 
         foreach ($this->menu->getCategories() as $category) {
-            for ($i = 0; $i < $category->items->count(); $i++) {
-                if ($category->items[$i]->hasChoice()) {
+            $items = $category->getItems();
+            for ($i = 0; $i < $items->count(); $i++) {
+                if ($items[$i]->hasChoice()) {
                     // avoid duplicates...when serialized the choice will contain all items
-                    if (in_array($category->items[$i]->choice->id, $combined_ids)) {
-                        unset($category->items[$i]);
+                    if (in_array($items[$i]->getChoice()->getId(), $combined_ids)) {
+                        unset($items[$i]);
                         continue;
                     }
-                    $combined_ids[] = $category->items[$i]->choice->id;
-                    $choice = $category->items[$i]->choice;
+                    $combined_ids[] = $items[$i]->getChoice()->getId();
+                    $choice = $items[$i]->getChoice();
                     $choice->setSizes();
-                    $category->items[$i] = $choice;
+                    $items[$i] = $choice;
                 }
             }
-            $category->items = $category->items->getValues();
+            $category->setItemsAsArray($items->getValues());
         }
     }
 }

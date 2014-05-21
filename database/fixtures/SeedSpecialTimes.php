@@ -10,21 +10,21 @@ class SeedSpecialTimes extends AbstractFixture implements DependentFixtureInterf
     public function load(ObjectManager $manager)
     {
         $time = new SpecialTime;
-        $time->days = '[]';
-        $time->times = '1500';
-        $time->menu_component = $this->getReference('lunch');
+        $time->setDays('[]');
+        $time->setTimes('1500');
+        $time->setMenuComponent($this->getReference('lunch'));
         $manager->persist($time);
 
         $time = new SpecialTime;
-        $time->days = '[1, 2, 3, 4, 5, 6]';
-        $time->times = '';
-        $time->menu_component = $this->getReference('egg roll');
+        $time->setDays('[1, 2, 3, 4, 5, 6]');
+        $time->setTimes('');
+        $time->setMenuComponent($this->getReference('egg roll'));
         $manager->persist($time);
 
         $time = new SpecialTime;
-        $time->days = '[]';
-        $time->times = '1100-1600';
-        $time->menu_component = $this->getReference('specials');
+        $time->setDays('[]');
+        $time->setTimes('1100-1600');
+        $time->setMenuComponent($this->getReference('specials'));
         $manager->persist($time);
 
         // uncomment to run

@@ -10,405 +10,405 @@ class SeedOptionValues extends AbstractFixture implements DependentFixtureInterf
     public function load(ObjectManager $manager)
     {
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'white rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('white rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'plain fried rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('plain fried rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'vegetable fried rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('vegetable fried rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'roast pork fried rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('roast pork fried rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'chicken fried rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('chicken fried rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'beef fried rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('beef fried rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'shrimp fried rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('shrimp fried rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'special fried rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('special fried rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'lobster fried rice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('lobster fried rice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('rice');
-        $value->title = 'brown rice';
-        $value->default_price = 1.50;
+        $value->setOption($this->getReference('rice'));
+        $value->setTitle('brown rice');
+        $value->setDefaultPrice(1.50);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('lo mein option');
-        $value->title = 'vegetable lo mein';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('lo mein option'));
+        $value->setTitle('vegetable lo mein');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('lo mein option');
-        $value->title = 'roast pork lo mein';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('lo mein option'));
+        $value->setTitle('roast pork lo mein');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('lo mein option');
-        $value->title = 'chicken lo mein';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('lo mein option'));
+        $value->setTitle('chicken lo mein');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('lo mein option');
-        $value->title = 'shrimp lo mein';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('lo mein option'));
+        $value->setTitle('shrimp lo mein');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('lo mein option');
-        $value->title = 'beef lo mein';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('lo mein option'));
+        $value->setTitle('beef lo mein');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('lo mein option');
-        $value->title = 'house special lo mein';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('lo mein option'));
+        $value->setTitle('house special lo mein');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('roll');
-        $value->title = 'egg roll';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('roll'));
+        $value->setTitle('egg roll');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('roll');
-        $value->title = 'shrimp roll';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('roll'));
+        $value->setTitle('shrimp roll');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('roll');
-        $value->title = 'pizza roll';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('roll'));
+        $value->setTitle('pizza roll');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('roll');
-        $value->title = 'spring roll';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('roll'));
+        $value->setTitle('spring roll');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'broccoli';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('broccoli');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'onion';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('onion');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'scallion';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('scallion');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'garlic';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('garlic');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'ginger';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('ginger');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'chinese cabbage';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('chinese cabbage');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'peas';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('peas');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'cashew nut';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('cashew nut');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'peanut';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('peanut');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'mushroom';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('mushroom');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'tofu';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('tofu');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'bean curd';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('bean curd');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'cabbage';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('cabbage');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'snow pea';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('snow pea');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'green pepper';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('green pepper');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'baby corn';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('baby corn');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'water chestnut';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('water chestnut');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'carrots';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('carrots');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'string bean';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('string bean');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('vegetables');
-        $value->title = 'celery';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('vegetables'));
+        $value->setTitle('celery');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'extra spicy';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('extra spicy');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'spice';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('spice');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'steamed';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('steamed');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'brown sauce';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('brown sauce');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'garlic sauce';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('garlic sauce');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'white sauce';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('white sauce');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'curry sauce';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('curry sauce');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'general tsos sauce';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('general tsos sauce');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('taste');
-        $value->title = 'black bean sauce';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('taste'));
+        $value->setTitle('black bean sauce');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'pork';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('pork');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'chicken';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('chicken');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'beef';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('beef');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'jumbo shrimp';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('jumbo shrimp');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'scallop';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('scallop');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'white meat';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('white meat');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'egg';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('egg');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'baby shrimp';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('baby shrimp');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'crabmeat';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('crabmeat');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('meat');
-        $value->title = 'lobster';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('meat'));
+        $value->setTitle('lobster');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('soup or soda option');
-        $value->title = 'Wonton Soup';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('soup or soda option'));
+        $value->setTitle('Wonton Soup');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('soup or soda option');
-        $value->title = 'Egg Drop Soup';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('soup or soda option'));
+        $value->setTitle('Egg Drop Soup');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('soup or soda option');
-        $value->title = 'Hot & Sour Soup';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('soup or soda option'));
+        $value->setTitle('Hot & Sour Soup');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('soup or soda option');
-        $value->title = 'Chicken Rice Soup';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('soup or soda option'));
+        $value->setTitle('Chicken Rice Soup');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('soup or soda option');
-        $value->title = 'Pepsi';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('soup or soda option'));
+        $value->setTitle('Pepsi');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('soup or soda option');
-        $value->title = 'Orange';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('soup or soda option'));
+        $value->setTitle('Orange');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('soup or soda option');
-        $value->title = 'Iced Tea';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('soup or soda option'));
+        $value->setTitle('Iced Tea');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         $value = new OptionValue;
-        $value->option = $this->getReference('soup or soda option');
-        $value->title = 'Root Beer';
-        $value->default_price = 0.00;
+        $value->setOption($this->getReference('soup or soda option'));
+        $value->setTitle('Root Beer');
+        $value->setDefaultPrice(0.00);
         $manager->persist($value);
 
         // uncomment to run

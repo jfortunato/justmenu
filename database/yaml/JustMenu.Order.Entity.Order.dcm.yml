@@ -19,5 +19,9 @@ JustMenu\Order\Entity\Order:
             type: string
         special_instructions:
             type: string
+        method:
+            type: string
+        paymentmethod:
+            type: string
         order:
             type: json_array

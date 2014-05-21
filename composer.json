@@ -20,7 +20,8 @@
         "symfony/http-foundation": "*",
         "symfony/routing": "*",
         "symfony/config": "*",
-        "swiftmailer/swiftmailer": "*"
+        "swiftmailer/swiftmailer": "*",
+        "vlucas/valitron": "*"
     },
 	"autoload": {
 		"classmap": [

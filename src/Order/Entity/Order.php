@@ -43,6 +43,16 @@ class Order
     private $special_instructions;
 
     /**
+     * @var string
+     */
+    private $method;
+
+    /**
+     * @var string
+     */
+    private $paymentmethod;
+
+    /**
      * @var array
      */
     private $order;
@@ -215,6 +225,52 @@ class Order
     public function getSpecialInstructions()
     {
         return $this->special_instructions;
+    }
+
+    /**
+     * Set method
+     *
+     * @param string $method
+     * @return Order
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
+     * Get method
+     *
+     * @return string 
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Set paymentmethod
+     *
+     * @param string $paymentmethod
+     * @return Order
+     */
+    public function setPaymentmethod($paymentmethod)
+    {
+        $this->paymentmethod = $paymentmethod;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentmethod
+     *
+     * @return string 
+     */
+    public function getPaymentmethod()
+    {
+        return $this->paymentmethod;
     }
 
     /**

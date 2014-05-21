@@ -6,6 +6,10 @@
 
         <div id="checkout-page">
 
+            <div class="alert">
+                <p ng-repeat="error in errors">{{ error }}</p>
+            </div>
+
             <h2>Pickup Or Delivery?</h2>
             <button type="button" class="icon-male" ng-class="{ 'pressed':info.method==='pickup' }" ng-click="info.method = 'pickup'">Pickup</button>
             <button type="button" class="icon-truck" ng-class="{ 'pressed':info.method==='delivery' }" ng-click="info.method = 'delivery'">Delivery</button>

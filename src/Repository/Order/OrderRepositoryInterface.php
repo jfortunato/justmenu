@@ -3,4 +3,6 @@
 interface OrderRepositoryInterface
 {
     public function create();
+    public function createFromArray(array $input);
+    public function getEntityManager();
 }

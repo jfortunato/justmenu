@@ -16,13 +16,21 @@ class DoctrineOrderRepository extends EntityRepository implements OrderRepositor
         $order->setName($input['name']);
         $order->setPhoneNumber($input['phone']);
         $order->setEmail($input['email']);
-        $order->setAddress($input['address']);
-        $order->setCity($input['city']);
         $order->setSpecialInstructions($input['instructions']);
         $order->setMethod($input['method']);
         $order->setPaymentMethod($input['paymentmethod']);
         $order->setOrder($input['order']);
 
+        if ($input['method'] === 'delivery') {
+            $order->setAddress($input['address']);
+            $order->setCity($input['city']);
+        }
+
         return $order;
+    }
+
+    public function getEntityManager()
+    {
+        return parent::getEntityManager();
     }
 }

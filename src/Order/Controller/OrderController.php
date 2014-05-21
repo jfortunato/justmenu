@@ -4,6 +4,8 @@ use JustMenu\Controller\BaseController;
 use JustMenu\Mailer\MailerInterface;
 use JustMenu\Repository\Order\OrderRepositoryInterface;
 use JustMenu\Order\Presenter\OrderPresenterInterface;
+use Valitron\Validator;
+use JustMenu\Order\Validator\OrderValidator;
 
 class OrderController extends BaseController
 {
@@ -12,6 +14,12 @@ class OrderController extends BaseController
     protected $repository;
 
     protected $presenter;
+
+    protected $json_response = array(
+        'success' => true,
+        'data'    => '',
+        'errors'    => '',
+    );
 
     public function __construct(MailerInterface $mailer, OrderRepositoryInterface $repository, OrderPresenterInterface $presenter)
     {
@@ -22,18 +30,20 @@ class OrderController extends BaseController
 
     public function placeOrder()
     {
-        $json = array('success' => false);
+        $validator = new OrderValidator($this->request->request->all());
+        if(!$validator->validate()) {
+            $this->json_response['success'] = false;
+            $this->json_response['errors'] = $validator->errors();
 
-        try {
-            // create the order from the POST input, validating then saving
-            $order = $this->repository->createFromArray($this->request->query->all());
-            $this->repository->save($order);
-
-            $json['success'] = true;
-        } catch (\Exception $e) {
-            $this->sendJsonResponse(json_encode($json));
-            die();
+            return $this->sendJsonResponse(json_encode($this->json_response));
         }
+
+        // create the order from the POST input the save
+        $order = $this->repository->createFromArray($this->request->request->all());
+
+        $manager = $this->repository->getEntityManager();
+        $manager->persist($order);
+        $manager->flush();
 
         $this->presenter->setOrder($order);
 
@@ -49,7 +59,7 @@ class OrderController extends BaseController
         $template = $this->presenter->render(__DIR__ . "/../Resources/view/mail-confirmation.html");
         $this->mailer->send($order->email, 'orders@jfortunato.com', ucfirst($order->method) . " Order Placed", $template);
 
-        $this->sendJsonResponse(json_encode($json));
+        $this->sendJsonResponse(json_encode($this->json_response));
 
         //$order->name                 = 'Justin';
         //$order->phone_number         = '8884747772';

@@ -25,7 +25,8 @@ angular.module('justmenu.checkout.controllers', [])
             if (data.success) {
                 $location.path('/complete');
             } else {
-                alert('error');
+                console.dir(data.errors);
+                $scope.errors = data.errors;
             }
         });
     };

@@ -55,14 +55,14 @@ class Order
     /**
      * @var array
      */
-    private $order;
+    private $contents;
 
 
     public function total()
     {
         $subtotal = $total = 0;
 
-        foreach (json_decode($this->order) as $item) {
+        foreach (json_decode($this->contents) as $item) {
             $price = $item->price;
 
             foreach ($item->selected_options as $option) {
@@ -274,25 +274,25 @@ class Order
     }
 
     /**
-     * Set order
+     * Set contents
      *
-     * @param array $order
+     * @param array $contents
      * @return Order
      */
-    public function setOrder($order)
+    public function setContents($contents)
     {
-        $this->order = $order;
+        $this->contents = $contents;
 
         return $this;
     }
 
     /**
-     * Get order
+     * Get contents
      *
      * @return array 
      */
-    public function getOrder()
+    public function getContents()
     {
-        return $this->order;
+        return $this->contents;
     }
 }

@@ -2,7 +2,7 @@ angular.module('justmenu.checkout.controllers', [])
 
 .controller('CheckoutController', ['$scope', '$location', 'Cart', '$http', function ($scope, $location, Cart, $http) {
     $scope.info = {
-        order: JSON.stringify(Cart.cart),
+        contents: JSON.stringify(Cart.cart),
     };
 
     $scope.total = Cart.total();

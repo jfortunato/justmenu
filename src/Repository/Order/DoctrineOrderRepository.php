@@ -19,7 +19,7 @@ class DoctrineOrderRepository extends EntityRepository implements OrderRepositor
         $order->setSpecialInstructions($input['instructions']);
         $order->setMethod($input['method']);
         $order->setPaymentMethod($input['paymentmethod']);
-        $order->setOrder($input['order']);
+        $order->setContents($input['contents']);
 
         if ($input['method'] === 'delivery') {
             $order->setAddress($input['address']);

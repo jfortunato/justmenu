@@ -15,13 +15,16 @@ JustMenu\Order\Entity\Order:
             type: string
         address:
             type: string
+            nullable: true
         city:
             type: string
+            nullable: true
         special_instructions:
             type: string
+            nullable: true
         method:
             type: string
         paymentmethod:
             type: string
-        order:
+        contents:
             type: json_array

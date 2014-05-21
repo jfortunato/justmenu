@@ -11,7 +11,7 @@ class OrderValidator extends Validator
             array('email'),
             array('method'),
             array('paymentmethod'),
-            array('order'),
+            array('contents'),
         ),
         'in' => array(
             array('method', array('pickup', 'delivery')),

@@ -6,6 +6,7 @@ use JustMenu\Repository\Order\OrderRepositoryInterface;
 use JustMenu\Order\Presenter\OrderPresenterInterface;
 use Valitron\Validator;
 use JustMenu\Order\Validator\OrderValidator;
+use JustMenu\Config\Config;
 
 class OrderController extends BaseController
 {
@@ -15,17 +16,20 @@ class OrderController extends BaseController
 
     protected $presenter;
 
+    protected $config;
+
     protected $json_response = array(
         'success' => true,
         'data'    => '',
         'errors'    => '',
     );
 
-    public function __construct(MailerInterface $mailer, OrderRepositoryInterface $repository, OrderPresenterInterface $presenter)
+    public function __construct(MailerInterface $mailer, OrderRepositoryInterface $repository, OrderPresenterInterface $presenter, Config $config)
     {
         $this->mailer = $mailer;
         $this->repository = $repository;
         $this->presenter = $presenter;
+        $this->config = $config;
     }
 
     public function placeOrder()
@@ -48,16 +52,24 @@ class OrderController extends BaseController
         $this->presenter->setOrder($order);
 
         // send fax order
-        //$template = $this->presenter->render(__DIR__ . "/../Resources/view/fax-order.html");
-        //$this->faxer->send($template);
+        if ($this->config->get('fax.send_fax_order')) {
+            $template = $this->presenter->render(__DIR__ . "/../Resources/view/fax-order.html");
+            $this->faxer->send($template);
+        }
 
         // send email order
-        //$template = $this->presenter->render(__DIR__ . "/../Resources/view/mail-order.html");
-        //$this->mailer->send($order->email, 'Order Placed', "An order has been placed. The name is {$order->name}.");
+        if ($this->config->get('email.send_email_order')) {
+            $template = $this->presenter->render(__DIR__ . "/../Resources/view/mail-order.html");
+            foreach ($this->config->get('email.order_emails') as $email) {
+                $this->mailer->send($email, $config->get('email.reply_email'), ucfirst($order->getMethod()) . " Order Placed", $template);
+            }
+        }
 
         // send confirmation to customer
-        $template = $this->presenter->render(__DIR__ . "/../Resources/view/mail-confirmation.html");
-        $this->mailer->send($order->getEmail(), 'orders@jfortunato.com', ucfirst($order->getMethod()) . " Order Placed", $template);
+        if ($this->config->get('email.send_confirmation')) {
+            $template = $this->presenter->render(__DIR__ . "/../Resources/view/mail-confirmation.html");
+            $this->mailer->send($order->getEmail(), $config->get('email.reply_email'), ucfirst($order->getMethod()) . " Order Placed", $template);
+        }
 
         $this->sendJsonResponse(json_encode($this->json_response));
     }

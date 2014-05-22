@@ -1,6 +1,6 @@
 <?php
 
-define('PROJECT_ROOT', __DIR__ . '/../');
+define('PROJECT_ROOT', __DIR__ . '/..');
 
 require_once PROJECT_ROOT . '/vendor/autoload.php';
 
@@ -11,6 +11,7 @@ $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler());
 $whoops->register();
 
 // load project specific configurations
-require_once PROJECT_ROOT . '/config/config.php';
+$yaml = new Symfony\Component\Yaml\Parser();
+$config = $yaml->parse(file_get_contents(PROJECT_ROOT . '/config/config.yml'));
 
 require_once 'container.php';

@@ -1,0 +1,15 @@
+parameters:
+    down_for_maintenance: false
+    minimum_for_delivery: 0.00
+    minimum_for_delivery_charge: 0.00
+    business_name: JustMenu
+    business_number: 8565551234
+
+email:
+    send_email_order: true
+    send_confirmation: true
+    reply_email: EDIT
+    order_emails: [EDIT]
+
+fax:
+    send_fax_order: false

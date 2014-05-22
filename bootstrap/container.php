@@ -15,8 +15,14 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use JustMenu\View\ViewFinder;
 use JustMenu\Order\Presenter\OrderPresenter;
 use JustMenu\Mailer\SwiftMailer;
+use JustMenu\Config\Config;
 
 $container = new Pimple();
+
+$container['config'] = function ($c) use ($config)
+{
+    return new Config($config);
+};
 
 $container['doctrine'] = function ($c) {
     $isDevMode = true;
@@ -64,7 +70,7 @@ $container['menu_controller'] = function ($c)
 
 $container['order_controller'] = function ($c)
 {
-    $controller = new OrderController($c['mailer'], $c['order_repository'], $c['order_presenter']);
+    $controller = new OrderController($c['mailer'], $c['order_repository'], $c['order_presenter'], $c['config']);
 
     return $controller->setRequest($c['request'])->setResponse($c['response']);
 };

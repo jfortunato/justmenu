@@ -4,3 +4,4 @@ node_modules
 public/assets/compiled/
 .vagrant/
 tiny-lr.pid
+config/config.yml

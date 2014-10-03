@@ -1,13 +1,13 @@
 <div data-justmenu-cart>
     <div class="cart-heading">
-        <button ng-click="cart.empty()" id="empty-cart" class="icon-trash" type="button"></button>
+        <button ng-hide="checkout" ng-click="cart.empty()" id="empty-cart" class="icon-trash" type="button"></button>
     </div>
     <div class="cart-body">
         <ul id="cart-contents">
             <li ng-show="!cart.cart.length && !cart.lastCart.length">Nothing in cart.</li>
             <li ng-repeat="item in cart.cart">
-                <button type="button" ng-click="cart.decreaseQuantity(item)" class="icon-down-open"><span></span></button>
-                <button type="button" ng-click="cart.increaseQuantity(item)" class="icon-up-open"><span></span></button>
+                <button ng-hide="checkout" type="button" ng-click="cart.decreaseQuantity(item)" class="icon-down-open"><span></span></button>
+                <button ng-hide="checkout" type="button" ng-click="cart.increaseQuantity(item)" class="icon-up-open"><span></span></button>
                 <span class="quantity">{{ item.quantity }}</span> {{ item.title }} ({{ item.size }}) <ul data-options><li ng-repeat="option in item.selected_options">{{ option.title }} <span>+{{ option.price | currency }}</span></li><li ng-show="item.instructions"><em>{{ item.instructions }}</em></li></ul>
                 <span>${{ item.price }}</span>
             </li>
@@ -20,8 +20,9 @@
         <ul id="cart-totals">
             <li>Sub-Total <span>{{ cart.total() | currency }}</span></li>
             <li>Tax <span>$0.00</span></li>
+            <li ng-show="checkout && info.method === 'delivery' && cart.total() < minimum_delivery_charge">Delivery Charge <span>{{ delivery_charge | currency }}</span></li>
             <hr>
-            <li>Total <span>{{ cart.total() | currency }}</span></li>
+            <li>Total <span>{{ info.total || cart.total() | currency }}</span></li>
         </ul>
     </div>
 </div>

@@ -35,6 +35,7 @@ class OrderController extends BaseController
     public function placeOrder()
     {
         $validator = new OrderValidator($this->request->request->all());
+        $validator->setConfig($this->config);
         if(!$validator->validate()) {
             $this->json_response['success'] = false;
             $this->json_response['errors'] = $validator->errors();

@@ -11,12 +11,14 @@
             </div>
 
             <h2>Pickup Or Delivery?</h2>
-            <button type="button" class="icon-male" ng-class="{ 'pressed':info.method==='pickup' }" ng-click="info.method = 'pickup'">Pickup</button>
-            <button type="button" class="icon-truck" ng-class="{ 'pressed':info.method==='delivery' }" ng-click="info.method = 'delivery'">Delivery</button>
+            <button type="button" class="icon-male" ng-class="{ 'pressed':info.method==='pickup' }" ng-click="selectedMethod('pickup')">Pickup</button>
+            <button type="button" class="icon-truck" ng-class="{ 'pressed':info.method==='delivery' }" ng-click="selectedMethod('delivery')">Delivery</button>
 
             <form name="infoForm" ng-show="info.method">
                 <input type="hidden" name="method" id="method" ng-model="info.method" ng-required="true" />
                 <input type="hidden" name="paymentmethod" id="paymentmethod" ng-model="info.paymentmethod" ng-required="true" />
+                <input type="hidden" name="total" id="total" ng-model="info.total" ng-required="true" />
+                <input type="hidden" name="delivery_charge" id="delivery_charge" ng-model="info.delivery_charge" ng-required="true" />
 
                 <section>
                     <h2>Information</h2>
@@ -78,7 +80,7 @@
                     <button type="button" class="icon-frown"></button>
                 </section>
 
-                <h1>{{ total | currency }}</h1>
+                <h1>{{ info.total | currency }}</h1>
                 <button type="button" class="jm-btn" ng-click="placeOrder(info)">Place Order</button>
                 <h1>Form Valid?: {{ infoForm.$valid }}</h1>
 

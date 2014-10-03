@@ -23,7 +23,6 @@
 * minimum delivery amount
 * custom payment options (like Rowan card)
 * round up to support development
-* send customer email
 * some way to show cart on mobile without hiding it in a drawer
 (or maybe require a review step just for mobile)
 * coupon/discounts

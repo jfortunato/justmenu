@@ -1,6 +1,7 @@
 <?php namespace JustMenu\Order\Validator;
 
 use Valitron\Validator;
+use JustMenu\Config\Config;
 
 class OrderValidator extends Validator
 {
@@ -12,6 +13,7 @@ class OrderValidator extends Validator
             array('method'),
             array('paymentmethod'),
             array('contents'),
+            array('total'),
         ),
         'in' => array(
             array('method', array('pickup', 'delivery')),
@@ -22,6 +24,21 @@ class OrderValidator extends Validator
         ),
     );
 
+    protected $config;
+
+    /**
+     * Sets the value of config
+     *
+     * @param Config $config description
+     *
+     * @return OrderValidator
+     */
+    public function setConfig(Config $config)
+    {
+        $this->config = $config;
+        return $this;
+    }
+
     public function validate()
     {
         $this->rules($this->rules);
@@ -29,8 +46,15 @@ class OrderValidator extends Validator
         $data = $this->data();
         $method = isset($data['method']) ? $data['method']:'';
 
-        if ($method === 'delivery') {
+        if ($method === 'delivery')
+        {
             $this->rule('required', array('address', 'city'));
+            $this->rule('min', 'total', $this->config->get('parameters.minimum_for_delivery'));
+
+            if ($data['total'] < $this->config->get('parameters.minimum_for_delivery_charge'))
+            {
+                $this->rule('required', 'delivery_charge');
+            }
         }
 
         return parent::validate();
